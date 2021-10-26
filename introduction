@@ -1,0 +1,14 @@
+// maybe here we need some data about elderly problems with medicine, overdosage and
+the problem of very pricy solutions, why our product is cheaper and why it represent 
+a step forward for this problem //
+
+Our project is highly modular, consisting of a pill magazine and reliable delivery system,
+in order to overcome the risk of overdosage. Multiple magazine can be stacked side by side, 
+with only the "controller magazine" necessarily connected to wifi for remote control of the 
+delivery schedule and to communicate via notification/email with a caregiver or relative.
+The controller magazine will send a warning messagge everytime a pill is not delivered or taken 
+properly on schedule.
+The physical dimension of the pill determines the "type" of magazine needed, for better operation;
+the pill is dispensed from the magazine through a sliding compartment and a load cell check the 
+correct operation of the sliding mechanism; the magazine emittes a jingle when it's ready for delivery
+and lights a LED to show which medicine needs to be taken.
