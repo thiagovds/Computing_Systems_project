@@ -174,19 +174,51 @@
 
 \section{Introduction}
 
-In a society with increasing elder population\cite{hobbs2001elderly} combined with traditional non-reliable forms of medicine intake control solutions, our society is faced with the growing problem of wrong medicine administration by frequent users that rely on traditional methods. The Italian average for medicine consumption is 1.5 pills a day, with this value climbing to 10 (3 doses a day) for people over 65 \cite{zito2021uso} . Following the medication schedule requires “prospective memory” \cite{Cohen07}\cite{CRYSTAL201588} which is a specifically hard task for people suffering from dementia or Alzheimer’ syndrome, and in general for elder people. The introduction of caregivers to administer the medicine intake marginally solves the problem, being reliable to human error and resulting as very time consuming.
-
-Our objective consists of designing a safe, reliable, cost-effective smart solution based on previous proposed solutions, improving and resolving their main issues: "HexaDrawers"\cite{Hexagons}, "MeDiC"\cite{Cohen07} and "Med-Drop"\cite{pike2021med}. The final desired product includes a seamless pill intake procedure in which any non-fundamental action from the user is performed by the system. Reliability/safety is the most important factor for our design, followed by cost (to enable more people to use it) and intrinsic modularity (simplicity for scalability). 
-
-In the hopes of reducing pill intake errors, introducing more tranquility for the families or caregivers, our design doses with high degrees of autonomy medication to patients who are unable to assert their pill intake schedule.
-
-The project is highly scalable through 3D printing, with every module consisting of a pill magazine and reliable delivery system, in order to overcome the risk of overdosage. Multiple modules can be stacked side by side, organized in a  master-slave configuration with the master module   connected to the internet for remote control of the delivery schedule and to communicate via notification/email with the responsible.
-
-The master module is tasked with notifying the caregiver about any deviation from the user schedule or from the system regular operation. Such messages include:  warnings when a pill is not delivered or taken properly on schedule; reminders when storage is almost running empty.
-
-For optimal operation, the physical dimension of the pill determines the "type" of magazine needed; the pill is dispensed from the magazine through a sliding compartment and a load cell check the correct operation of the sliding mechanism; a photo-interrupter sensing system verifies and counts the amount of pills dispensed for each individual module to ensure the correct operation of the pill selection system. Finally each module emits a sound when it's ready for the user to intake and lights a green LED to signal which medicine needs to be taken.
-
-
+In a society with increasing elder population[Hobbs 2001] combined
+with traditional non-reliable forms of medicine intake control solutions, our society is faced with the growing problem of wrong
+medicine administration by frequent users that rely on traditional
+methods. The Italian average for medicine consumption is 1.5 pills
+a day, with this value climbing to 10 (3 doses a day) for people over
+65 [Zito et al. 2021] . Following the medication schedule requires
+“prospective memory” [Nabacino and Negretti 2020][Crystal and
+George Wilson 2015] which is a specifically hard task for people
+suffering from dementia or Alzheimer’ syndrome, and in general
+for elder people. The introduction of caregivers to administer the
+medicine intake marginally solves the problem, being reliable to
+human error and resulting as very time consuming.
+Our objective consists of designing a safe, reliable, cost-effective
+smart solution based on previous proposed solutions, improving
+and resolving their main issues: "HexaDrawers"[Marco Faverzani
+2021], "MeDiC"[Nabacino and Negretti 2020] and "Med-Drop"[Pike
+et al. 2021]. The final desired product includes a seamless pill intake
+procedure in which any non-fundamental action from the user is
+performed by the system.
+Reliability and safety are the most important factors for our design, followed by cost (to enable more users) and intrinsic modularity. In the hopes of reducing pill intake errors, introducing more
+tranquility for the families or caregivers, our design doses with
+high degrees of autonomy medication to patients who are unable to
+assert their pill intake schedule.
+The project is highly scalable through 3D printing, with every
+module consisting of a pill magazine and reliable delivery system, in
+order to overcome the risk of overdosage. Multiple modules can be
+stacked side by side, organized in a master-slave configuration with
+the master module connected to the internet for remote control of
+the delivery schedule and to communicate via notification/email
+with the responsible.
+The master module is tasked with notifying the caregiver about
+any deviation from the user schedule or from the system regular
+operation. Such messages include: warnings when a pill is not delivered or taken properly on schedule; reminders when storage is
+almost running empty.
+For optimal operation, the physical dimension of the pill determines the "type" of magazine needed; the pill is dispensed from
+the magazine through a sliding compartment and a load cell check
+the correct operation of the sliding mechanism; a photo-interrupter
+sensing system verifies and counts the amount of pills dispensed
+for each individual module to ensure the correct operation of the
+pill selection system. Finally each module emits a sound when it’s
+Authors’ addresses: Thiago Van der Stricht, Politecnico di Milano, Milano, Italy, thiago.
+vanderstricht@polimi.mail.it; Federico Delmonte, Politecnico di Milano, , Alseno, Italy,
+federico.delmonte@mail.polimi.it.
+ready for the user to intake and lights a green LED to signal which
+medicine needs to be taken.
 
 
 % {\itshape for italic} 
