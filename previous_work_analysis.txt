@@ -1,0 +1,6 @@
+The first and still most common solution to safe medicine delivering is pill organizers,
+simple containers divided in compartments to differentiate different pills. The most advanced
+of such devices can lock or unlock the various compartments on a time-based scheduled set 
+by the users, and consequently remind the patient which pill has to be taken. Even if the risk 
+of assuming wrong medicines during a day is mostly mitigated, the organizer requires daily 
+refilling by a caregiver or relative of the patient.
