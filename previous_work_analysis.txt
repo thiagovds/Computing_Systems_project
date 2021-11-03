@@ -1,6 +1,11 @@
+//min 3000 char, if we get to 2500 good enough
+
 The first and still most common solution to safe medicine delivering is pill organizers,
 simple containers divided in compartments to differentiate different pills. The most advanced
 of such devices can lock or unlock the various compartments on a time-based scheduled set 
 by the users, and consequently remind the patient which pill has to be taken. Even if the risk 
 of assuming wrong medicines during a day is mostly mitigated, the organizer requires daily 
-refilling by a caregiver or relative of the patient.
+refilling by a caregiver or relative of the patient. One advantage of these organizers is 
+portability, making it a valid solution for those users who move around often during the day.
+Our project focuses on people who are mainly forced at home, either for aging issues or physical 
+disabilities. The Hero pill dispenser represents the flagship...
