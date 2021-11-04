@@ -1,0 +1,39 @@
+The first and still most common approach to improve medicine adherence  are pill organizers, simple containers divided into compartments to differentiate different pills \cite{me}. 
+
+The most advanced of such devices can lock or unlock the various compartments on a time-based schedule set by the users \cite{Hexagons}, while also reminding the patient which pill has to be taken. Even if the risk of assuming wrong medicines during a day is mostly mitigated, the organizer requires frequent refilling by a caregiver or relative of the patient.
+
+One advantage of schedule-based organizers is portability, being battery based, making them a valid solution for users that roam often during the day \cite{LiveFine} . Our project focuses on people who are mainly forced at home, either by ageing issues or physical disabilities. Self-contained units are already present on the market, capable of delivering up to 90 days of 10 different medications \cite{HERO}\cite{philips}\cite{livi}, together with very smart notification/alarm systems. 
+
+The main drawback is the very high cost of such units, not to mention their lack in modularity and scalability. To solve this issue, we are basing our design on different prototypes \cite{Cohen07}\cite{Hexagons}, all while keeping the cost as low as possible. Here’s a list of some of the solutions discussed above and other similar products.
+
+DIVIDE SOLUTIONS BY PILL TYPE AND SCHEDULE
+Generally in the works analyzed two main groups of systems can be implemented. System that store pills in compartments organized by drug type or systems that organize their compartments by intake times. The latter has the inherent problem of manually 
+HexaDrawers prototype
+A Highly modular and adaptive design in which the user can add progressively more types of pills as their pill intake schedule changes. It is done by an innovative approach using a telegram bot to set up the whole system. It uses a master-slave configuration, with data being transferred between adjacent modules through magnet interfaces. 
+An inexpensive ESP32 microcontroller manages the whole system through the master cell and the hexagonal bodies of each module interconnect seamlessly using the connection mode from the Telegram bot. 
+It however requires pre-sorting of the pills by schedule, which leaves the solution impaired when it comes to full-automation of the pill adherence procedure. This leaves the important task of pre-sorting to the user or caregiver.
+Prototype cost estimated at 20€ \cite{Hexagons}.
+MeDiC prototype
+Due to the very simple mechanical design, this prototype shows very high reliability and precision, and it’s open to further implementation for modularity. However, the refilling process is tedious and having a higher medicine capacity would require a very large and impractical device.
+Med Drop
+This design was implemented to aid nurses to distribute medications in home visits to VA (Veteran Affairs) patients, it is a fully mechanical device used as both a sorting tray and a pill box, an attempt to solve the intrinsic problem of schedule based pill dispensers. 
+It is a great solution for its intended use, to help nurses and caregivers cost-effectively, but presents itself as a fully passive device with no smart related features, falling into the list of devices that require “prospective memory” from the operator.
+Announced prototype cost of 19.89\$. \cite{pike2021med}.
+Phillips Medication Dispenser
+This is a product offered as a subscription in which the user does not own the machine, there are no startup or initial costs to use it.
+A requirement for the proper functioning of this system is the setting of a phone line to issue alerts to caregivers of any important warning.
+It can take up to 40 days of doses 6 of these a day, contains a backup internal battery, adding on the reliability of the product, working even in cases of a power outage.
+The price for this solution is a monthly subscription fee of \$59.95, (amounting to 1438.8\$ in just two years).
+LiveFine Automatic Pill Dispenser  (89\$) (an identical in the italian market:TabTime)
+The LiveFine Pill Dispenser has 28 slots, with up to a month of pills in its storage.
+It contains a lock to prevent tampering with the device or any overdosage.
+Lacks any connectivity or IoT related features to warn caregivers. Has a non-compact form factor for the pill storage capacity. The construction of the device isn’t particularly strong, it is subjective to substantial damage if dropped or abused by the user.
+ “and could easily be damaged if it is dropped or abused in some other way”.
+This product, unlike many of its competitors, does not have a monthly subscription, and it can be owned for an 89\$ price tag. However it lacks a fully automated solution; sorting of pills by time schedule has to be made for every refill, systems to ensure the pill administration process are not present, leaving the repetitive and error-prone task of pill sorting for the user. Furthermore, there are no connectivity features, disabling remote verification from a caregiver.
+Livi automated medication dispenser
+The Livi Medication Dispenser offers a 90 day reservoir for 15 different pills with time-programmable reminders and alarms. Based on the medication size, the user is required to assemble the specific reservoir to ensure better functionality. The device works with main power, backed up by a battery that guarantees 8 hours of continuous operation. It’s not state of the art but still very capable, however it’s the most expensive solution, requiring a first 49\$ payment una tantum followed by a monthly fee of 99\$, which amounts to a 2,425\$ over a 2 year span.
+Hero
+With wifi connectivity and a fully functional and integrated app to control the device, the Hero pill dispenser can be considered the market reference point when designing a pill dispenser. 
+It combines all of the main desirable features such as schedule customization with reminders, fully automated pill sorting and delivery, notifications for caregivers, relevant data visualization in an easy-to-use package, all coupled with smart connectivity.
+It can hold up to ten different medications per day for up to a 90-day supply, comes with a companion smartphone app to keep track of medication intake with alerts for overdosage or missed pills. It has an intuitive, easy mechanism for refilling.
+However, it comes with a hefty price for extended use, a 99 \$ first instalment, followed by a 29 \$ monthly fee (795 \$ in a 2-years use interval).
