@@ -9,15 +9,16 @@
   available; while high electrical efficiency is not mandatory as the system is not meant to be carried around.
 3.2 General architecture
   The minimum configuration is comprehensive of a brain cell connected to the first dispenser, and all the other magazine required can be added 
-  side by side; the brain cell manages all the computation required through a microcontroller, .. next part in italian for quicker writing, sorry..
-  
- " La configurazione di base comprende una cella madre connessa con il primo dispenser, e tutte le altre possono essere aggiunte lateralmente a questa; 
-   la cella madre esegue tutta la computazione necessaria mediante un microcontrollore, e tramite un modulo esp3822 si connette ad internet. Oltre a memorizzare 
-   la scheda medica del paziente e guidare la parte meccanica del dispenser, il microcontrollore Arduino si occupa di ricordare al paziente quando prendere i medicinali e 
-   "notificarlo" tramite led e buzzer, e quando necessario invia i messaggi al caregiver predisposto. 
-    Il singolo dispenser contiene 2 servomotori che si occupano di dispensare affidabilmente una o più pillole alla volta: uno apre il canale di uscita, 
-    l'altro blocca le pilloel successive affinchè non siano dispensati medicine in eccesso. Un sensore ottico che controlla il corretto funzionamento del dispenser; 
-    inoltre, essendo il sistema modulare, un trasduttore è presente internamente per permettere di collegare a catena i singoli moduli controllati dalla cella madre. 
-    Ogni modulo condivide il meccanismo di funzionamento, mentre la dimensione del singolo contenitore dipende dal medicinale che si vuole fornire. "
+  side by side; the brain cell manages all the computation required through a microcontroller, and the internet connection is achieved through a ESP8266 
+  module. Aside from storing the medical schedule of the patient and driving the mechanics of the device, the microcontroller Arduino Uno Rev 3 manages the
+  notification system for both the user and the associated relative or caregiver.
+  The single magazine is activated by 2 servomotors, which work in tandem to guarantee a reliable dispensing action: the first let the pill drop into the 
+  user's hand, while the other holds the successive pills and prevent them from being dispensed. A photointerrupter at the and of the chain check for 
+  correct operation of the dispenser. Being the system modular, 2 transceiver are featured inside every magazine, thus to allow the daisy chaining of the 
+  various compartments required by the medical necessities of the patient. Each module shares the same working mechanism, but the dimension of the single 
+  container depends on the size of medication that has to be dispensed. Following the Capsule Size Guide, the dispensers are designed to serve the most 
+  consumed pills.
+ 
+    
 
 3.3 Relevant Characteristics of the system
