@@ -1,0 +1,24 @@
+3.1 System specifications
+  The main goal of the system is autonomous and reliable medicine storing and dispensing: it must dispense a set amount of pills (1 or more 
+  depending on the dosage required) following the medical schedule of the patient; for such purpose it requires internet connectivity, through 
+  which the scedule can be uploaded, but at the same time it has to store the minimum data locally to ensure a few hours of backup in case of 
+  a power outage. In case of "heavy mental/physical issues" the role of caregivers or relatives is necessary to refill the system's magazine 
+  and to set remotely the medication schedule. Aside from the delivery, the system is packed with reminders for both the user (buzzer/alarm when
+  it's pill time, LED light to showcase which magazine is delivering) and the caregiver (warning notification in case of dispense failure or short 
+  supply of pills). Another big requirement is a low production price and high scalability, which makes the system more competitive and more 
+  available; while high electrical efficiency is not mandatory as the system is not meant to be carried around.
+3.2 General architecture
+  The minimum configuration is comprehensive of a brain cell connected to the first dispenser, and all the other magazine required can be added 
+  side by side; the brain cell manages all the computation required through a microcontroller, and the internet connection is achieved through a ESP8266 
+  module. Aside from storing the medical schedule of the patient and driving the mechanics of the device, the microcontroller Arduino Uno Rev 3 manages the
+  notification system for both the user and the associated relative or caregiver.
+  The single magazine is activated by 2 servomotors, which work in tandem to guarantee a reliable dispensing action: the first let the pill drop into the 
+  user's hand, while the other holds the successive pills and prevent them from being dispensed. A photointerrupter at the and of the chain check for 
+  correct operation of the dispenser. Being the system modular, 2 transceiver are featured inside every magazine, thus to allow the daisy chaining of the 
+  various compartments required by the medical necessities of the patient. Each module shares the same working mechanism, but the dimension of the single 
+  container depends on the size of medication that has to be dispensed. Following the Capsule Size Guide, the dispensers are designed to serve the most 
+  consumed pills.
+ 
+    
+
+3.3 Relevant Characteristics of the system
