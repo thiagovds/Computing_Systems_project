@@ -2928,3 +2928,879 @@ Started logging.
 2021/11/11 20:00:47 IDE --> exit notif5 [93m read-unlocked[0m
 2021/11/11 20:00:47 Lost connection with clangd!
 2021/11/11 20:00:47 removing buildpath
+
+
+
+
+
+
+
+Started logging.
+2021/11/16 21:03:06 logging to d:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\inols.log
+2021/11/16 21:03:06 Initial board configuration: {"NodeMCU 1.0 (ESP-12E Module)" esp8266:esp8266:nodemcuv2}
+2021/11/16 21:03:06 Language server build path: C:\Users\Thiag\AppData\Local\Temp\arduino-language-server744922891
+2021/11/16 21:03:06 Language server build sketch root: C:\Users\Thiag\AppData\Local\Temp\arduino-language-server744922891\sketch
+2021/11/16 21:03:06 [92mIDE --> LS     CL: REQUEST initialize 0: [0m
+2021/11/16 21:03:06 IDE --> initialize 0 [93m locked[0m
+2021/11/16 21:03:06 IDE --> initialize 0 [93m unlocked[0m
+2021/11/16 21:03:06 INIT--- initializing workbench
+2021/11/16 21:03:06 INIT--- [93m locked[0m
+2021/11/16 21:03:06     --> initialize(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER)
+2021/11/16 21:03:06 [91mIDE <-- LS     CL: ANSWER UNBOUND (0): [0m
+2021/11/16 21:03:06 running:  c:\Program Files\Arduino IDE\resources\app\node_modules\arduino-ide-extension\build\arduino-cli.exe --config-file c:\Users\Thiag\.arduinoIDE\arduino-cli.yaml compile --fqbn esp8266:esp8266:nodemcuv2 --only-compilation-database --clean --source-override C:\Users\Thiag\AppData\Local\Temp\910559982 --build-path C:\Users\Thiag\AppData\Local\Temp\arduino-language-server744922891 --format json D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER
+2021/11/16 21:03:06 [92mIDE --> LS     CL: NOTIFICATION initialized: [0m
+2021/11/16 21:03:10 arduino-cli output: {
+  "compiler_out": "",
+  "compiler_err": "",
+  "builder_result": {
+    "build_path": "C:\\Users\\Thiag\\AppData\\Local\\Temp\\arduino-language-server744922891"
+  },
+  "success": true
+}
+
+2021/11/16 21:03:11 running:  c:\Program Files\Arduino IDE\resources\app\node_modules\arduino-ide-extension\build\arduino-cli.exe --config-file c:\Users\Thiag\.arduinoIDE\arduino-cli.yaml config dump --format json
+2021/11/16 21:03:11 Arduino Data Dir ->  c:\Users\Thiag\AppData\Local\Arduino15
+2021/11/16 21:03:11     Starting clangd: c:\Program Files\Arduino IDE\resources\app\node_modules\arduino-ide-extension\build\bin\clangd.exe -log=verbose --compile-commands-dir=C:\Users\Thiag\AppData\Local\Temp\arduino-language-server744922891 -query-driver=c:\Users\Thiag\AppData\Local\Arduino15\packages\**
+2021/11/16 21:03:11 logging to d:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\inols-clangd.log
+2021/11/16 21:03:11 logging to d:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\inols-clangd-err.log
+2021/11/16 21:03:11 [91mIDE     LS --> CL: REQUEST initialize 0: [0m
+2021/11/16 21:03:11 [92mIDE     LS <-- CL: ANSWER initialize 0 (0): [0m
+2021/11/16 21:03:11 [91mIDE     LS --> CL: NOTIFICATION initialized: [0m
+2021/11/16 21:03:11 INIT--- initializing workbench (done)
+2021/11/16 21:03:11 INIT--- [93m unlocked[0m
+2021/11/16 21:03:11 IDE --> initialized notif1 [93m read-locked[0m
+2021/11/16 21:03:11 IDE --> initialized notif1 notification is not propagated to clangd
+2021/11/16 21:03:11 IDE --> initialized notif1 [93m read-unlocked[0m
+2021/11/16 21:03:11 [92mIDE --> LS     CL: NOTIFICATION textDocument/didOpen: [0m
+2021/11/16 21:03:11 IDE --> textDocument/didOpen notif2 [93m locked[0m
+2021/11/16 21:03:11 IDE --> textDocument/didOpen notif2 (file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino@1 as 'cpp')
+2021/11/16 21:03:11     increasing .ino tracked files count: 1
+2021/11/16 21:03:11 IDE --> textDocument/didOpen notif2 to clang: didOpen(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp@1 as 'cpp')
+2021/11/16 21:03:11 IDE --> textDocument/didOpen notif2 sent to Clang
+2021/11/16 21:03:11 [91mIDE     LS --> CL: NOTIFICATION textDocument/didOpen: [0m
+2021/11/16 21:03:11 IDE --> textDocument/didOpen notif2 Queued resfreshing document symbols
+2021/11/16 21:03:11 IDE --> textDocument/didOpen notif2 [93m unlocked[0m
+2021/11/16 21:03:11 SYLD--- [93m read-locked[0m
+2021/11/16 21:03:11 SYLD--- requesting documentSymbol for file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp
+2021/11/16 21:03:11 SYLD--- [93m read-unlocked[0m
+2021/11/16 21:03:11 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 1: [0m
+2021/11/16 21:03:11 [92mIDE --> LS     CL: REQUEST textDocument/codeAction 1: [0m
+2021/11/16 21:03:11 IDE --> textDocument/codeAction 1 [93m read-locked[0m
+2021/11/16 21:03:11 --> codeAction(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino:0:0)
+2021/11/16 21:03:11     --> codeAction(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp:2:0)
+2021/11/16 21:03:11 IDE --> textDocument/codeAction 1 sent to Clang
+2021/11/16 21:03:11 [91mIDE     LS --> CL: REQUEST textDocument/codeAction 2: [0m
+2021/11/16 21:03:11 [92mIDE     LS <-- CL: REQUEST window/workDoneProgress/create 0: [0m
+2021/11/16 21:03:11 [91mIDE     LS --> CL: ANSWER UNBOUND (0): [0m
+2021/11/16 21:03:11 [91mIDE <-- LS     CL: REQUEST window/workDoneProgress/create 0: [0m
+2021/11/16 21:03:11 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress BEGIN indexing [0m
+2021/11/16 21:03:11 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 0/1 0%[0m
+2021/11/16 21:03:11 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 0/84 0%[0m
+2021/11/16 21:03:11 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 0/84 0%[0m
+2021/11/16 21:03:11 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 0/84 0%[0m
+2021/11/16 21:03:11 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 0/84 0%[0m
+2021/11/16 21:03:11 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 1/84 1.1904761904761905%[0m
+2021/11/16 21:03:11 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 1/84 1.1904761904761905%[0m
+2021/11/16 21:03:11 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 2/84 2.380952380952381%[0m
+2021/11/16 21:03:11 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 2/84 2.380952380952381%[0m
+2021/11/16 21:03:12 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 3/84 3.5714285714285716%[0m
+2021/11/16 21:03:12 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 3/84 3.5714285714285716%[0m
+2021/11/16 21:03:12 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 4/84 4.761904761904762%[0m
+2021/11/16 21:03:12 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 4/84 4.761904761904762%[0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: NOTIFICATION textDocument/publishDiagnostics: [0m
+2021/11/16 21:03:13 CLG <-- textDocument/publishDiagnostics notif15 (queued)
+2021/11/16 21:03:13 CLG <-- textDocument/publishDiagnostics notif15 [93m read-locked[0m
+2021/11/16 21:03:13 CLG <-- textDocument/publishDiagnostics notif15 (running)
+2021/11/16 21:03:13 CLG <-- textDocument/publishDiagnostics notif15 publishDiagnostics(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp):
+2021/11/16 21:03:13 CLG <-- textDocument/publishDiagnostics notif15 > 0:0 - 1: drv_unknown_argument_with_suggestion
+2021/11/16 21:03:13 CLG <-- textDocument/publishDiagnostics notif15 > 0:0 - 1: drv_unknown_argument
+2021/11/16 21:03:13 CLG <-- textDocument/publishDiagnostics notif15 > 0:0 - 1: drv_unknown_argument_with_suggestion
+2021/11/16 21:03:13 CLG <-- textDocument/publishDiagnostics notif15 > 0:0 - 1: drv_unknown_argument
+2021/11/16 21:03:13 CLG <-- textDocument/publishDiagnostics notif15 > 0:9 - 1: pp_file_not_found
+2021/11/16 21:03:13 CLG <-- textDocument/publishDiagnostics notif15 > 14:11 - 1: undeclared_var_use
+2021/11/16 21:03:13 CLG <-- textDocument/publishDiagnostics notif15 > 24:21 - 1: undeclared_var_use
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 1 (1): [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/codeAction 2 (2): [0m
+2021/11/16 21:03:13 SYLD--- [93m read-locked[0m
+2021/11/16 21:03:13 SYLD---    symbol: Function setup 7:0-7:12
+2021/11/16 21:03:13 SYLD---             > void setup()
+2021/11/16 21:03:13 SYLD---    symbol: Function loop 9:0-9:11
+2021/11/16 21:03:13 SYLD---             > void loop()
+2021/11/16 21:03:13 SYLD---    symbol: Function setup 11:0-16:1
+2021/11/16 21:03:13 SYLD---      TRIMMED> void setup() 
+2021/11/16 21:03:13 SYLD---    symbol: Function loop 18:0-26:1
+2021/11/16 21:03:13 SYLD---      TRIMMED> void loop() 
+2021/11/16 21:03:13 SYLD--- [93m read-unlocked[0m
+2021/11/16 21:03:13 SYLD--- (done)
+2021/11/16 21:03:13     URI: converted 0:0-0:0 to /not-ino:0:0-0:0
+2021/11/16 21:03:13     <-- codeAction(0 elements)
+2021/11/16 21:03:13 <-- codeAction(0 elements)
+2021/11/16 21:03:13 IDE --> textDocument/codeAction 1 [93m read-unlocked[0m
+2021/11/16 21:03:13     URI: converted 0:0-0:0 to /not-ino:0:0-0:0
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (1): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/codeAction 2: [0m
+2021/11/16 21:03:13 IDE --> textDocument/codeAction 2 [93m read-locked[0m
+2021/11/16 21:03:13 --> codeAction(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino:0:0)
+2021/11/16 21:03:13     URI: converted 0:0-0:0 to /not-ino:0:0-0:0
+2021/11/16 21:03:13     URI: converted 0:0-0:0 to /not-ino:0:0-0:0
+2021/11/16 21:03:13     URI: converted 0:9-0:10 to /not-ino:0:9-0:10
+2021/11/16 21:03:13     URI: converted 14:11-14:24 to D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino:7:11-7:24
+2021/11/16 21:03:13     URI: converted 24:21-24:34 to D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino:17:21-17:34
+2021/11/16 21:03:13 CLG <-- textDocument/publishDiagnostics notif15 to IDE: publishDiagnostics(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino):
+2021/11/16 21:03:13 CLG <-- textDocument/publishDiagnostics notif15 > 7:11 - 1: undeclared_var_use
+2021/11/16 21:03:13 CLG <-- textDocument/publishDiagnostics notif15 > 17:21 - 1: undeclared_var_use
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: NOTIFICATION textDocument/publishDiagnostics: [0m
+2021/11/16 21:03:13 CLG <-- textDocument/publishDiagnostics notif15 [93m read-unlocked[0m
+2021/11/16 21:03:13     --> codeAction(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp:2:0)
+2021/11/16 21:03:13 IDE --> textDocument/codeAction 2 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/codeAction 3: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/codeAction 3 (3): [0m
+2021/11/16 21:03:13 IDE --> textDocument/codeAction 2 Queued check document symbols
+2021/11/16 21:03:13 SYCK--- [93m read-locked[0m
+2021/11/16 21:03:13 SYCK--- requesting documentSymbol for file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp
+2021/11/16 21:03:13 SYCK--- [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 4: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 4 (4): [0m
+2021/11/16 21:03:13 SYCK--- [93m read-locked[0m
+2021/11/16 21:03:13 SYCK---    symbol: Function setup 7:0-7:12
+2021/11/16 21:03:13 SYCK---             > void setup()
+2021/11/16 21:03:13 SYCK---    symbol: Function loop 9:0-9:11
+2021/11/16 21:03:13 SYCK---             > void loop()
+2021/11/16 21:03:13 SYCK---    symbol: Function setup 11:0-16:1
+2021/11/16 21:03:13 SYCK---      TRIMMED> void setup() 
+2021/11/16 21:03:13 SYCK---    symbol: Function loop 18:0-26:1
+2021/11/16 21:03:13 SYCK---      TRIMMED> void loop() 
+2021/11/16 21:03:13 SYCK--- [93m read-unlocked[0m
+2021/11/16 21:03:13 SYCK--- (done)
+2021/11/16 21:03:13     <-- codeAction(0 elements)
+2021/11/16 21:03:13 <-- codeAction(0 elements)
+2021/11/16 21:03:13 IDE --> textDocument/codeAction 2 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (2): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 3: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 3 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 3 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 5: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 5 (5): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 3 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (3): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif3 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif3 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif3 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 4: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 4 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 4 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 6: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 6 (6): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 4 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (4): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif4 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif4 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif4 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 5: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 5 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 5 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 7: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 7 (7): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 5 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (5): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif5 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif5 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif5 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 6: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 6 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 6 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 8: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 8 (8): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 6 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (6): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif6 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif6 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif6 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 7: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 7 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 7 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 9: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 9 (9): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 7 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (7): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif7 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif7 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif7 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 8: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 8 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 8 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 10: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 10 (10): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 8 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (8): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif8 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif8 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif8 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 9: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 9 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 9 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 11: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 11 (11): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 9 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (9): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif9 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif9 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif9 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 10: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 10 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 10 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 12: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 12 (12): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 10 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (10): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif10 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif10 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif10 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 11: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 11 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 11 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 13: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 13 (13): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 11 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (11): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif11 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif11 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif11 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 12: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 12 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 12 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 14: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 14 (14): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 12 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (12): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif12 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif12 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif12 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 13: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 13 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 13 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 15: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 15 (15): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 13 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (13): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif13 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif13 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif13 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 14: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 14 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 14 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 16: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 16 (16): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 14 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (14): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif14 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif14 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif14 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 15: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 15 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 15 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 17: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 17 (17): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 15 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (15): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif15 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif15 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif15 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 16: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 16 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 16 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 18: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 18 (18): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 16 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (16): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif16 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif16 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif16 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 17: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 17 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 17 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 19: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 19 (19): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 17 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (17): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif17 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif17 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif17 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 18: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 18 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 18 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 20: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 20 (20): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 18 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (18): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif18 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif18 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif18 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 19: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 19 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 19 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 21: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 21 (21): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 19 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (19): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif19 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif19 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif19 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 20: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 20 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 20 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 22: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 22 (22): [0m
+2021/11/16 21:03:13     <-- documentSymbol(5 document symbols)
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Variable 5:0-5:13
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 7:0-7:12
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 9:0-9:11
+2021/11/16 21:03:13       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:03:13     > convert Function 11:0-16:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13     > convert Function 18:0-26:1
+2021/11/16 21:03:13     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 20 [93m read-unlocked[0m
+2021/11/16 21:03:13 [91mIDE <-- LS     CL: ANSWER UNBOUND (20): [0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif20 [93m read-locked[0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif20 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:03:13 IDE --> $/cancelRequest notif20 [93m read-unlocked[0m
+2021/11/16 21:03:13 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 21: [0m
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 21 [93m read-locked[0m
+2021/11/16 21:03:13 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:03:13     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server744922891/sketch/LASER.ino.cpp)
+2021/11/16 21:03:13 IDE --> textDocument/documentSymbol 21 sent to Clang
+2021/11/16 21:03:13 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 23: [0m
+2021/11/16 21:03:13 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 23 (23): [0m
+
+
+
+
+
+
+
+Started logging.
+2021/11/16 21:12:00 logging to d:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\inols.log
+2021/11/16 21:12:00 Initial board configuration: {"NodeMCU 1.0 (ESP-12E Module)" esp8266:esp8266:nodemcuv2}
+2021/11/16 21:12:00 Language server build path: C:\Users\Thiag\AppData\Local\Temp\arduino-language-server780986223
+2021/11/16 21:12:00 Language server build sketch root: C:\Users\Thiag\AppData\Local\Temp\arduino-language-server780986223\sketch
+2021/11/16 21:12:00 [92mIDE --> LS     CL: REQUEST initialize 0: [0m
+2021/11/16 21:12:00 IDE --> initialize 0 [93m locked[0m
+2021/11/16 21:12:00 IDE --> initialize 0 [93m unlocked[0m
+2021/11/16 21:12:00 INIT--- initializing workbench
+2021/11/16 21:12:00 INIT--- [93m locked[0m
+2021/11/16 21:12:00     --> initialize(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER)
+2021/11/16 21:12:00 [91mIDE <-- LS     CL: ANSWER UNBOUND (0): [0m
+2021/11/16 21:12:00 running:  c:\Program Files\Arduino IDE\resources\app\node_modules\arduino-ide-extension\build\arduino-cli.exe --config-file c:\Users\Thiag\.arduinoIDE\arduino-cli.yaml compile --fqbn esp8266:esp8266:nodemcuv2 --only-compilation-database --clean --source-override C:\Users\Thiag\AppData\Local\Temp\470361090 --build-path C:\Users\Thiag\AppData\Local\Temp\arduino-language-server780986223 --format json D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER
+2021/11/16 21:12:00 [92mIDE --> LS     CL: NOTIFICATION initialized: [0m
+2021/11/16 21:12:03 arduino-cli output: {
+  "compiler_out": "",
+  "compiler_err": "",
+  "builder_result": {
+    "build_path": "C:\\Users\\Thiag\\AppData\\Local\\Temp\\arduino-language-server780986223"
+  },
+  "success": true
+}
+
+2021/11/16 21:12:03 running:  c:\Program Files\Arduino IDE\resources\app\node_modules\arduino-ide-extension\build\arduino-cli.exe --config-file c:\Users\Thiag\.arduinoIDE\arduino-cli.yaml config dump --format json
+2021/11/16 21:12:03 Arduino Data Dir ->  c:\Users\Thiag\AppData\Local\Arduino15
+2021/11/16 21:12:03     Starting clangd: c:\Program Files\Arduino IDE\resources\app\node_modules\arduino-ide-extension\build\bin\clangd.exe -log=verbose --compile-commands-dir=C:\Users\Thiag\AppData\Local\Temp\arduino-language-server780986223 -query-driver=c:\Users\Thiag\AppData\Local\Arduino15\packages\**
+2021/11/16 21:12:03 logging to d:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\inols-clangd.log
+2021/11/16 21:12:03 logging to d:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\inols-clangd-err.log
+2021/11/16 21:12:03 [91mIDE     LS --> CL: REQUEST initialize 0: [0m
+2021/11/16 21:12:03 [92mIDE     LS <-- CL: ANSWER initialize 0 (0): [0m
+2021/11/16 21:12:03 [91mIDE     LS --> CL: NOTIFICATION initialized: [0m
+2021/11/16 21:12:03 INIT--- initializing workbench (done)
+2021/11/16 21:12:03 INIT--- [93m unlocked[0m
+2021/11/16 21:12:03 IDE --> initialized notif1 [93m read-locked[0m
+2021/11/16 21:12:03 IDE --> initialized notif1 notification is not propagated to clangd
+2021/11/16 21:12:03 IDE --> initialized notif1 [93m read-unlocked[0m
+2021/11/16 21:12:03 [92mIDE --> LS     CL: NOTIFICATION textDocument/didOpen: [0m
+2021/11/16 21:12:03 IDE --> textDocument/didOpen notif2 [93m locked[0m
+2021/11/16 21:12:03 IDE --> textDocument/didOpen notif2 (file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino@1 as 'cpp')
+2021/11/16 21:12:03     increasing .ino tracked files count: 1
+2021/11/16 21:12:03 IDE --> textDocument/didOpen notif2 to clang: didOpen(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server780986223/sketch/LASER.ino.cpp@1 as 'cpp')
+2021/11/16 21:12:03 IDE --> textDocument/didOpen notif2 sent to Clang
+2021/11/16 21:12:03 [91mIDE     LS --> CL: NOTIFICATION textDocument/didOpen: [0m
+2021/11/16 21:12:03 IDE --> textDocument/didOpen notif2 Queued resfreshing document symbols
+2021/11/16 21:12:03 IDE --> textDocument/didOpen notif2 [93m unlocked[0m
+2021/11/16 21:12:03 SYLD--- [93m read-locked[0m
+2021/11/16 21:12:03 [92mIDE --> LS     CL: REQUEST textDocument/codeAction 1: [0m
+2021/11/16 21:12:03 SYLD--- requesting documentSymbol for file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server780986223/sketch/LASER.ino.cpp
+2021/11/16 21:12:03 SYLD--- [93m read-unlocked[0m
+2021/11/16 21:12:03 IDE --> textDocument/codeAction 1 [93m read-locked[0m
+2021/11/16 21:12:03 --> codeAction(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino:0:0)
+2021/11/16 21:12:03 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 1: [0m
+2021/11/16 21:12:03     --> codeAction(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server780986223/sketch/LASER.ino.cpp:2:0)
+2021/11/16 21:12:03 IDE --> textDocument/codeAction 1 sent to Clang
+2021/11/16 21:12:03 [91mIDE     LS --> CL: REQUEST textDocument/codeAction 2: [0m
+2021/11/16 21:12:03 [92mIDE     LS <-- CL: REQUEST window/workDoneProgress/create 0: [0m
+2021/11/16 21:12:03 [91mIDE     LS --> CL: ANSWER UNBOUND (0): [0m
+2021/11/16 21:12:03 [91mIDE <-- LS     CL: REQUEST window/workDoneProgress/create 0: [0m
+2021/11/16 21:12:03 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress BEGIN indexing [0m
+2021/11/16 21:12:03 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 0/1 0%[0m
+2021/11/16 21:12:03 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 0/84 0%[0m
+2021/11/16 21:12:03 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 0/84 0%[0m
+2021/11/16 21:12:03 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 0/84 0%[0m
+2021/11/16 21:12:03 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 0/84 0%[0m
+2021/11/16 21:12:03 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 1/84 1.1904761904761905%[0m
+2021/11/16 21:12:03 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 1/84 1.1904761904761905%[0m
+2021/11/16 21:12:03 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 2/84 2.380952380952381%[0m
+2021/11/16 21:12:03 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 2/84 2.380952380952381%[0m
+2021/11/16 21:12:03 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 3/84 3.5714285714285716%[0m
+2021/11/16 21:12:03 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 3/84 3.5714285714285716%[0m
+2021/11/16 21:12:04 [92mIDE     LS <-- CL: NOTIFICATION textDocument/publishDiagnostics: [0m
+2021/11/16 21:12:04 CLG <-- textDocument/publishDiagnostics notif13 (queued)
+2021/11/16 21:12:04 CLG <-- textDocument/publishDiagnostics notif13 [93m read-locked[0m
+2021/11/16 21:12:04 CLG <-- textDocument/publishDiagnostics notif13 (running)
+2021/11/16 21:12:04 CLG <-- textDocument/publishDiagnostics notif13 publishDiagnostics(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server780986223/sketch/LASER.ino.cpp):
+2021/11/16 21:12:04 CLG <-- textDocument/publishDiagnostics notif13 > 0:0 - 1: drv_unknown_argument_with_suggestion
+2021/11/16 21:12:04 CLG <-- textDocument/publishDiagnostics notif13 > 0:0 - 1: drv_unknown_argument
+2021/11/16 21:12:04 CLG <-- textDocument/publishDiagnostics notif13 > 0:0 - 1: drv_unknown_argument_with_suggestion
+2021/11/16 21:12:04 CLG <-- textDocument/publishDiagnostics notif13 > 0:0 - 1: drv_unknown_argument
+2021/11/16 21:12:04 CLG <-- textDocument/publishDiagnostics notif13 > 0:9 - 1: pp_file_not_found
+2021/11/16 21:12:04 CLG <-- textDocument/publishDiagnostics notif13 > 14:11 - 1: undeclared_var_use
+2021/11/16 21:12:04 CLG <-- textDocument/publishDiagnostics notif13 > 24:21 - 1: undeclared_var_use
+2021/11/16 21:12:04 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 1 (1): [0m
+2021/11/16 21:12:04 SYLD--- [93m read-locked[0m
+2021/11/16 21:12:04 SYLD---    symbol: Function setup 7:0-7:12
+2021/11/16 21:12:04 SYLD---             > void setup()
+2021/11/16 21:12:04 SYLD---    symbol: Function loop 9:0-9:11
+2021/11/16 21:12:04 SYLD---             > void loop()
+2021/11/16 21:12:04 SYLD---    symbol: Function setup 11:0-16:1
+2021/11/16 21:12:04 SYLD---      TRIMMED> void setup() 
+2021/11/16 21:12:04 SYLD---    symbol: Function loop 18:0-26:1
+2021/11/16 21:12:04 SYLD---      TRIMMED> void loop() 
+2021/11/16 21:12:04 SYLD--- [93m read-unlocked[0m
+2021/11/16 21:12:04 SYLD--- (done)
+2021/11/16 21:12:04 [92mIDE     LS <-- CL: ANSWER textDocument/codeAction 2 (2): [0m
+2021/11/16 21:12:04     URI: converted 0:0-0:0 to /not-ino:0:0-0:0
+2021/11/16 21:12:04     URI: converted 0:0-0:0 to /not-ino:0:0-0:0
+2021/11/16 21:12:04     <-- codeAction(0 elements)
+2021/11/16 21:12:04 <-- codeAction(0 elements)
+2021/11/16 21:12:04 IDE --> textDocument/codeAction 1 [93m read-unlocked[0m
+2021/11/16 21:12:04 [91mIDE <-- LS     CL: ANSWER UNBOUND (1): [0m
+2021/11/16 21:12:04 [92mIDE --> LS     CL: REQUEST textDocument/codeAction 2: [0m
+2021/11/16 21:12:04 IDE --> textDocument/codeAction 2 [93m read-locked[0m
+2021/11/16 21:12:04 --> codeAction(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino:0:0)
+2021/11/16 21:12:04     URI: converted 0:0-0:0 to /not-ino:0:0-0:0
+2021/11/16 21:12:04     URI: converted 0:0-0:0 to /not-ino:0:0-0:0
+2021/11/16 21:12:04     URI: converted 0:9-0:10 to /not-ino:0:9-0:10
+2021/11/16 21:12:04     URI: converted 14:11-14:24 to D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino:7:11-7:24
+2021/11/16 21:12:04     URI: converted 24:21-24:34 to D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino:17:21-17:34
+2021/11/16 21:12:04 CLG <-- textDocument/publishDiagnostics notif13 to IDE: publishDiagnostics(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino):
+2021/11/16 21:12:04 CLG <-- textDocument/publishDiagnostics notif13 > 7:11 - 1: undeclared_var_use
+2021/11/16 21:12:04 CLG <-- textDocument/publishDiagnostics notif13 > 17:21 - 1: undeclared_var_use
+2021/11/16 21:12:04 [91mIDE <-- LS     CL: NOTIFICATION textDocument/publishDiagnostics: [0m
+2021/11/16 21:12:04 CLG <-- textDocument/publishDiagnostics notif13 [93m read-unlocked[0m
+2021/11/16 21:12:04     --> codeAction(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server780986223/sketch/LASER.ino.cpp:2:0)
+2021/11/16 21:12:04 IDE --> textDocument/codeAction 2 sent to Clang
+2021/11/16 21:12:04 [91mIDE     LS --> CL: REQUEST textDocument/codeAction 3: [0m
+2021/11/16 21:12:04 [92mIDE     LS <-- CL: ANSWER textDocument/codeAction 3 (3): [0m
+2021/11/16 21:12:04 IDE --> textDocument/codeAction 2 Queued check document symbols
+2021/11/16 21:12:04 SYCK--- [93m read-locked[0m
+2021/11/16 21:12:04 SYCK--- requesting documentSymbol for file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server780986223/sketch/LASER.ino.cpp
+2021/11/16 21:12:04 SYCK--- [93m read-unlocked[0m
+2021/11/16 21:12:04 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 4: [0m
+2021/11/16 21:12:04 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 4 (4): [0m
+2021/11/16 21:12:04 SYCK--- [93m read-locked[0m
+2021/11/16 21:12:04 SYCK---    symbol: Function setup 7:0-7:12
+2021/11/16 21:12:04 SYCK---             > void setup()
+2021/11/16 21:12:04 SYCK---    symbol: Function loop 9:0-9:11
+2021/11/16 21:12:04 SYCK---             > void loop()
+2021/11/16 21:12:04 SYCK---    symbol: Function setup 11:0-16:1
+2021/11/16 21:12:04 SYCK---      TRIMMED> void setup() 
+2021/11/16 21:12:04 SYCK---    symbol: Function loop 18:0-26:1
+2021/11/16 21:12:04 SYCK---      TRIMMED> void loop() 
+2021/11/16 21:12:04 SYCK--- [93m read-unlocked[0m
+2021/11/16 21:12:04 SYCK--- (done)
+2021/11/16 21:12:04     <-- codeAction(0 elements)
+2021/11/16 21:12:04 <-- codeAction(0 elements)
+2021/11/16 21:12:04 IDE --> textDocument/codeAction 2 [93m read-unlocked[0m
+2021/11/16 21:12:04 [91mIDE <-- LS     CL: ANSWER UNBOUND (2): [0m
+2021/11/16 21:12:04 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 3: [0m
+2021/11/16 21:12:04 IDE --> textDocument/documentSymbol 3 [93m read-locked[0m
+2021/11/16 21:12:04 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:12:04     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server780986223/sketch/LASER.ino.cpp)
+2021/11/16 21:12:04 IDE --> textDocument/documentSymbol 3 sent to Clang
+2021/11/16 21:12:04 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 5: [0m
+2021/11/16 21:12:04 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 5 (5): [0m
+2021/11/16 21:12:04     <-- documentSymbol(5 document symbols)
+2021/11/16 21:12:04     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:12:04     > convert Variable 5:0-5:13
+2021/11/16 21:12:04     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:12:04     > convert Function 7:0-7:12
+2021/11/16 21:12:04       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:12:04     > convert Function 9:0-9:11
+2021/11/16 21:12:04       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:12:04     > convert Function 11:0-16:1
+2021/11/16 21:12:04     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:12:04     > convert Function 18:0-26:1
+2021/11/16 21:12:04     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:12:04 IDE --> textDocument/documentSymbol 3 [93m read-unlocked[0m
+2021/11/16 21:12:04 [91mIDE <-- LS     CL: ANSWER UNBOUND (3): [0m
+2021/11/16 21:12:04 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:12:04 IDE --> $/cancelRequest notif3 [93m read-locked[0m
+2021/11/16 21:12:04 IDE --> $/cancelRequest notif3 sent to Clang
+2021/11/16 21:12:04 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/16 21:12:04 IDE --> $/cancelRequest notif3 [93m read-unlocked[0m
+2021/11/16 21:12:04 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 4: [0m
+2021/11/16 21:12:04 IDE --> textDocument/documentSymbol 4 [93m read-locked[0m
+2021/11/16 21:12:04 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino)
+2021/11/16 21:12:04     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server780986223/sketch/LASER.ino.cpp)
+2021/11/16 21:12:04 IDE --> textDocument/documentSymbol 4 sent to Clang
+2021/11/16 21:12:04 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 6: [0m
+2021/11/16 21:12:04 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 6 (6): [0m
+2021/11/16 21:12:04     <-- documentSymbol(5 document symbols)
+2021/11/16 21:12:04     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:12:04     > convert Variable 5:0-5:13
+2021/11/16 21:12:04     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:12:04     > convert Function 7:0-7:12
+2021/11/16 21:12:04       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:12:04     > convert Function 9:0-9:11
+2021/11/16 21:12:04       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/16 21:12:04     > convert Function 11:0-16:1
+2021/11/16 21:12:04     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:12:04     > convert Function 18:0-26:1
+2021/11/16 21:12:04     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\Sensor kit docs\LASER\LASER.ino
+2021/11/16 21:12:04 IDE --> textDocument/documentSymbol 4 [93m read-unlocked[0m
+2021/11/16 21:12:04 [91mIDE <-- LS     CL: ANSWER UNBOUND (4): [0m
+2021/11/16 21:12:04 [92mIDE --> LS     CL: ANSWER window/workDoneProgress/create 0 (0): [0m
+2021/11/16 21:12:04 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress BEGIN indexing [0m
+2021/11/16 21:12:04 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 3/84 3.5714285714285716%[0m
+2021/11/16 21:12:04 [92mIDE --> LS     CL: REQUEST textDocument/codeAction 5: [0m
+2021/11/16 21:12:04 IDE --> textDocument/codeAction 5 [93m read-locked[0m
+2021/11/16 21:12:04 --> codeAction(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino:0:0)
+2021/11/16 21:12:04     --> codeAction(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server780986223/sketch/LASER.ino.cpp:2:0)
+2021/11/16 21:12:04 IDE --> textDocument/codeAction 5 sent to Clang
+2021/11/16 21:12:04 [91mIDE     LS --> CL: REQUEST textDocument/codeAction 7: [0m
+2021/11/16 21:12:04 [92mIDE     LS <-- CL: ANSWER textDocument/codeAction 7 (7): [0m
+2021/11/16 21:12:04     <-- codeAction(0 elements)
+2021/11/16 21:12:04 <-- codeAction(0 elements)
+2021/11/16 21:12:04 IDE --> textDocument/codeAction 5 [93m read-unlocked[0m
+2021/11/16 21:12:04 [91mIDE <-- LS     CL: ANSWER UNBOUND (5): [0m
+2021/11/16 21:12:04 [92mIDE --> LS     CL: REQUEST textDocument/codeAction 6: [0m
+2021/11/16 21:12:04 IDE --> textDocument/codeAction 6 [93m read-locked[0m
+2021/11/16 21:12:04 --> codeAction(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/Sensor%20kit%20docs/LASER/LASER.ino:0:0)
+2021/11/16 21:12:04     --> codeAction(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server780986223/sketch/LASER.ino.cpp:2:0)
+2021/11/16 21:12:04 IDE --> textDocument/codeAction 6 sent to Clang
+2021/11/16 21:12:04 [91mIDE     LS --> CL: REQUEST textDocument/codeAction 8: [0m
+2021/11/16 21:12:04 [92mIDE     LS <-- CL: ANSWER textDocument/codeAction 8 (8): [0m
+2021/11/16 21:12:04     <-- codeAction(0 elements)
+2021/11/16 21:12:04 <-- codeAction(0 elements)
+2021/11/16 21:12:04 IDE --> textDocument/codeAction 6 [93m read-unlocked[0m
+2021/11/16 21:12:04 [91mIDE <-- LS     CL: ANSWER UNBOUND (6): [0m
+2021/11/16 21:12:07 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 4/84 4.761904761904762%[0m
+2021/11/16 21:12:07 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 4/84 4.761904761904762%[0m
+2021/11/16 21:12:07 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 4/84 4.761904761904762%[0m
+2021/11/16 21:12:07 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 4/84 4.761904761904762%[0m
+2021/11/16 21:12:07 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 5/84 5.9523809523809526%[0m
+2021/11/16 21:12:07 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 5/84 5.9523809523809526%[0m
+2021/11/16 21:12:07 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 5/84 5.9523809523809526%[0m
+2021/11/16 21:12:07 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 5/84 5.9523809523809526%[0m
+2021/11/16 21:12:07 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 6/84 7.142857142857143%[0m
+2021/11/16 21:12:07 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 6/84 7.142857142857143%[0m
+2021/11/16 21:12:07 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 6/84 7.142857142857143%[0m
+2021/11/16 21:12:07 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 6/84 7.142857142857143%[0m
+2021/11/16 21:12:07 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 7/84 8.333333333333334%[0m
+2021/11/16 21:12:07 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 7/84 8.333333333333334%[0m
+2021/11/16 21:12:07 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 7/84 8.333333333333334%[0m
+2021/11/16 21:12:07 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 8/84 9.523809523809524%[0m
+2021/11/16 21:12:07 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 8/84 9.523809523809524%[0m
+2021/11/16 21:12:07 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 8/84 9.523809523809524%[0m
+2021/11/16 21:12:07 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 8/84 9.523809523809524%[0m
+2021/11/16 21:12:08 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 9/84 10.714285714285714%[0m
+2021/11/16 21:12:08 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 9/84 10.714285714285714%[0m
+2021/11/16 21:12:08 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 9/84 10.714285714285714%[0m
+2021/11/16 21:12:08 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 9/84 10.714285714285714%[0m
+2021/11/16 21:12:08 [92mIDE --> LS     CL: REQUEST shutdown 7: [0m
+2021/11/16 21:12:08 IDE --> shutdown 7 [93m read-locked[0m
+2021/11/16 21:12:08 IDE --> shutdown 7 sent to Clang
+2021/11/16 21:12:08 [91mIDE     LS --> CL: REQUEST shutdown 9: [0m
+2021/11/16 21:12:08 [92mIDE     LS <-- CL: ANSWER shutdown 9 (9): [0m
+2021/11/16 21:12:08 IDE --> shutdown 7 [93m read-unlocked[0m
+2021/11/16 21:12:08 [91mIDE <-- LS     CL: ANSWER UNBOUND (7): [0m
+2021/11/16 21:12:08 [92mIDE --> LS     CL: NOTIFICATION exit: [0m
+2021/11/16 21:12:08 IDE --> exit notif4 [93m read-locked[0m
+2021/11/16 21:12:08 IDE --> exit notif4 sent to Clang
+2021/11/16 21:12:08 [91mIDE     LS --> CL: NOTIFICATION exit: [0m
+2021/11/16 21:12:08 IDE --> exit notif4 [93m read-unlocked[0m
