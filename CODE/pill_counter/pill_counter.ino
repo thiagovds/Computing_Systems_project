@@ -29,14 +29,16 @@ void loop()
 
         //ADD LINE HERE TO SEND EMAIL!!!!!!           -------------------------------------------------------------------------------
 
-        i=0; mytime[i] = millis();  delay(4000);  //4 seconds for user read and reset mytime  
+        i=0; mytime[i] = millis();  //reset mytime  
         error_count++;
         
         Serial.print("counter : ");           Serial.println(counter);    
         Serial.print("time difference : ") ;  Serial.println(mytime[i]-mytime[i-1]);
         Serial.print("mytime[i] : ") ;        Serial.println(mytime[i]);
         Serial.print("mytime[0] : ") ;        Serial.println(mytime[i-1]);  
-        Serial.print("i = ");                 Serial.println(i);   
+        Serial.print("i = ");                 Serial.println(i);
+        
+        delay(4000);  //4 seconds for user read   
     }
     else
     {
