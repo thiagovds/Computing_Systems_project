@@ -2807,3 +2807,169 @@ Content-Length: 37
 {"id":21,"result":[],"jsonrpc":"2.0"}Content-Length: 114
 
 {"id":22,"error":{"code":-32602,"message":"trying to get AST for non-added document","data":null},"jsonrpc":"2.0"}
+
+
+
+
+
+
+Started logging.
+
+<<<
+Content-Length: 3157
+
+{"jsonrpc":"2.0","id":0,"method":"initialize","params":{"processId":2832,"clientInfo":{"name":"vscode","version":"1.53.2"},"rootPath":"d:\\Users\\Thiago\\Documents\\GitHub\\Computing_Systems_project\\CODE\\pill_counter","rootUri":"file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/CODE/pill_counter","capabilities":{"workspace":{"applyEdit":true,"workspaceEdit":{"documentChanges":true,"resourceOperations":["create","rename","delete"],"failureHandling":"textOnlyTransactional"},"didChangeConfiguration":{"dynamicRegistration":true},"didChangeWatchedFiles":{"dynamicRegistration":true},"symbol":{"dynamicRegistration":true,"symbolKind":{"valueSet":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]}},"executeCommand":{"dynamicRegistration":true},"configuration":true,"workspaceFolders":true},"textDocument":{"publishDiagnostics":{"relatedInformation":true,"versionSupport":false,"tagSupport":{"valueSet":[1,2]}},"synchronization":{"dynamicRegistration":true,"willSave":true,"willSaveWaitUntil":true,"didSave":true},"completion":{"dynamicRegistration":true,"contextSupport":true,"completionItem":{"snippetSupport":true,"commitCharactersSupport":true,"documentationFormat":["markdown","plaintext"],"deprecatedSupport":true,"preselectSupport":true,"tagSupport":{"valueSet":[1]}},"completionItemKind":{"valueSet":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]}},"hover":{"dynamicRegistration":true,"contentFormat":["markdown","plaintext"]},"signatureHelp":{"dynamicRegistration":true,"signatureInformation":{"documentationFormat":["markdown","plaintext"],"parameterInformation":{"labelOffsetSupport":true}},"contextSupport":true},"definition":{"dynamicRegistration":true,"linkSupport":true},"references":{"dynamicRegistration":true},"documentHighlight":{"dynamicRegistration":true},"documentSymbol":{"dynamicRegistration":true,"symbolKind":{"valueSet":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]},"hierarchicalDocumentSymbolSupport":true},"codeAction":{"dynamicRegistration":true,"isPreferredSupport":true,"codeActionLiteralSupport":{"codeActionKind":{"valueSet":["","quickfix","refactor","refactor.extract","refactor.inline","refactor.rewrite","source","source.organizeImports"]}}},"codeLens":{"dynamicRegistration":true},"formatting":{"dynamicRegistration":true},"rangeFormatting":{"dynamicRegistration":true},"onTypeFormatting":{"dynamicRegistration":true},"rename":{"dynamicRegistration":true,"prepareSupport":true},"documentLink":{"dynamicRegistration":true,"tooltipSupport":true},"typeDefinition":{"dynamicRegistration":true,"linkSupport":true},"implementation":{"dynamicRegistration":true,"linkSupport":true},"colorProvider":{"dynamicRegistration":true},"foldingRange":{"dynamicRegistration":true,"rangeLimit":5000,"lineFoldingOnly":true},"declaration":{"dynamicRegistration":true,"linkSupport":true},"selectionRange":{"dynamicRegistration":true}},"window":{"workDoneProgress":true}},"initializationOptions":{},"trace":"off","workspaceFolders":[{"uri":"file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/CODE/pill_counter","name":"pill_counter"}]}}
+>>>
+Content-Length: 598
+
+{"id":0,"result":{"capabilities":{"textDocumentSync":2,"hoverProvider":true,"completionProvider":{"triggerCharacters":[".","\u003e",":"]},"signatureHelpProvider":{"triggerCharacters":["(",","]},"definitionProvider":true,"documentHighlightProvider":true,"documentSymbolProvider":true,"workspaceSymbolProvider":true,"codeActionProvider":true,"documentFormattingProvider":true,"documentRangeFormattingProvider":true,"documentOnTypeFormattingProvider":{"firstTriggerCharacter":"\n"},"renameProvider":false,"executeCommandProvider":{"commands":["clangd.applyFix","clangd.applyTweak"]}}},"jsonrpc":"2.0"}
+<<<
+Content-Length: 52
+
+{"jsonrpc":"2.0","method":"initialized","params":{}}Content-Length: 2569
+
+{"jsonrpc":"2.0","method":"textDocument/didOpen","params":{"textDocument":{"uri":"file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/CODE/pill_counter/pill_counter.ino","languageId":"cpp","version":1,"text":"#define LDR A1\r\n\r\n\r\nint calib_val = 900;   //calibration value, decrease if false counts\r\nint light = 0;\r\nint counter = 0;\r\nint error_count = 0;\r\nunsigned long mytime[] = {0,0,0};\r\nint i = 0;\r\nvoid setup() \r\n{\r\n  pinMode (LDR, INPUT); //define status ON/OFF\r\n  Serial.begin(9600);     Serial.println(\"Serial started\");\r\n  mytime[0] = millis();   Serial.println(mytime[i]);\r\n  i++;\r\n}\r\n\r\nvoid loop() \r\n{\r\n  delay(15);  light = analogRead(LDR);\r\n\r\n  if (light < calib_val)                      //detection of light beam obstruction\r\n  {\r\n    counter++; mytime[i] = millis();          //record passing of pill and its timestamp\r\n    \r\n    if(mytime[i] - mytime[i-1] < 1000   &&   i != 0)   // if 2 pill counting events are less than 100ms apart, that means that 2 or more pills were dispensed at once!\r\n    {\r\n        Serial.println(\"DISPENSING ERROR! 2 or more pills dispensed!\"); \r\n\r\n        //ADD LINE HERE TO SEND EMAIL!!!!!!           -------------------------------------------------------------------------------\r\n\r\n        i=0; mytime[i] = millis();  //reset mytime  \r\n        error_count++;\r\n        \r\n        Serial.print(\"counter : \");           Serial.println(counter);    \r\n        Serial.print(\"time difference : \") ;  Serial.println(mytime[i]-mytime[i-1]);\r\n        Serial.print(\"mytime[i] : \") ;        Serial.println(mytime[i]);\r\n        Serial.print(\"mytime[0] : \") ;        Serial.println(mytime[i-1]);  \r\n        Serial.print(\"i = \");                 Serial.println(i);\r\n        \r\n        delay(4000);  //4 seconds for user read   \r\n    }\r\n    else\r\n    {\r\n      Serial.print(\"counter : \");             Serial.println(counter);    \r\n      Serial.print(\"time difference : \") ;    Serial.println(mytime[i]-mytime[i-1]);\r\n      Serial.print(\"mytime[i] : \") ;          Serial.println(mytime[i]);\r\n      Serial.print(\"mytime[0] : \") ;          Serial.println(mytime[i-1]);\r\n      Serial.print(\"i = \");                   Serial.println(i);   \r\n    }\r\n    \r\n    \r\n    \r\n    \r\n  \r\n    \r\n    \r\n  \r\n    \r\n    i++;\r\n    if (counter >= 100){counter = 0;}\r\n  }\r\n  else\r\n  {\r\n    //  Serial.print(\"NO COUNT\\n light =\");\r\n    //  Serial.println(light);            \r\n  }\r\n}\r\n"}}}Content-Length: 304
+
+{"jsonrpc":"2.0","id":1,"method":"textDocument/codeAction","params":{"textDocument":{"uri":"file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/CODE/pill_counter/pill_counter.ino"},"range":{"start":{"line":40,"character":8},"end":{"line":40,"character":8}},"context":{"diagnostics":[]}}}Content-Length: 302
+
+{"jsonrpc":"2.0","id":2,"method":"textDocument/codeAction","params":{"textDocument":{"uri":"file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/CODE/pill_counter/pill_counter.ino"},"range":{"start":{"line":0,"character":0},"end":{"line":0,"character":0}},"context":{"diagnostics":[]}}}Content-Length: 203
+
+{"jsonrpc":"2.0","id":3,"method":"textDocument/documentSymbol","params":{"textDocument":{"uri":"file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/CODE/pill_counter/pill_counter.ino"}}}Content-Length: 62
+
+{"jsonrpc":"2.0","method":"$/cancelRequest","params":{"id":3}}Content-Length: 203
+
+{"jsonrpc":"2.0","id":4,"method":"textDocument/documentSymbol","params":{"textDocument":{"uri":"file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/CODE/pill_counter/pill_counter.ino"}}}
+>>>
+Content-Length: 111
+
+{"method":"window/workDoneProgress/create","params":{"token":"backgroundIndexProgress"},"id":0,"jsonrpc":"2.0"}Content-Length: 36
+
+{"id":1,"result":[],"jsonrpc":"2.0"}Content-Length: 36
+
+{"id":2,"result":[],"jsonrpc":"2.0"}Content-Length: 1531
+
+{"id":3,"result":[{"name":"calib_val","kind":13,"range":{"start":{"line":3,"character":0},"end":{"line":3,"character":19}},"selectionRange":{"start":{"line":3,"character":4},"end":{"line":3,"character":13}}},{"name":"light","kind":13,"range":{"start":{"line":4,"character":0},"end":{"line":4,"character":13}},"selectionRange":{"start":{"line":4,"character":4},"end":{"line":4,"character":9}}},{"name":"counter","kind":13,"range":{"start":{"line":5,"character":0},"end":{"line":5,"character":15}},"selectionRange":{"start":{"line":5,"character":4},"end":{"line":5,"character":11}}},{"name":"error_count","kind":13,"range":{"start":{"line":6,"character":0},"end":{"line":6,"character":19}},"selectionRange":{"start":{"line":6,"character":4},"end":{"line":6,"character":15}}},{"name":"mytime","kind":13,"range":{"start":{"line":7,"character":0},"end":{"line":7,"character":32}},"selectionRange":{"start":{"line":7,"character":14},"end":{"line":7,"character":20}}},{"name":"i","kind":13,"range":{"start":{"line":8,"character":0},"end":{"line":8,"character":9}},"selectionRange":{"start":{"line":8,"character":4},"end":{"line":8,"character":5}}},{"name":"setup","kind":12,"range":{"start":{"line":9,"character":0},"end":{"line":15,"character":1}},"selectionRange":{"start":{"line":9,"character":5},"end":{"line":9,"character":10}}},{"name":"loop","kind":12,"range":{"start":{"line":17,"character":0},"end":{"line":67,"character":1}},"selectionRange":{"start":{"line":17,"character":5},"end":{"line":17,"character":9}}}],"jsonrpc":"2.0"}Content-Length: 1531
+
+{"id":4,"result":[{"name":"calib_val","kind":13,"range":{"start":{"line":3,"character":0},"end":{"line":3,"character":19}},"selectionRange":{"start":{"line":3,"character":4},"end":{"line":3,"character":13}}},{"name":"light","kind":13,"range":{"start":{"line":4,"character":0},"end":{"line":4,"character":13}},"selectionRange":{"start":{"line":4,"character":4},"end":{"line":4,"character":9}}},{"name":"counter","kind":13,"range":{"start":{"line":5,"character":0},"end":{"line":5,"character":15}},"selectionRange":{"start":{"line":5,"character":4},"end":{"line":5,"character":11}}},{"name":"error_count","kind":13,"range":{"start":{"line":6,"character":0},"end":{"line":6,"character":19}},"selectionRange":{"start":{"line":6,"character":4},"end":{"line":6,"character":15}}},{"name":"mytime","kind":13,"range":{"start":{"line":7,"character":0},"end":{"line":7,"character":32}},"selectionRange":{"start":{"line":7,"character":14},"end":{"line":7,"character":20}}},{"name":"i","kind":13,"range":{"start":{"line":8,"character":0},"end":{"line":8,"character":9}},"selectionRange":{"start":{"line":8,"character":4},"end":{"line":8,"character":5}}},{"name":"setup","kind":12,"range":{"start":{"line":9,"character":0},"end":{"line":15,"character":1}},"selectionRange":{"start":{"line":9,"character":5},"end":{"line":9,"character":10}}},{"name":"loop","kind":12,"range":{"start":{"line":17,"character":0},"end":{"line":67,"character":1}},"selectionRange":{"start":{"line":17,"character":5},"end":{"line":17,"character":9}}}],"jsonrpc":"2.0"}
+<<<
+Content-Length: 38
+
+{"jsonrpc":"2.0","id":0,"result":null}
+>>>
+Content-Length: 143
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"title":"indexing","percentage":0,"kind":"begin"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"4/34","percentage":11.764705882352942,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"5/34","percentage":14.705882352941176,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"5/34","percentage":14.705882352941176,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"6/34","percentage":17.647058823529413,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"6/34","percentage":17.647058823529413,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 158
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"7/34","percentage":20.58823529411765,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 158
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"7/34","percentage":20.58823529411765,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"8/34","percentage":23.529411764705884,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"8/34","percentage":23.529411764705884,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"9/34","percentage":26.470588235294116,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"9/34","percentage":26.470588235294116,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"10/34","percentage":29.41176470588235,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"10/34","percentage":29.41176470588235,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"11/34","percentage":32.35294117647059,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"11/34","percentage":32.35294117647059,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 160
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"12/34","percentage":35.294117647058826,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 160
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"12/34","percentage":35.294117647058826,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"13/34","percentage":38.23529411764706,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 158
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"14/34","percentage":41.1764705882353,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 158
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"14/34","percentage":41.1764705882353,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"15/34","percentage":44.11764705882353,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"15/34","percentage":44.11764705882353,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"16/34","percentage":47.05882352941177,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"16/34","percentage":47.05882352941177,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 144
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"17/34","percentage":50,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 144
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"17/34","percentage":50,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"18/34","percentage":52.94117647058823,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"19/34","percentage":55.88235294117647,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"19/34","percentage":55.88235294117647,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 158
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"20/34","percentage":58.8235294117647,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 158
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"20/34","percentage":58.8235294117647,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"21/34","percentage":61.76470588235294,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"21/34","percentage":61.76470588235294,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"22/34","percentage":64.70588235294117,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"22/34","percentage":64.70588235294117,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 158
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"23/34","percentage":67.6470588235294,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 158
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"23/34","percentage":67.6470588235294,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"24/34","percentage":70.58823529411765,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"24/34","percentage":70.58823529411765,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"25/34","percentage":73.52941176470588,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"25/34","percentage":73.52941176470588,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"26/34","percentage":76.47058823529412,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"27/34","percentage":79.41176470588235,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"27/34","percentage":79.41176470588235,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 158
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"28/34","percentage":82.3529411764706,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 158
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"28/34","percentage":82.3529411764706,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"29/34","percentage":85.29411764705883,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"29/34","percentage":85.29411764705883,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"30/34","percentage":88.23529411764706,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"31/34","percentage":91.17647058823529,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"32/34","percentage":94.11764705882354,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 159
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"message":"33/34","percentage":97.05882352941177,"kind":"report"}},"jsonrpc":"2.0"}Content-Length: 107
+
+{"method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"kind":"end"}},"jsonrpc":"2.0"}
+<<<
+Content-Length: 232
+
+{"jsonrpc":"2.0","id":5,"method":"textDocument/hover","params":{"textDocument":{"uri":"file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/CODE/pill_counter/pill_counter.ino"},"position":{"line":25,"character":24}}}
+>>>
+Content-Length: 293
+
+{"id":5,"result":{"contents":{"kind":"markdown","value":"### variable `mytime`  \n\n---\nType: `unsigned long [3]`  \nValue = `{0, 0, 0}`  \n\n---\n```cpp\nunsigned long mytime[] = {0, 0, 0}\n```"},"range":{"start":{"line":25,"character":19},"end":{"line":25,"character":25}}},"jsonrpc":"2.0"}

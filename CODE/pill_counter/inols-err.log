@@ -6220,3 +6220,306 @@ Started logging.
 2021/11/16 21:31:55     <-- null documentSymbol
 2021/11/16 21:31:55 IDE --> textDocument/documentSymbol 22 [93m read-unlocked[0m
 2021/11/16 21:31:55 [91mIDE <-- LS     CL: ANSWER UNBOUND (22): [0m
+
+
+
+
+
+
+
+Started logging.
+2021/11/17 16:07:30 logging to d:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\inols.log
+2021/11/17 16:07:30 Initial board configuration: {"Arduino NANO 33 IoT" arduino:samd:nano_33_iot}
+2021/11/17 16:07:30 Language server build path: C:\Users\Thiag\AppData\Local\Temp\arduino-language-server134599295
+2021/11/17 16:07:30 Language server build sketch root: C:\Users\Thiag\AppData\Local\Temp\arduino-language-server134599295\sketch
+2021/11/17 16:07:30 [92mIDE --> LS     CL: REQUEST initialize 0: [0m
+2021/11/17 16:07:30 IDE --> initialize 0 [93m locked[0m
+2021/11/17 16:07:30 IDE --> initialize 0 [93m unlocked[0m
+2021/11/17 16:07:30 INIT--- initializing workbench
+2021/11/17 16:07:30 INIT--- [93m locked[0m
+2021/11/17 16:07:30     --> initialize(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/CODE/pill_counter)
+2021/11/17 16:07:30 [91mIDE <-- LS     CL: ANSWER UNBOUND (0): [0m
+2021/11/17 16:07:30 running:  c:\Program Files\Arduino IDE\resources\app\node_modules\arduino-ide-extension\build\arduino-cli.exe --config-file c:\Users\Thiag\.arduinoIDE\arduino-cli.yaml compile --fqbn arduino:samd:nano_33_iot --only-compilation-database --clean --source-override C:\Users\Thiag\AppData\Local\Temp\979453394 --build-path C:\Users\Thiag\AppData\Local\Temp\arduino-language-server134599295 --format json D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter
+2021/11/17 16:07:30 [92mIDE --> LS     CL: NOTIFICATION initialized: [0m
+2021/11/17 16:07:32 arduino-cli output: {
+  "compiler_out": "",
+  "compiler_err": "",
+  "builder_result": {
+    "build_path": "C:\\Users\\Thiag\\AppData\\Local\\Temp\\arduino-language-server134599295"
+  },
+  "success": true
+}
+
+2021/11/17 16:07:32 running:  c:\Program Files\Arduino IDE\resources\app\node_modules\arduino-ide-extension\build\arduino-cli.exe --config-file c:\Users\Thiag\.arduinoIDE\arduino-cli.yaml config dump --format json
+2021/11/17 16:07:32 Arduino Data Dir ->  c:\Users\Thiag\AppData\Local\Arduino15
+2021/11/17 16:07:32     Starting clangd: c:\Program Files\Arduino IDE\resources\app\node_modules\arduino-ide-extension\build\bin\clangd.exe -log=verbose --compile-commands-dir=C:\Users\Thiag\AppData\Local\Temp\arduino-language-server134599295 -query-driver=c:\Users\Thiag\AppData\Local\Arduino15\packages\**
+2021/11/17 16:07:32 logging to d:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\inols-clangd.log
+2021/11/17 16:07:32 logging to d:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\inols-clangd-err.log
+2021/11/17 16:07:32 [91mIDE     LS --> CL: REQUEST initialize 0: [0m
+2021/11/17 16:07:32 [92mIDE     LS <-- CL: ANSWER initialize 0 (0): [0m
+2021/11/17 16:07:32 [91mIDE     LS --> CL: NOTIFICATION initialized: [0m
+2021/11/17 16:07:32 INIT--- initializing workbench (done)
+2021/11/17 16:07:32 INIT--- [93m unlocked[0m
+2021/11/17 16:07:32 IDE --> initialized notif1 [93m read-locked[0m
+2021/11/17 16:07:32 IDE --> initialized notif1 notification is not propagated to clangd
+2021/11/17 16:07:32 IDE --> initialized notif1 [93m read-unlocked[0m
+2021/11/17 16:07:32 [92mIDE --> LS     CL: NOTIFICATION textDocument/didOpen: [0m
+2021/11/17 16:07:32 IDE --> textDocument/didOpen notif2 [93m locked[0m
+2021/11/17 16:07:32 IDE --> textDocument/didOpen notif2 (file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/CODE/pill_counter/pill_counter.ino@1 as 'cpp')
+2021/11/17 16:07:32     increasing .ino tracked files count: 1
+2021/11/17 16:07:32 IDE --> textDocument/didOpen notif2 to clang: didOpen(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server134599295/sketch/pill_counter.ino.cpp@1 as 'cpp')
+2021/11/17 16:07:32 IDE --> textDocument/didOpen notif2 sent to Clang
+2021/11/17 16:07:32 [91mIDE     LS --> CL: NOTIFICATION textDocument/didOpen: [0m
+2021/11/17 16:07:32 IDE --> textDocument/didOpen notif2 Queued resfreshing document symbols
+2021/11/17 16:07:32 IDE --> textDocument/didOpen notif2 [93m unlocked[0m
+2021/11/17 16:07:32 SYLD--- [93m read-locked[0m
+2021/11/17 16:07:32 SYLD--- requesting documentSymbol for file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server134599295/sketch/pill_counter.ino.cpp
+2021/11/17 16:07:32 SYLD--- [93m read-unlocked[0m
+2021/11/17 16:07:32 [92mIDE --> LS     CL: REQUEST textDocument/codeAction 1: [0m
+2021/11/17 16:07:32 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 1: [0m
+2021/11/17 16:07:32 IDE --> textDocument/codeAction 1 [93m read-locked[0m
+2021/11/17 16:07:32 --> codeAction(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/CODE/pill_counter/pill_counter.ino:40:8)
+2021/11/17 16:07:32     --> codeAction(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server134599295/sketch/pill_counter.ino.cpp:47:8)
+2021/11/17 16:07:32 IDE --> textDocument/codeAction 1 sent to Clang
+2021/11/17 16:07:32 [91mIDE     LS --> CL: REQUEST textDocument/codeAction 2: [0m
+2021/11/17 16:07:32 [92mIDE     LS <-- CL: REQUEST window/workDoneProgress/create 0: [0m
+2021/11/17 16:07:32 [91mIDE     LS --> CL: ANSWER UNBOUND (0): [0m
+2021/11/17 16:07:32 [91mIDE <-- LS     CL: REQUEST window/workDoneProgress/create 0: [0m
+2021/11/17 16:07:32 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress BEGIN indexing [0m
+2021/11/17 16:07:32 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 0/1 0%[0m
+2021/11/17 16:07:32 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 0/34 0%[0m
+2021/11/17 16:07:32 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 0/34 0%[0m
+2021/11/17 16:07:32 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 0/34 0%[0m
+2021/11/17 16:07:32 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 0/34 0%[0m
+2021/11/17 16:07:32 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 1/34 2.9411764705882355%[0m
+2021/11/17 16:07:32 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 1/34 2.9411764705882355%[0m
+2021/11/17 16:07:32 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 2/34 5.882352941176471%[0m
+2021/11/17 16:07:32 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 2/34 5.882352941176471%[0m
+2021/11/17 16:07:32 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 3/34 8.823529411764707%[0m
+2021/11/17 16:07:32 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 3/34 8.823529411764707%[0m
+2021/11/17 16:07:32 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 4/34 11.764705882352942%[0m
+2021/11/17 16:07:32 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 4/34 11.764705882352942%[0m
+2021/11/17 16:07:33 [92mIDE     LS <-- CL: NOTIFICATION textDocument/publishDiagnostics: [0m
+2021/11/17 16:07:33 CLG <-- textDocument/publishDiagnostics notif15 (queued)
+2021/11/17 16:07:33 CLG <-- textDocument/publishDiagnostics notif15 [93m read-locked[0m
+2021/11/17 16:07:33 CLG <-- textDocument/publishDiagnostics notif15 (running)
+2021/11/17 16:07:33 CLG <-- textDocument/publishDiagnostics notif15 publishDiagnostics(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server134599295/sketch/pill_counter.ino.cpp):
+2021/11/17 16:07:33 CLG <-- textDocument/publishDiagnostics notif15 > 0:9 - 1: pp_file_not_found
+2021/11/17 16:07:33 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 1 (1): [0m
+2021/11/17 16:07:33 [92mIDE     LS <-- CL: ANSWER textDocument/codeAction 2 (2): [0m
+2021/11/17 16:07:33 SYLD--- [93m read-locked[0m
+2021/11/17 16:07:33 SYLD---    symbol: Function setup 12:0-12:12
+2021/11/17 16:07:33 SYLD---             > void setup()
+2021/11/17 16:07:33 SYLD---    symbol: Function loop 14:0-14:11
+2021/11/17 16:07:33 SYLD---             > void loop()
+2021/11/17 16:07:33 SYLD---    symbol: Function setup 16:0-22:1
+2021/11/17 16:07:33 SYLD---      TRIMMED> void setup() 
+2021/11/17 16:07:33 SYLD---    symbol: Function loop 24:0-74:1
+2021/11/17 16:07:33 SYLD---      TRIMMED> void loop() 
+2021/11/17 16:07:33 SYLD--- [93m read-unlocked[0m
+2021/11/17 16:07:33 SYLD--- (done)
+2021/11/17 16:07:33     URI: converted 0:9-0:10 to /not-ino:0:9-0:10
+2021/11/17 16:07:33 CLG <-- textDocument/publishDiagnostics notif15 [93m read-unlocked[0m
+2021/11/17 16:07:33     <-- codeAction(0 elements)
+2021/11/17 16:07:33 <-- codeAction(0 elements)
+2021/11/17 16:07:33 IDE --> textDocument/codeAction 1 [93m read-unlocked[0m
+2021/11/17 16:07:33 [91mIDE <-- LS     CL: ANSWER UNBOUND (1): [0m
+2021/11/17 16:07:33 [92mIDE --> LS     CL: REQUEST textDocument/codeAction 2: [0m
+2021/11/17 16:07:33 IDE --> textDocument/codeAction 2 [93m read-locked[0m
+2021/11/17 16:07:33 --> codeAction(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/CODE/pill_counter/pill_counter.ino:0:0)
+2021/11/17 16:07:33     --> codeAction(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server134599295/sketch/pill_counter.ino.cpp:2:0)
+2021/11/17 16:07:33 IDE --> textDocument/codeAction 2 sent to Clang
+2021/11/17 16:07:33 [91mIDE     LS --> CL: REQUEST textDocument/codeAction 3: [0m
+2021/11/17 16:07:33 [92mIDE     LS <-- CL: ANSWER textDocument/codeAction 3 (3): [0m
+2021/11/17 16:07:33     <-- codeAction(0 elements)
+2021/11/17 16:07:33 <-- codeAction(0 elements)
+2021/11/17 16:07:33 IDE --> textDocument/codeAction 2 [93m read-unlocked[0m
+2021/11/17 16:07:33 [91mIDE <-- LS     CL: ANSWER UNBOUND (2): [0m
+2021/11/17 16:07:33 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 3: [0m
+2021/11/17 16:07:33 IDE --> textDocument/documentSymbol 3 [93m read-locked[0m
+2021/11/17 16:07:33 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/CODE/pill_counter/pill_counter.ino)
+2021/11/17 16:07:33     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server134599295/sketch/pill_counter.ino.cpp)
+2021/11/17 16:07:33 IDE --> textDocument/documentSymbol 3 sent to Clang
+2021/11/17 16:07:33 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 4: [0m
+2021/11/17 16:07:33 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 4 (4): [0m
+2021/11/17 16:07:33     <-- documentSymbol(10 document symbols)
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33     > convert Variable 5:0-5:19
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33     > convert Variable 6:0-6:13
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33     > convert Variable 7:0-7:15
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33     > convert Variable 8:0-8:19
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33     > convert Variable 9:0-9:32
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33     > convert Variable 10:0-10:9
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33     > convert Function 12:0-12:12
+2021/11/17 16:07:33       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/17 16:07:33     > convert Function 14:0-14:11
+2021/11/17 16:07:33       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/17 16:07:33     > convert Function 16:0-22:1
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33     > convert Function 24:0-74:1
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33 IDE --> textDocument/documentSymbol 3 [93m read-unlocked[0m
+2021/11/17 16:07:33 [91mIDE <-- LS     CL: ANSWER UNBOUND (3): [0m
+2021/11/17 16:07:33 [92mIDE --> LS     CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/17 16:07:33 IDE --> $/cancelRequest notif3 [93m read-locked[0m
+2021/11/17 16:07:33 IDE --> $/cancelRequest notif3 sent to Clang
+2021/11/17 16:07:33 [91mIDE     LS --> CL: NOTIFICATION $/cancelRequest: [0m
+2021/11/17 16:07:33 IDE --> $/cancelRequest notif3 [93m read-unlocked[0m
+2021/11/17 16:07:33 [92mIDE --> LS     CL: REQUEST textDocument/documentSymbol 4: [0m
+2021/11/17 16:07:33 IDE --> textDocument/documentSymbol 4 [93m read-locked[0m
+2021/11/17 16:07:33 --> documentSymbol(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/CODE/pill_counter/pill_counter.ino)
+2021/11/17 16:07:33     --> documentSymbol(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server134599295/sketch/pill_counter.ino.cpp)
+2021/11/17 16:07:33 IDE --> textDocument/documentSymbol 4 sent to Clang
+2021/11/17 16:07:33 [91mIDE     LS --> CL: REQUEST textDocument/documentSymbol 5: [0m
+2021/11/17 16:07:33 [92mIDE     LS <-- CL: ANSWER textDocument/documentSymbol 5 (5): [0m
+2021/11/17 16:07:33     <-- documentSymbol(10 document symbols)
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33     > convert Variable 5:0-5:19
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33     > convert Variable 6:0-6:13
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33     > convert Variable 7:0-7:15
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33     > convert Variable 8:0-8:19
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33     > convert Variable 9:0-9:32
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33     > convert Variable 10:0-10:9
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33     > convert Function 12:0-12:12
+2021/11/17 16:07:33       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/17 16:07:33     > convert Function 14:0-14:11
+2021/11/17 16:07:33       symbol is in the preprocessed section of the sketch.ino.cpp
+2021/11/17 16:07:33     > convert Function 16:0-22:1
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33     > convert Function 24:0-74:1
+2021/11/17 16:07:33     filtering for requested ino file: D:\Users\Thiago\Documents\GitHub\Computing_Systems_project\CODE\pill_counter\pill_counter.ino
+2021/11/17 16:07:33 IDE --> textDocument/documentSymbol 4 [93m read-unlocked[0m
+2021/11/17 16:07:33 [91mIDE <-- LS     CL: ANSWER UNBOUND (4): [0m
+2021/11/17 16:07:33 [92mIDE --> LS     CL: ANSWER window/workDoneProgress/create 0 (0): [0m
+2021/11/17 16:07:33 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress BEGIN indexing [0m
+2021/11/17 16:07:33 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 4/34 11.764705882352942%[0m
+2021/11/17 16:07:33 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 5/34 14.705882352941176%[0m
+2021/11/17 16:07:33 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 5/34 14.705882352941176%[0m
+2021/11/17 16:07:33 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 5/34 14.705882352941176%[0m
+2021/11/17 16:07:33 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 5/34 14.705882352941176%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 6/34 17.647058823529413%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 6/34 17.647058823529413%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 6/34 17.647058823529413%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 6/34 17.647058823529413%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 7/34 20.58823529411765%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 7/34 20.58823529411765%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 7/34 20.58823529411765%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 7/34 20.58823529411765%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 8/34 23.529411764705884%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 8/34 23.529411764705884%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 8/34 23.529411764705884%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 8/34 23.529411764705884%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 9/34 26.470588235294116%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 9/34 26.470588235294116%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 9/34 26.470588235294116%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 9/34 26.470588235294116%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 10/34 29.41176470588235%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 10/34 29.41176470588235%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 10/34 29.41176470588235%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 10/34 29.41176470588235%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 11/34 32.35294117647059%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 11/34 32.35294117647059%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 11/34 32.35294117647059%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 11/34 32.35294117647059%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 12/34 35.294117647058826%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 12/34 35.294117647058826%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 12/34 35.294117647058826%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 12/34 35.294117647058826%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 13/34 38.23529411764706%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 13/34 38.23529411764706%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 13/34 38.23529411764706%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 14/34 41.1764705882353%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 14/34 41.1764705882353%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 14/34 41.1764705882353%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 14/34 41.1764705882353%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 15/34 44.11764705882353%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 15/34 44.11764705882353%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 15/34 44.11764705882353%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 15/34 44.11764705882353%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 16/34 47.05882352941177%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 16/34 47.05882352941177%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 16/34 47.05882352941177%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 16/34 47.05882352941177%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 17/34 50%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 17/34 50%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 17/34 50%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 17/34 50%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 18/34 52.94117647058823%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 18/34 52.94117647058823%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 18/34 52.94117647058823%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 19/34 55.88235294117647%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 19/34 55.88235294117647%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 19/34 55.88235294117647%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 19/34 55.88235294117647%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 20/34 58.8235294117647%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 20/34 58.8235294117647%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 20/34 58.8235294117647%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 20/34 58.8235294117647%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 21/34 61.76470588235294%[0m
+2021/11/17 16:07:34 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 21/34 61.76470588235294%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 21/34 61.76470588235294%[0m
+2021/11/17 16:07:34 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 21/34 61.76470588235294%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 22/34 64.70588235294117%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 22/34 64.70588235294117%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 22/34 64.70588235294117%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 22/34 64.70588235294117%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 23/34 67.6470588235294%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 23/34 67.6470588235294%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 23/34 67.6470588235294%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 23/34 67.6470588235294%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 24/34 70.58823529411765%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 24/34 70.58823529411765%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 24/34 70.58823529411765%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 24/34 70.58823529411765%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 25/34 73.52941176470588%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 25/34 73.52941176470588%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 25/34 73.52941176470588%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 25/34 73.52941176470588%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 26/34 76.47058823529412%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 26/34 76.47058823529412%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 26/34 76.47058823529412%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 27/34 79.41176470588235%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 27/34 79.41176470588235%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 27/34 79.41176470588235%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 27/34 79.41176470588235%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 28/34 82.3529411764706%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 28/34 82.3529411764706%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 28/34 82.3529411764706%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 28/34 82.3529411764706%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 29/34 85.29411764705883%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 29/34 85.29411764705883%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 29/34 85.29411764705883%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 29/34 85.29411764705883%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 30/34 88.23529411764706%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 30/34 88.23529411764706%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 30/34 88.23529411764706%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 31/34 91.17647058823529%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 31/34 91.17647058823529%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 32/34 94.11764705882354%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 32/34 94.11764705882354%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 33/34 97.05882352941177%[0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress REPORT 33/34 97.05882352941177%[0m
+2021/11/17 16:07:35 [92mIDE     LS <-- CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress END [0m
+2021/11/17 16:07:35 [91mIDE <-- LS     CL: NOTIFICATION $/progress: TOKEN=backgroundIndexProgress END [0m
+2021/11/17 16:14:38 [92mIDE --> LS     CL: REQUEST textDocument/hover 5: [0m
+2021/11/17 16:14:38 IDE --> textDocument/hover 5 [93m read-locked[0m
+2021/11/17 16:14:38 --> hover(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/CODE/pill_counter/pill_counter.ino:25:24)
+2021/11/17 16:14:38     --> hover(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server134599295/sketch/pill_counter.ino.cpp:32:24)
+2021/11/17 16:14:38 IDE --> textDocument/hover 5 sent to Clang
+2021/11/17 16:14:38 [91mIDE     LS --> CL: REQUEST textDocument/hover 6: [0m
+2021/11/17 16:14:38 [92mIDE     LS <-- CL: ANSWER textDocument/hover 6 (6): [0m
+2021/11/17 16:14:38 <-- hover("### variable `mytime`  \n\n---\nType: `unsigned long [3]`  \nValue = `{0, 0, 0}`  \n\n---\n```cpp\nunsigned long mytime[] = {0, 0, 0}\n```")
+2021/11/17 16:14:38 IDE --> textDocument/hover 5 [93m read-unlocked[0m
+2021/11/17 16:14:38 [91mIDE <-- LS     CL: ANSWER UNBOUND (5): [0m
