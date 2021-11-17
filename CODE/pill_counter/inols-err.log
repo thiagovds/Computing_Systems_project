@@ -6523,3 +6523,26 @@ Started logging.
 2021/11/17 16:14:38 <-- hover("### variable `mytime`  \n\n---\nType: `unsigned long [3]`  \nValue = `{0, 0, 0}`  \n\n---\n```cpp\nunsigned long mytime[] = {0, 0, 0}\n```")
 2021/11/17 16:14:38 IDE --> textDocument/hover 5 [93m read-unlocked[0m
 2021/11/17 16:14:38 [91mIDE <-- LS     CL: ANSWER UNBOUND (5): [0m
+2021/11/17 17:20:38 [92mIDE --> LS     CL: REQUEST textDocument/hover 6: [0m
+2021/11/17 17:20:38 IDE --> textDocument/hover 6 [93m read-locked[0m
+2021/11/17 17:20:38 --> hover(file:///d%3A/Users/Thiago/Documents/GitHub/Computing_Systems_project/CODE/pill_counter/pill_counter.ino:3:28)
+2021/11/17 17:20:38     --> hover(file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server134599295/sketch/pill_counter.ino.cpp:5:28)
+2021/11/17 17:20:38 IDE --> textDocument/hover 6 sent to Clang
+2021/11/17 17:20:38 [91mIDE     LS --> CL: REQUEST textDocument/hover 7: [0m
+2021/11/17 17:20:38 [92mIDE     LS <-- CL: ANSWER textDocument/hover 7 (7): [0m
+2021/11/17 17:20:38 IDE --> textDocument/hover 6 [93m read-unlocked[0m
+2021/11/17 17:20:38 [91mIDE <-- LS     CL: ANSWER UNBOUND (6): [0m
+2021/11/17 17:21:48 [92mIDE --> LS     CL: REQUEST shutdown 7: [0m
+2021/11/17 17:21:48 IDE --> shutdown 7 [93m read-locked[0m
+2021/11/17 17:21:48 IDE --> shutdown 7 sent to Clang
+2021/11/17 17:21:48 [91mIDE     LS --> CL: REQUEST shutdown 8: [0m
+2021/11/17 17:21:48 [92mIDE     LS <-- CL: ANSWER shutdown 8 (8): [0m
+2021/11/17 17:21:48 IDE --> shutdown 7 [93m read-unlocked[0m
+2021/11/17 17:21:48 [91mIDE <-- LS     CL: ANSWER UNBOUND (7): [0m
+2021/11/17 17:21:48 [92mIDE --> LS     CL: NOTIFICATION exit: [0m
+2021/11/17 17:21:48 IDE --> exit notif4 [93m read-locked[0m
+2021/11/17 17:21:48 IDE --> exit notif4 sent to Clang
+2021/11/17 17:21:48 [91mIDE     LS --> CL: NOTIFICATION exit: [0m
+2021/11/17 17:21:48 IDE --> exit notif4 [93m read-unlocked[0m
+2021/11/17 17:21:48 Lost connection with clangd!
+2021/11/17 17:21:48 removing buildpath

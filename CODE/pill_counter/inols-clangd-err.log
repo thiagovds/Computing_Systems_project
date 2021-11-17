@@ -6348,3 +6348,20 @@ V[16:14:38.062] ASTWorker running Hover on version 1 of C:\Users\Thiag\AppData\L
 I[16:14:38.068] --> reply:textDocument/hover(6) 10 ms
 V[16:14:38.068] >>> {"id":6,"jsonrpc":"2.0","result":{"contents":{"kind":"markdown","value":"### variable `mytime`  \n\n---\nType: `unsigned long [3]`  \nValue = `{0, 0, 0}`  \n\n---\n```cpp\nunsigned long mytime[] = {0, 0, 0}\n```"},"range":{"end":{"character":25,"line":32},"start":{"character":19,"line":32}}}}
 
+V[17:20:38.932] <<< {"id":7,"jsonrpc":"2.0","method":"textDocument/hover","params":{"position":{"character":28,"line":5},"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server134599295/sketch/pill_counter.ino.cpp"}}}
+
+I[17:20:38.932] <-- textDocument/hover(7)
+V[17:20:38.935] ASTWorker running Hover on version 1 of C:\Users\Thiag\AppData\Local\Temp\arduino-language-server134599295\sketch\pill_counter.ino.cpp
+I[17:20:38.936] --> reply:textDocument/hover(7) 4 ms
+V[17:20:38.936] >>> {"id":7,"jsonrpc":"2.0","result":null}
+
+V[17:21:48.538] <<< {"id":8,"jsonrpc":"2.0","method":"shutdown","params":null}
+
+I[17:21:48.538] <-- shutdown(8)
+I[17:21:48.538] --> reply:shutdown(8) 0 ms
+V[17:21:48.538] >>> {"id":8,"jsonrpc":"2.0","result":null}
+
+V[17:21:48.544] <<< {"jsonrpc":"2.0","method":"exit","params":null}
+
+I[17:21:48.544] <-- exit
+I[17:21:48.544] LSP finished, exiting with status 0

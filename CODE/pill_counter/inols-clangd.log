@@ -3369,3 +3369,23 @@ Content-Length: 231
 Content-Length: 293
 
 {"id":6,"jsonrpc":"2.0","result":{"contents":{"kind":"markdown","value":"### variable `mytime`  \n\n---\nType: `unsigned long [3]`  \nValue = `{0, 0, 0}`  \n\n---\n```cpp\nunsigned long mytime[] = {0, 0, 0}\n```"},"range":{"end":{"character":25,"line":32},"start":{"character":19,"line":32}}}}
+>>>
+Content-Length: 230
+
+{"method":"textDocument/hover","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server134599295/sketch/pill_counter.ino.cpp"},"position":{"line":5,"character":28}},"id":7,"jsonrpc":"2.0"}
+<<<
+Content-Length: 38
+
+{"id":7,"jsonrpc":"2.0","result":null}
+>>>
+Content-Length: 58
+
+{"method":"shutdown","params":null,"id":8,"jsonrpc":"2.0"}
+<<<
+Content-Length: 38
+
+{"id":8,"jsonrpc":"2.0","result":null}
+>>>
+Content-Length: 47
+
+{"method":"exit","params":null,"jsonrpc":"2.0"}<<< Read Error: EOF
