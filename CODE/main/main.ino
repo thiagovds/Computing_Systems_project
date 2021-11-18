@@ -63,7 +63,7 @@ void add_pills()
 	Serial.read();
 }
 
-void insert_schedule()
+void insert_schedule()   //TO BE ALTERED! DATA OF SCHEDULE HAS TO RETURN TO THE MAIN!!!
 {
 	int time[];
 	int module_number;
