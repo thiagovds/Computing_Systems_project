@@ -9,7 +9,7 @@
 
 
 int mode;
-int time[2] = {0 , 0};
+
 
 void setup()
 {
@@ -30,7 +30,7 @@ void loop()
 	Serial.println("Welcome to the MENU! \n To enter the desired mode, press: ");
 	Serial.println("0 - for inserting a schedule"); Serial.println("1 - for adding pills to a module storage"); Serial.println("any key - for dispensing pills");
 
-	mode = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
+	while (Serial.available() == 0) {} mode = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
 
 	switch (mode) {
 	    case 0:
@@ -58,7 +58,7 @@ void loop()
 
 void add_pills()
 {
-	char medicine[];
+	string medicine;
 	int number_of_pills;
 	int module_number;
 
@@ -69,7 +69,8 @@ void add_pills()
 	while (Serial.available() == 0) {} 	number_of_pills = Serial.parseInt();
 
 	Serial.print("Please type the medicine name that will be added to the storage number" ); Serial.print(module_number); Serial.println(":");
-	while (Serial.available() == 0) {}	medicine[] = Serial.parseString();
+	while (Serial.available() == 0) {}   S erial.setTimeout(5000);   //This sets the maximum time to wait for serial data from user.
+	while (Serial.available() == 0) {}    medicine = Serial.readString();
 	
 }
 
@@ -87,9 +88,10 @@ void insert_schedule()   //TO BE ALTERED! DATA OF SCHEDULE HAS TO RETURN TO THE 
 	Serial.println("Would you like to insert the pills into the storage now? \n Y for yes, anykey for no.");
 	while (Serial.available() == 0) {
   	}
-  	char menuChoice = Serial.parseInt();
+  	Serial.setTimeout(1000);   //This sets the maximum time to wait for serial data from user.
+  	string menuChoice = Serial.readString();
 	
-	if (menuChoice == 'Y')
+	if (!strcmp(menuChoice, "Y"))
 	{
 		add_pills();
 	} 
@@ -99,7 +101,6 @@ void insert_schedule()   //TO BE ALTERED! DATA OF SCHEDULE HAS TO RETURN TO THE 
 	}
 
 }
-
 
 int photointerrupter()
 {
@@ -123,7 +124,7 @@ int alarm()
 
 void dispense_pills()
 {
-	/* INSERT CODE FOR DISPENSING PILLS ALGORITHM HERE (sound buzz) */
+	/* INSERT CODE FOR DISPENSING PILLS ALGORITHM HERE */
 }
 
 void pass_data_to_ESP()
