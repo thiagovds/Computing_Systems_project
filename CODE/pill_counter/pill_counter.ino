@@ -17,6 +17,7 @@ void setup()
 
 void loop() 
 {
+  
   delay(15);  light = analogRead(LDR);
 
   if (light < calib_val)                      //detection of light beam obstruction
