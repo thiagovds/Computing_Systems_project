@@ -15,7 +15,13 @@ void setup() {
   	pinMode(motorPin4, OUTPUT);
 }
 
+void loop(){
+  dispense_pills();
+  }
+
 void dispense_pills() {
+
+  photointerrupter
 
 	//needs to be calibrated based on the strength the stepper applies on the pills
 	//stepper turns right to lock all the pills stacked above the second
