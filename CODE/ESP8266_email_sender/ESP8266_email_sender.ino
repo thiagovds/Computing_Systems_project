@@ -180,7 +180,7 @@ byte sendEmail()
 
   espClient.println(F("Subject: ESP8266 test e-mail\r\n"));
 
-  espClient.println(F("This is is a test e-mail sent from ESP8266.\n"));
+  espClient.println(F("This is is a test e-mail sent from ESP8266.\n"));  /*  THIS IS WHERE WE ADD THE EMAIL  */ 
 
   espClient.println(F("Second line of the test e-mail."));
 
