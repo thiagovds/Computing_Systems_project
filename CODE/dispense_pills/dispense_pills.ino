@@ -1,4 +1,4 @@
-#include <Servo.h> //Sservo motor library
+#include <Servo.h> //Servo motor library
 
 Servo servo_gate;
 int motorPin1 = 8;      //IN1 attached to pin 8    
@@ -6,6 +6,8 @@ int motorPin2 = 9;      //IN2 attached to pin 9
 int motorPin3 = 10;     //IN3 attached to pin 10
 int motorPin4 = 11;     //IN4 attached to pin 11
 int motor_Speed = 4;    // stepper speed must be calibrated
+
+int time_motor[] = {0,0,0}
 
 void setup() {
 	servo_gate.attach(1); //digital pin 1 is attached to the servo
@@ -21,7 +23,7 @@ void loop(){
 
 void dispense_pills() {
 
-  photointerrupter
+  //photointerrupter
 
 	//needs to be calibrated based on the strength the stepper applies on the pills
 	//stepper turns right to lock all the pills stacked above the second

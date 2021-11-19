@@ -1,19 +1,29 @@
 #define LDR A1
+#define stepMotorPin1 10
+#define stepMotorPin2 11
+#define stepMotorPin3 12
+#define stepMotorPin4 13
 
-
-
-/*  INITIALIZATION OF VARIABLES FOR MAIN 
-
-
-*/
+/*  INITIALIZATION OF VARIABLES FOR MAIN  ----------------------  */
 
 
 int mode;
+int motor_Speed = 4
+
+
+
+/*-----------------------*/
+
 
 
 void setup()
 {
 	pinMode(LDR, INPUT);
+
+  	pinMode(stepMotorPin1, OUTPUT);
+  	pinMode(stepMotorPin2, OUTPUT);
+  	pinMode(stepMotorPin3, OUTPUT);
+  	pinMode(stepMotorPin4, OUTPUT);
 
 }
 
