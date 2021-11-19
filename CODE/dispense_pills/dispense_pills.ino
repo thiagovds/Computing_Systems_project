@@ -31,22 +31,18 @@ void dispense_pills() {
   	digitalWrite(motorPin3, LOW);
   	digitalWrite(motorPin2, LOW);
   	digitalWrite(motorPin1, LOW);
-  	delay(motor_Speed);
   	digitalWrite(motorPin4, LOW);
   	digitalWrite(motorPin3, HIGH);
   	digitalWrite(motorPin2, LOW);
   	digitalWrite(motorPin1, LOW);
-  	delay(motor_Speed);
   	digitalWrite(motorPin4, LOW);
   	digitalWrite(motorPin3, LOW);
 	digitalWrite(motorPin2, HIGH);
   	digitalWrite(motorPin1, LOW);
-  	delay(motor_Speed);
   	digitalWrite(motorPin4, LOW);
   	digitalWrite(motorPin3, LOW);
   	digitalWrite(motorPin2, LOW);
   	digitalWrite(motorPin1, HIGH);
-  	delay(motor_Speed);
   	delay(500);
 	
 	servo_gate.write(-180); //servo turns 180 dgs to open the gate
@@ -59,22 +55,18 @@ void dispense_pills() {
   	digitalWrite(motorPin2, LOW);
   	digitalWrite(motorPin3, LOW);
   	digitalWrite(motorPin4, LOW);
-  	delay(motor_Speed);
   	digitalWrite(motorPin1, LOW);
   	digitalWrite(motorPin2, HIGH);
   	digitalWrite(motorPin3, LOW);
   	digitalWrite(motorPin4, LOW);
-  	delay(motor_Speed);
   	digitalWrite(motorPin1, LOW);
   	digitalWrite(motorPin2, LOW);
   	digitalWrite(motorPin3, HIGH);
   	digitalWrite(motorPin4, LOW);
-  	delay(motor_Speed);
   	digitalWrite(motorPin1, LOW);
 	digitalWrite(motorPin2, LOW);
   	digitalWrite(motorPin3, LOW);
   	digitalWrite(motorPin4, HIGH);
-  	delay(motor_Speed);
 
 
 }
