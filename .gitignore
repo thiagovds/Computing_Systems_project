@@ -2,3 +2,8 @@
 CODE/main/inols-clangd.log
 CODE/main/inols-clangd-err.log
 CODE/main/inols.log
+CODE/main/inols-err.log
+CODE/pill_counter/inols-clangd-err.log
+CODE/pill_counter/inols-clangd.log
+CODE/pill_counter/inols-err.log
+CODE/pill_counter/inols.log
