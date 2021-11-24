@@ -1,5 +1,8 @@
 #include <ESP8266WiFi.h>
 
+#define SIGNAL_FROM_ARDUINO 16   //PIN D0!!!!! TO INTERCONNECT 2 BOARDS
+int a = 0;
+
 const char* ssid = "Thai";   // Enter the namme of your WiFi Network.
 
 const char* password = "NotYourWifi33";  // Enter the Password of your WiFi Network.
@@ -13,8 +16,9 @@ WiFiClient espClient;
 void setup()
 
 {
+  pinMode(SIGNAL_FROM_ARDUINO, INPUT);
 
-  Serial.begin(115200);
+  Serial.begin(9600);    //original code had 115200 baud rate!
 
   delay(10);
 
@@ -48,7 +52,7 @@ void setup()
 
   Serial.println(WiFi.localIP());
 
-  byte ret = sendEmail();
+  //byte ret = sendEmail();                       //-------------------------------
 
  }
 
@@ -57,8 +61,15 @@ void setup()
 void loop()
 
 {
-
- 
+  a = digitalRead(SIGNAL_FROM_ARDUINO);
+  if(a == HIGH)
+  {
+      byte ret = sendEmail();
+      Serial.println(a);
+      Serial.println("Email Sent!");
+      delay(10000);
+  }
+  //       ELSE ENTER lowpower mode!!!               TO BE IMPLEMENTED!!!
 
 }
 
@@ -178,13 +189,13 @@ byte sendEmail()
 
   espClient.println(F("From: arduino33@protonmail.com")); // Enter Sender Mail Id
 
-  espClient.println(F("Subject: ESP8266 test e-mail\r\n"));
+  espClient.println(F("Subject: PILL DISPENSER ERROR!\r\n"));
 
-  espClient.println(F("This is is a test e-mail sent from ESP8266.\n"));  /*  THIS IS WHERE WE ADD THE EMAIL  */ 
+  espClient.println(F("Dear Caregiver,\n"));  /*  THIS IS WHERE WE ADD THE EMAIL  */ 
 
-  espClient.println(F("Second line of the test e-mail."));
+  espClient.println(F("This is an automatic email, the RAPID pill dispenser has run into a dispensing error!"));
 
-  espClient.println(F("Third line of the test e-mail."));
+  espClient.println(F("Please contact patient immediately."));
 
   //
 
