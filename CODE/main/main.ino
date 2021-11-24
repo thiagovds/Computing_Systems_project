@@ -11,7 +11,7 @@
 #define stepMotorPin4 13
 
 #define LDR A1
-
+#define Servo_pin 9
 
 /*  INITIALIZATION OF GLOBAL VARIABLES FOR MAIN  ----------------------  */
 
@@ -30,6 +30,7 @@ unsigned long t_current, t_0;
 String medicine;
 int number_of_pills;
 
+int success = 0;
 
 /*-----------------------*/
 
@@ -48,7 +49,7 @@ void setup()
 {
   pinMode(LDR, INPUT);
 
-    Servo1.attach (9); //Il Servo1 è collegato al pin digitale 
+    Servo1.attach (Servo_pin); //Il Servo1 è collegato al pin digitale 
 
     pinMode(stepMotorPin1, OUTPUT);
     pinMode(stepMotorPin2, OUTPUT);
@@ -64,7 +65,7 @@ void loop()
 {
   if (start ==1)                      //----------THIS SECTION IS EXECUTED only once
     {
-        t_0 = millis; start = 0;
+        t_0 = millis(); start = 0;
         cycle_stage = 1;
     }                                      //------------------------------ END SECTION
 
@@ -74,9 +75,16 @@ void loop()
   if (operation_over == 1){ menu(); }  //only check menu again if no operation is taking place
   else{
     dispense_pills();   //erial.println("Dispensing pill!");
-    photointerrupter();
-  }
+    success = photointerrupter();
+    if (success == 1)
+    {
+    	operation_over == 1;
+    }
+    else
+    {
 
+    }
+  }
 
 
 
@@ -173,7 +181,7 @@ int photointerrupter()
 {
 
 
-  delay(15);  int light = analogRead(LDR);
+  	/*delay(); LETS TRY WITH NO DELAY*/  int light = analogRead(LDR);
 
     if (light < calib_val)                      //detection of light beam obstruction
     {
@@ -194,7 +202,7 @@ int photointerrupter()
           Serial.print("mytime[0] : ") ;        Serial.println(mytime[i-1]);  
           Serial.print("i = ");                 Serial.println(i);
         
-          delay(2000);  //4 seconds for user read   
+          return 0;
       }
       else
       {
@@ -266,6 +274,7 @@ void dispense_pills()
         unlock_pill();
         t_0 = t_current;
         cycle_stage = 1;
+        //engine_over
         Serial.println("unlock pill! Getting ready for Stage 1");    
     }
 
