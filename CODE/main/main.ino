@@ -6,7 +6,6 @@
 #define Servo_pin 9
 
 
-
 /* CALIBRATION CONSTANTS FOR STEPPER   -----------------------*/
 #define Time_interval_stepper 1000
 #define Time_interval_servo 500
@@ -24,40 +23,44 @@
 
 
 /*  INITIALIZATION OF GLOBAL VARIABLES FOR MAIN  ----------------------  */
+int mode, operation_over = 1;
+//int start = 1;
 
+
+/*    GLOBAL VARIABLES FOR ENGINES    */
 Servo Servo1;
 
 int cycle_stage;
-int start = 1;
-
-int mode, operation_over = 1;
 int motor_Speed = 4;
 int engine_over = 0;
 
-int Schedule_time[][2];
+/*    GLOBAL VARIABLES FOR SCHEDULE    */
+
+int Schedule_time[30][2];
+int schedule_enumerator;  //variable to keep track of how many pill-taking events in a complex schedule
 int module_number;
 
 
 unsigned long t_current, t_0;
-
+/*         GLOBAL VARIABLES FOR verify_success FUNCTION       */
 int attempts = 0;
+int success = 0;
 
-//------- ADD PILLS global variables
+
+/*         ADD PILLS global variables              */
 String medicine;
 int number_of_pills;
 
-int success = 0;
 
-/*-----------------------*/
 
-//-------------PHOTOINTERRUPTER GLOBAL VARIABLES --
+/*        PHOTOINTERRUPTER GLOBAL VARIABLES        */
 int counter;
 int mytime[20];
 int i=1;
 int calib_val = 900;
 int error_count =0;
 
-//--------------------------------
+
 
 
 
@@ -66,27 +69,30 @@ void setup()
   pinMode(LDR, INPUT);
 
     Servo1.attach (Servo_pin); //Il Servo1 è collegato al pin digitale 
-
-    pinMode(SIGNAL_TO_ESP, OUTPUT); digitalWrite(SIGNAL_TO_ESP, LOW);
     pinMode(stepMotorPin1, OUTPUT);
     pinMode(stepMotorPin2, OUTPUT);
     pinMode(stepMotorPin3, OUTPUT);
     pinMode(stepMotorPin4, OUTPUT);
+
+    /* SETUP Send_email() */
+    pinMode(SIGNAL_TO_ESP, OUTPUT); digitalWrite(SIGNAL_TO_ESP, LOW);
 
 
     Serial.begin(9600);
     delay(2000);                        //FOR NANO BOARD ONLY!! 
     Serial.println("serial Begin!");
 
+    /* SETUP ENGINES TIMING */
+    t_0 = millis(); cycle_stage = 1;
 
     /*SETUP PHOTOINTERRUPTER*/
-    mytime[0] = millis();   Serial.print("mytime[0]: "); Serial.println(mytime[i]);
+    mytime[0] = t_0;   Serial.print("mytime[0]: "); Serial.println(mytime[i]);
     i++;
 }
 
 void loop()
 {
-    if (start ==1) { t_0 = millis(); start = 0; cycle_stage = 1; }  //----------THIS SECTION IS EXECUTED only once
+    //if (start ==1) { t_0 = millis(); start = 0; cycle_stage = 1; }  //----------THIS SECTION IS EXECUTED only once
 
 
     /* TAKE TIMESTAMP EVERY CYCLE i.e. UPDATE TIME TO CURRENT ARD TIME  */
@@ -133,7 +139,7 @@ void verify_success()
 
 void check_schedule()
 {
-
+  
 }
 
 void menu()
@@ -147,7 +153,8 @@ void menu()
   */
   Serial.println("\n------------------------------------------------------------");
   Serial.println("Welcome to the MENU! \n To enter the desired mode, press: ");
-  Serial.println("0 - for inserting a schedule"); Serial.println("1 - for adding pills to a module storage"); Serial.println("2 - for dispensing pills");
+  Serial.println("0 - for inserting a schedule"); Serial.println("1 - for editing schedule"); 
+  Serial.println("2 - for adding pills to a module storage"); Serial.println("3 - for dispensing pills");
 
   while (Serial.available() == 0) {} mode = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
 
@@ -159,6 +166,11 @@ void menu()
 
       case 1:
         Serial.println("1 Inserted!");
+          edit_schedule();
+          break;
+
+      case 2:
+        Serial.println("2 Inserted!");
           add_pills();
           break;
 
@@ -172,8 +184,6 @@ void menu()
 
 void add_pills()
 {
-
-  int module_number;
 
   Serial.println("You are in add pills mode! \n Please insert the module number that will receive the pill!");
   while (Serial.available() == 0) {}  module_number = Serial.parseInt();
@@ -191,19 +201,41 @@ void add_pills()
   
 }
 
+void edit_schedule()
+{
+    Y = sizeof(schedule_enumerator); Serial.print("size of schedule_enumerator = "); Serial.println(Y);
+    X = 2
+
+    Serial.println("You are in edit schedule mode");
+    Serial.println(Schedule);
+    for (int k =0; k < Y; k++) 
+    {
+        Serial.print("This is your full schedule! \n Pill routine number: "); Serial.print(schedule_enumerator); Serial.println("Time"); 
+        for (int l =0; l < X; l++) 
+        {
+            Serial.print(Schedule_time[k][l]);Serial.print(" ");
+        }
+        Serial.println("");
+    }
+
+    Serial.println("Insert routine number to edit : "); while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][0] =Serial.parseInt();
+
+}
+
 void insert_schedule()   //TO BE ALTERED! DATA OF SCHEDULE HAS TO RETURN TO THE MAIN!!!
 {
-  int module_number;
-  
 
   Serial.println("You are in insert schedule mode! \n Please insert the hours '00' followed by an enter and then minutes '00' "); 
-  Serial.println("insert hours, range from 0 until 23:");  while (Serial.available() == 0) {}  Schedule_time[0] =Serial.parseInt();
-  Serial.println("insert minutes, range from 0 until 59"); while (Serial.available() == 0) {}  Schedule_time[1] =Serial.parseInt();
+  Serial.println("insert hours, range from 0 until 23:");  while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][0] =Serial.parseInt();
+  Serial.println("insert minutes, range from 0 until 59"); while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][1] =Serial.parseInt();
   
   Serial.println("insert module number to be operated at the specified time:"); while (Serial.available() == 0) {} module_number = Serial.parseInt();
 
-  Serial.print("Schedule Saved!! Time:"); Serial.print(Schedule_time[0]);  Serial.print(":"); Serial.println(Schedule_time[1]);
+  Serial.print("Schedule Saved!! Time:"); Serial.print(Schedule_time[schedule_enumerator][0]);  Serial.print(":"); Serial.println(Schedule_time[schedule_enumerator][1]);
+  
   Serial.print("Module : "); Serial.println(module_number);
+
+  schedule_enumerator++;
 
   Serial.println("Would you like to insert the pills into the storage now? \n Y for yes, N for no.");
   while (Serial.available() == 0) {
@@ -280,7 +312,7 @@ int alarm()
   
   /* INSERT CODE FOR ALARM SYSTEM HERE (sound buzz) */
 
-  //WHEN schedule_time[0] == 'value'  &&  schedule_time[1]  == 'value'
+  //WHEN schedule_time[][0] == 'value'  &&  schedule_time[1]  == 'value'
 
 }
 
@@ -399,6 +431,8 @@ void close_gate()
     int motor_Speed = 1000;
     Servo1.write (140);
 }
+
+
 
 
 void send_email()
