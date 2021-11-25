@@ -22,6 +22,7 @@ void loop()
 
   if (light < calib_val)                      //detection of light beam obstruction
   {
+    
     counter++; mytime[i] = millis();          //record passing of pill and its timestamp
     
     if(mytime[i] - mytime[i-1] < 1000   &&   i != 0)   // if 2 pill counting events are less than 100ms apart, that means that 2 or more pills were dispensed at once!

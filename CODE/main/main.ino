@@ -34,8 +34,13 @@ int mode, operation_over = 1;
 int motor_Speed = 4;
 int engine_over = 0;
 
-int Schedule_time[2];
+int Schedule_time[][2];
+int module_number;
+
+
 unsigned long t_current, t_0;
+
+int attempts = 0;
 
 //------- ADD PILLS global variables
 String medicine;
@@ -73,6 +78,10 @@ void setup()
     delay(2000);                        //FOR NANO BOARD ONLY!! 
     Serial.println("serial Begin!");
 
+
+    /*SETUP PHOTOINTERRUPTER*/
+    mytime[0] = millis();   Serial.print("mytime[0]: "); Serial.println(mytime[i]);
+    i++;
 }
 
 void loop()
@@ -109,22 +118,17 @@ void verify_success()
         operation_over = 1;
         Serial.println("Pill dispensed successfully!!");
         break;
-      case 2:                                 //TRY AGAIN!
+      case 2:                                 //TRY AGAIN!   NO PILL WAS DISPENSED
         Serial.println("Reattempting pill dispensing!");
+        delay(2000);
+        attempts++; Serial.print("\t attempt number:"); Serial.println(attempts);
+        if(attempts >= 3){ operation_over = 1; attempts = 0; }
 
         break;  
       default:
         Serial.println("Default!");     //-------------------------------------
   }
-  if (success == 1)
-  {
-      operation_over == 1;
-      Serial.println("Pill dispensed successfully!!");
-  }
-  else
-  {
-      Serial.println("ERROR when dispensing pill!!");
-  }
+
 }
 
 void check_schedule()
@@ -221,18 +225,18 @@ void insert_schedule()   //TO BE ALTERED! DATA OF SCHEDULE HAS TO RETURN TO THE 
 int photointerrupter()
 {
 
-
     delay(Delay_time_photoint);  int light = analogRead(LDR);
 
     if (light < calib_val)                      //detection of light beam obstruction
     {
+        Serial.println(light); 
         counter++; mytime[i] = millis();          //record passing of pill and its timestamp
     
         if(mytime[i] - mytime[i-1] < Time_between_detections   &&   i != 0)   // if 2 pill counting events are less than 100ms apart, that means that 2 or more pills were dispensed at once!
         {
             Serial.println("DISPENSING ERROR! 2 or more pills dispensed!"); 
 
-            send_email();//ADD LINE HERE TO SEND EMAIL!!!!!!           -------------------------------------------------------------------------------
+            send_email();              // SEND EMAIL!!!!!!           -------------------------------------------------------------------------------
             
             Serial.print("counter : ");           Serial.println(counter);    
             Serial.print("time difference : ") ;  Serial.println(mytime[i]-mytime[i-1]);
@@ -241,8 +245,8 @@ int photointerrupter()
             Serial.print("i = ");                 Serial.println(i);
 
             i=0; mytime[i] = millis();  //reset mytime  
-            error_count++;
-          
+            i++;  error_count++; 
+
             return 0;    //return to success variable on main
         }
         else
@@ -252,16 +256,19 @@ int photointerrupter()
             Serial.print("mytime[i] : ") ;          Serial.println(mytime[i]);
             Serial.print("mytime[0] : ") ;          Serial.println(mytime[i-1]);
             Serial.print("i = ");                   Serial.println(i);
+            i++;
+
         }
 
-    
-        i++;
-        if (counter >= 100){counter = 0;}
     }
 
-    else if (mytime[i] - mytime[i-1] > TIMEOUT_COUNTER)   //     CASE THAT NO PILL IS DISPENSED.    ----------------------------------
+    else if (t_current - mytime[i] > TIMEOUT_COUNTER  &&  i != 0)   //     CASE THAT NO PILL IS DISPENSED.    ----------------------------------
     {
         Serial.println("TIMEOUT FOR PILL DETECTION! \t NO PILL DISPENSED");  //TO ADD! TRY AGAIN TO DISPENSE PILL!
+        Serial.print("current time - last event time > TIMEOUT = "); Serial.println(t_current - mytime[i]);
+        Serial.print("t_current: ") ;          Serial.println(t_current);
+        Serial.print("mytime["); Serial.print(i); Serial.print("] : ");  Serial.println(mytime[i]);
+
         return 2;     //return to success variable on main
     }
 
@@ -392,8 +399,6 @@ void close_gate()
     int motor_Speed = 1000;
     Servo1.write (140);
 }
-
-
 
 
 void send_email()

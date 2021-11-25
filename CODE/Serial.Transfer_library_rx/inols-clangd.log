@@ -1,0 +1,213 @@
+
+
+
+
+
+
+
+Started logging.
+
+>>>
+Content-Length: 2163
+
+{"method":"initialize","params":{"processId":18552,"rootPath":"C:\\Users\\Thiag\\AppData\\Local\\Temp\\arduino-language-server218210339\\sketch","rootUri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch","clientInfo":{"name":"vscode","version":"1.53.2"},"trace":"off","initializationOptions":{},"capabilities":{"workspace":{"workspaceEdit":{"documentChanges":true,"resourceOperations":["create","rename","delete"]},"applyEdit":true,"symbol":{"symbolKind":{"valueSet":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]}},"executeCommand":{"dynamicRegistration":true},"didChangeWatchedFiles":{"dynamicRegistration":true},"workspaceFolders":true,"configuration":true},"textDocument":{"declaration":{"linkSupport":true},"definition":{"linkSupport":true},"implementation":{"linkSupport":true,"dynamicRegistration":true},"typeDefinition":{"linkSupport":true},"synchronization":{"willSave":true,"didSave":true,"willSaveWaitUntil":true},"documentSymbol":{"symbolKind":{"valueSet":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]},"hierarchicalDocumentSymbolSupport":true},"formatting":{"dynamicRegistration":true},"rangeFormatting":{"dynamicRegistration":true},"rename":{"dynamicRegistration":true,"prepareSupport":true},"codeAction":{"dynamicRegistration":true,"isPreferredSupport":true,"codeActionLiteralSupport":{"codeActionKind":{"valueSet":["","quickfix","refactor","refactor.extract","refactor.inline","refactor.rewrite","source","source.organizeImports"]}}},"completion":{"completionItem":{"documentationFormat":["markdown","plaintext"],"snippetSupport":true},"completionItemKind":{"valueSet":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]},"contextSupport":true},"signatureHelp":{"signatureInformation":{"parameterInformation":{"labelOffsetSupport":true}}},"documentLink":{"dynamicRegistration":true,"tooltipSupport":true},"hover":{"contentFormat":["markdown","plaintext"]},"foldingRange":{"dynamicRegistration":true,"rangeLimit":5000,"lineFoldingOnly":true},"colorProvider":{"dynamicRegistration":true}},"window":{"workDoneProgress":true}}},"id":0,"jsonrpc":"2.0"}
+<<<
+Content-Length: 1671
+
+{"id":0,"jsonrpc":"2.0","result":{"capabilities":{"astProvider":true,"callHierarchyProvider":true,"codeActionProvider":{"codeActionKinds":["quickfix","refactor","info"]},"compilationDatabase":{"automaticReload":true},"completionProvider":{"allCommitCharacters":[" ","\t","(",")","[","]","{","}","<",">",":",";",",","+","-","/","*","%","^","&","#","?",".","=","\"","'","|"],"resolveProvider":false,"triggerCharacters":[".","<",">",":","\"","/"]},"declarationProvider":true,"definitionProvider":true,"documentFormattingProvider":true,"documentHighlightProvider":true,"documentLinkProvider":{"resolveProvider":false},"documentOnTypeFormattingProvider":{"firstTriggerCharacter":"\n","moreTriggerCharacter":[]},"documentRangeFormattingProvider":true,"documentSymbolProvider":true,"executeCommandProvider":{"commands":["clangd.applyFix","clangd.applyTweak"]},"hoverProvider":true,"implementationProvider":true,"memoryUsageProvider":true,"referencesProvider":true,"renameProvider":{"prepareProvider":true},"selectionRangeProvider":true,"semanticTokensProvider":{"full":{"delta":true},"legend":{"tokenModifiers":[],"tokenTypes":["variable","variable","parameter","function","method","function","property","variable","class","enum","enumMember","type","dependent","dependent","namespace","typeParameter","concept","type","macro","comment"]},"range":false},"signatureHelpProvider":{"triggerCharacters":["(",","]},"textDocumentSync":{"change":2,"openClose":true,"save":true},"typeHierarchyProvider":true,"workspaceSymbolProvider":true},"serverInfo":{"name":"clangd","version":"clangd version 12.0.0 (https://github.com/llvm/llvm-project e841bd5f335864b8c4d81cbf4df08460ef39f2ae)"}}}
+>>>
+Content-Length: 52
+
+{"method":"initialized","params":{},"jsonrpc":"2.0"}Content-Length: 976
+
+{"method":"textDocument/didOpen","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp","languageId":"cpp","version":1,"text":"#include \u003cArduino.h\u003e\n#line 1 \"D:\\\\Users\\\\Thiago\\\\Documents\\\\GitHub\\\\Computing_Systems_project\\\\CODE\\\\Serial.Transfer_library_rx\\\\Serial.Transfer_library_rx.ino\"\n#include \"SerialTransfer.h\"\r\n\r\nSerialTransfer myTransfer;\r\n\r\nvoid setup()\r\n{\r\n  Serial.begin(115200);\r\n  Serial1.begin(115200);\r\n  myTransfer.begin(Serial1);\r\n}\r\n\r\nvoid loop()\r\n{\r\n  if(myTransfer.available())\r\n  {\r\n    float myFloat;\r\n    \r\n    Serial.print(\"New Data: \");\r\n    myTransfer.rxObj(myFloat, sizeof(myFloat));\r\n    Serial.println(myFloat);\r\n  }\r\n  else if(myTransfer.status \u003c 0)\r\n  {\r\n    Serial.print(\"ERROR: \");\r\n    Serial.println(myTransfer.status);\r\n  }\r\n}\r\n\n"}},"jsonrpc":"2.0"}Content-Length: 216
+
+{"method":"textDocument/documentSymbol","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"}},"id":1,"jsonrpc":"2.0"}
+<<<
+Content-Length: 111
+
+{"id":0,"jsonrpc":"2.0","method":"window/workDoneProgress/create","params":{"token":"backgroundIndexProgress"}}
+>>>
+Content-Length: 38
+
+{"id":0,"result":null,"jsonrpc":"2.0"}
+<<<
+Content-Length: 143
+
+{"jsonrpc":"2.0","method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"kind":"begin","percentage":0,"title":"indexing"}}}Content-Length: 141
+
+{"jsonrpc":"2.0","method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"kind":"report","message":"0/1","percentage":0}}}
+>>>
+Content-Length: 315
+
+{"method":"textDocument/codeAction","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"},"range":{"start":{"line":2,"character":0},"end":{"line":2,"character":0}},"context":{"diagnostics":[]}},"id":2,"jsonrpc":"2.0"}
+<<<
+Content-Length: 141
+
+{"jsonrpc":"2.0","method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"kind":"report","message":"0/1","percentage":0}}}Content-Length: 107
+
+{"jsonrpc":"2.0","method":"$/progress","params":{"token":"backgroundIndexProgress","value":{"kind":"end"}}}Content-Length: 1883
+
+{"jsonrpc":"2.0","method":"textDocument/publishDiagnostics","params":{"diagnostics":[{"code":"pp_file_not_found","message":"'Arduino.h' file not found","range":{"end":{"character":20,"line":0},"start":{"character":9,"line":0}},"severity":1,"source":"clang"},{"code":"unknown_typename","message":"Unknown type name 'SerialTransfer'","range":{"end":{"character":14,"line":4},"start":{"character":0,"line":4}},"severity":1,"source":"clang"},{"code":"undeclared_var_use","message":"Use of undeclared identifier 'Serial'","range":{"end":{"character":8,"line":8},"start":{"character":2,"line":8}},"severity":1,"source":"clang"},{"code":"undeclared_var_use","message":"Use of undeclared identifier 'Serial1'","range":{"end":{"character":9,"line":9},"start":{"character":2,"line":9}},"severity":1,"source":"clang"},{"code":"undeclared_var_use","message":"Use of undeclared identifier 'Serial1'","range":{"end":{"character":26,"line":10},"start":{"character":19,"line":10}},"severity":1,"source":"clang"},{"code":"undeclared_var_use","message":"Use of undeclared identifier 'Serial'","range":{"end":{"character":10,"line":19},"start":{"character":4,"line":19}},"severity":1,"source":"clang"},{"code":"undeclared_var_use","message":"Use of undeclared identifier 'Serial'","range":{"end":{"character":10,"line":21},"start":{"character":4,"line":21}},"severity":1,"source":"clang"},{"code":"undeclared_var_use","message":"Use of undeclared identifier 'Serial'","range":{"end":{"character":10,"line":25},"start":{"character":4,"line":25}},"severity":1,"source":"clang"},{"code":"undeclared_var_use","message":"Use of undeclared identifier 'Serial'","range":{"end":{"character":10,"line":26},"start":{"character":4,"line":26}},"severity":1,"source":"clang"}],"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp","version":1}}Content-Length: 600
+
+{"id":1,"jsonrpc":"2.0","result":[{"kind":13,"name":"myTransfer","range":{"end":{"character":25,"line":4},"start":{"character":0,"line":4}},"selectionRange":{"end":{"character":25,"line":4},"start":{"character":15,"line":4}}},{"kind":12,"name":"setup","range":{"end":{"character":1,"line":11},"start":{"character":0,"line":6}},"selectionRange":{"end":{"character":10,"line":6},"start":{"character":5,"line":6}}},{"kind":12,"name":"loop","range":{"end":{"character":1,"line":28},"start":{"character":0,"line":13}},"selectionRange":{"end":{"character":9,"line":13},"start":{"character":5,"line":13}}}]}Content-Length: 36
+
+{"id":2,"jsonrpc":"2.0","result":[]}
+>>>
+Content-Length: 216
+
+{"method":"textDocument/documentSymbol","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"}},"id":3,"jsonrpc":"2.0"}
+<<<
+Content-Length: 600
+
+{"id":3,"jsonrpc":"2.0","result":[{"kind":13,"name":"myTransfer","range":{"end":{"character":25,"line":4},"start":{"character":0,"line":4}},"selectionRange":{"end":{"character":25,"line":4},"start":{"character":15,"line":4}}},{"kind":12,"name":"setup","range":{"end":{"character":1,"line":11},"start":{"character":0,"line":6}},"selectionRange":{"end":{"character":10,"line":6},"start":{"character":5,"line":6}}},{"kind":12,"name":"loop","range":{"end":{"character":1,"line":28},"start":{"character":0,"line":13}},"selectionRange":{"end":{"character":9,"line":13},"start":{"character":5,"line":13}}}]}
+>>>
+Content-Length: 216
+
+{"method":"textDocument/documentSymbol","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"}},"id":4,"jsonrpc":"2.0"}
+<<<
+Content-Length: 600
+
+{"id":4,"jsonrpc":"2.0","result":[{"kind":13,"name":"myTransfer","range":{"end":{"character":25,"line":4},"start":{"character":0,"line":4}},"selectionRange":{"end":{"character":25,"line":4},"start":{"character":15,"line":4}}},{"kind":12,"name":"setup","range":{"end":{"character":1,"line":11},"start":{"character":0,"line":6}},"selectionRange":{"end":{"character":10,"line":6},"start":{"character":5,"line":6}}},{"kind":12,"name":"loop","range":{"end":{"character":1,"line":28},"start":{"character":0,"line":13}},"selectionRange":{"end":{"character":9,"line":13},"start":{"character":5,"line":13}}}]}
+>>>
+Content-Length: 62
+
+{"method":"$/cancelRequest","params":{"id":2},"jsonrpc":"2.0"}Content-Length: 216
+
+{"method":"textDocument/documentSymbol","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"}},"id":5,"jsonrpc":"2.0"}
+<<<
+Content-Length: 600
+
+{"id":5,"jsonrpc":"2.0","result":[{"kind":13,"name":"myTransfer","range":{"end":{"character":25,"line":4},"start":{"character":0,"line":4}},"selectionRange":{"end":{"character":25,"line":4},"start":{"character":15,"line":4}}},{"kind":12,"name":"setup","range":{"end":{"character":1,"line":11},"start":{"character":0,"line":6}},"selectionRange":{"end":{"character":10,"line":6},"start":{"character":5,"line":6}}},{"kind":12,"name":"loop","range":{"end":{"character":1,"line":28},"start":{"character":0,"line":13}},"selectionRange":{"end":{"character":9,"line":13},"start":{"character":5,"line":13}}}]}
+>>>
+Content-Length: 216
+
+{"method":"textDocument/documentSymbol","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"}},"id":6,"jsonrpc":"2.0"}
+<<<
+Content-Length: 600
+
+{"id":6,"jsonrpc":"2.0","result":[{"kind":13,"name":"myTransfer","range":{"end":{"character":25,"line":4},"start":{"character":0,"line":4}},"selectionRange":{"end":{"character":25,"line":4},"start":{"character":15,"line":4}}},{"kind":12,"name":"setup","range":{"end":{"character":1,"line":11},"start":{"character":0,"line":6}},"selectionRange":{"end":{"character":10,"line":6},"start":{"character":5,"line":6}}},{"kind":12,"name":"loop","range":{"end":{"character":1,"line":28},"start":{"character":0,"line":13}},"selectionRange":{"end":{"character":9,"line":13},"start":{"character":5,"line":13}}}]}
+>>>
+Content-Length: 315
+
+{"method":"textDocument/codeAction","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"},"range":{"start":{"line":2,"character":0},"end":{"line":2,"character":0}},"context":{"diagnostics":[]}},"id":7,"jsonrpc":"2.0"}
+<<<
+Content-Length: 36
+
+{"id":7,"jsonrpc":"2.0","result":[]}
+>>>
+Content-Length: 244
+
+{"method":"textDocument/hover","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"},"position":{"line":27,"character":0}},"id":8,"jsonrpc":"2.0"}
+<<<
+Content-Length: 38
+
+{"id":8,"jsonrpc":"2.0","result":null}
+>>>
+Content-Length: 245
+
+{"method":"textDocument/hover","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"},"position":{"line":15,"character":19}},"id":9,"jsonrpc":"2.0"}
+<<<
+Content-Length: 38
+
+{"id":9,"jsonrpc":"2.0","result":null}
+>>>
+Content-Length: 246
+
+{"method":"textDocument/hover","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"},"position":{"line":15,"character":17}},"id":10,"jsonrpc":"2.0"}
+<<<
+Content-Length: 39
+
+{"id":10,"jsonrpc":"2.0","result":null}
+>>>
+Content-Length: 246
+
+{"method":"textDocument/hover","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"},"position":{"line":20,"character":22}},"id":11,"jsonrpc":"2.0"}
+<<<
+Content-Length: 39
+
+{"id":11,"jsonrpc":"2.0","result":null}
+>>>
+Content-Length: 246
+
+{"method":"textDocument/hover","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"},"position":{"line":20,"character":22}},"id":12,"jsonrpc":"2.0"}
+<<<
+Content-Length: 39
+
+{"id":12,"jsonrpc":"2.0","result":null}
+>>>
+Content-Length: 246
+
+{"method":"textDocument/hover","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"},"position":{"line":20,"character":22}},"id":13,"jsonrpc":"2.0"}
+<<<
+Content-Length: 39
+
+{"id":13,"jsonrpc":"2.0","result":null}
+>>>
+Content-Length: 246
+
+{"method":"textDocument/hover","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"},"position":{"line":21,"character":22}},"id":14,"jsonrpc":"2.0"}
+<<<
+Content-Length: 39
+
+{"id":14,"jsonrpc":"2.0","result":null}
+>>>
+Content-Length: 246
+
+{"method":"textDocument/hover","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"},"position":{"line":21,"character":21}},"id":15,"jsonrpc":"2.0"}
+<<<
+Content-Length: 39
+
+{"id":15,"jsonrpc":"2.0","result":null}
+>>>
+Content-Length: 246
+
+{"method":"textDocument/hover","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"},"position":{"line":21,"character":21}},"id":16,"jsonrpc":"2.0"}
+<<<
+Content-Length: 39
+
+{"id":16,"jsonrpc":"2.0","result":null}
+>>>
+Content-Length: 246
+
+{"method":"textDocument/hover","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"},"position":{"line":21,"character":21}},"id":17,"jsonrpc":"2.0"}
+<<<
+Content-Length: 39
+
+{"id":17,"jsonrpc":"2.0","result":null}
+>>>
+Content-Length: 246
+
+{"method":"textDocument/hover","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"},"position":{"line":21,"character":20}},"id":18,"jsonrpc":"2.0"}
+<<<
+Content-Length: 39
+
+{"id":18,"jsonrpc":"2.0","result":null}
+>>>
+Content-Length: 246
+
+{"method":"textDocument/hover","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"},"position":{"line":21,"character":26}},"id":19,"jsonrpc":"2.0"}
+<<<
+Content-Length: 39
+
+{"id":19,"jsonrpc":"2.0","result":null}
+>>>
+Content-Length: 246
+
+{"method":"textDocument/hover","params":{"textDocument":{"uri":"file:///C:/Users/Thiag/AppData/Local/Temp/arduino-language-server218210339/sketch/Serial.Transfer_library_rx.ino.cpp"},"position":{"line":21,"character":26}},"id":20,"jsonrpc":"2.0"}
+<<<
+Content-Length: 39
+
+{"id":20,"jsonrpc":"2.0","result":null}
+>>>
+Content-Length: 59
+
+{"method":"shutdown","params":null,"id":21,"jsonrpc":"2.0"}
+<<<
+Content-Length: 39
+
+{"id":21,"jsonrpc":"2.0","result":null}
+>>>
+Content-Length: 47
+
+{"method":"exit","params":null,"jsonrpc":"2.0"}<<< Read Error: EOF
