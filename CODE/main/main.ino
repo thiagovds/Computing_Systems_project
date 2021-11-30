@@ -1,12 +1,18 @@
+#include <WiFiNINA.h>
+#include <RTCZero.h>
 #include <Servo.h> 
 
 #define MAX_num_of_routines 30
+#define MAX_num_of_modules 4
 
 
 /* PINOUT SELECTION   --------------------------------------*/
 #define LDR A1
 #define SIGNAL_TO_ESP 2
 #define Servo_pin 9
+
+#define SEL0 21 //BLUE CABLE
+#define SEL1 20 //PURPLE CABLE -----------
 
 
 /* CALIBRATION CONSTANTS FOR STEPPER   -----------------------*/
@@ -25,13 +31,31 @@
 #define Time_between_detections 1000          //to set around 100ms ?
 
 
+/* Create an RTC (Real Time Clock) object  ------------------------------------ RTC */
+
+RTCZero rtc;
+
+/* Change these values to set the current initial time */
+
+const byte seconds = 0;
+const byte minutes = 0;
+const byte hours = 16;
+
+/* Change these values to set the current initial date */
+
+const byte day = 25;
+const byte month = 9;
+const byte year = 15;
+
+
+
 /*  INITIALIZATION OF GLOBAL VARIABLES FOR MAIN  ----------------------  */
 int mode, operation_over = 1;
 //int start = 1;
 
 
 /*    GLOBAL VARIABLES FOR ENGINES    */
-Servo Servo1;
+Servo Servo1;   // create Servo object
 
 int cycle_stage;
 int motor_Speed = 4;
@@ -56,17 +80,17 @@ int success = 0;
 
 
 /*         ADD PILLS global variables              */
-String medicine[16];
+String medicine[MAX_num_of_modules + 1];
 int number_of_pills[MAX_num_of_routines];
 
 
 
 /*        PHOTOINTERRUPTER GLOBAL VARIABLES        */
 int counter;
-int mytime[20];
+int mytime[20];   //size can be changed
 int i=1;
 int calib_val = 900;
-int error_count =0;
+int error_count = 0;
 
 
 
@@ -74,7 +98,9 @@ int error_count =0;
 
 void setup()
 {
-  pinMode(LDR, INPUT);
+    pinMode(LDR, INPUT);
+    pinMode(SEL0, OUTPUT);
+    pinMode(SEL1, OUTPUT);
 
     Servo1.attach (Servo_pin); //Il Servo1 è collegato al pin digitale 
     pinMode(stepMotorPin1, OUTPUT);
@@ -86,30 +112,38 @@ void setup()
     pinMode(SIGNAL_TO_ESP, OUTPUT); digitalWrite(SIGNAL_TO_ESP, LOW);
 
 
-    Serial.begin(9600);
-    delay(2000);                        //FOR NANO BOARD ONLY!! 
-    Serial.println("serial Begin!");
+    Serial.begin(9600); while (!Serial); Serial.println("serial Begin!");
+
+    rtc.begin(); // initialize RTC 24H format
+    rtc.setTime(hours, minutes, seconds);
+    rtc.setDate(day, month, year);
+
+    //rtc.setAlarmTime(16, 0, 10);
+    //rtc.enableAlarm(rtc.MATCH_HHMMSS);
+
+    rtc.attachInterrupt(alarmMatch);
+
+    print_date_time();
 
     /* SETUP ENGINES TIMING */
     t_0 = millis(); cycle_stage = 1;
 
     /*SETUP PHOTOINTERRUPTER*/
-    mytime[0] = t_0;   Serial.print("mytime[0]: "); Serial.println(mytime[i]);
+    mytime[0] = t_0;   //Serial.print("mytime[0]: "); Serial.println(mytime[i]);
     i++;
 }
 
 void loop()
 {
-    //if (start ==1) { t_0 = millis(); start = 0; cycle_stage = 1; }  //----------THIS SECTION IS EXECUTED only once
 
-
-    /* TAKE TIMESTAMP EVERY CYCLE i.e. UPDATE TIME TO CURRENT ARD TIME  */
+    /* TAKE TIMESTAMP EVERY CYCLE i.e. UPDATE TIMESTAMP TO CURRENT TIMESTAMP  */
     t_current = millis();
     check_schedule();
 
     if (operation_over == 1){ menu(); }  //only check menu again if no operation is taking place
     else
     {
+
         dispense_pills();   
         success = photointerrupter();
 
@@ -136,7 +170,7 @@ void verify_success()
         Serial.println("Reattempting pill dispensing!");
         delay(2000);
         attempts++; Serial.print("\t attempt number:"); Serial.println(attempts);
-        if(attempts >= 3){ operation_over = 1; attempts = 0; }
+        if(attempts > 3){ operation_over = 1; attempts = 0; }
 
         break;  
       default:
@@ -145,9 +179,28 @@ void verify_success()
 
 }
 
-void check_schedule()
+
+void alarmMatch()
+{
+    Serial.println("Alarm Match!");
+}
+
+int alarm()
 {
   
+  /* INSERT CODE FOR ALARM SYSTEM HERE (sound buzz) */
+
+  //WHEN schedule_time[][0] == 'value'  &&  schedule_time[1]  == 'value'
+  for(int a=0; a<Y; a++)
+  {
+    rtc.setAlarmTime(Schedule_time[a][0], Schedule_time[a][0], 00);
+    rtc.enableAlarm(rtc.MATCH_HHMMSS);
+  }
+}
+
+void check_schedule()
+{
+    
 }
 
 void menu()
@@ -162,9 +215,10 @@ void menu()
   */
   Serial.println("\n------------------------------------------------------------");
   Serial.println("Welcome to the MAIN MENU! \n To enter the desired mode, press: ");
-  Serial.println("1 - for editing routine schedule"); 
-  Serial.println("2 - for refilling pills to a module storage"); Serial.println("3 - for dispensing pills");
-  Serial.println("\n------------------------------------------------------------");
+  Serial.println("1 - for displaying your full schedule");
+  Serial.println("2 - for editing routine schedule"); 
+  Serial.println("3 - for refilling pills to a module storage"); Serial.println("4 - for dispensing pills");
+  Serial.println("------------------------------------------------------------");
 
     while (Serial.available() == 0) {}  mode = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
     while (mode > 3  ||  mode<=0)  //------------INPUT ERROR CHECKING  ------------------- 
@@ -173,6 +227,7 @@ void menu()
         mode = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
         Serial.println("The mode inserted mode does not exist! \n Try again: ");
     }
+
 
   switch (mode) 
   {
@@ -186,7 +241,13 @@ void menu()
         refill_module();
         break;
 
+      case 3:
+        Serial.println("3 Inserted!");
+        print_schedule();
+        break;
+
       default:  //dispensing pills!  mode 3
+        selector_function();  //We activate the correct module to be operated!
         operation_over = 0;  //WE START AN OPERATION, BYPASS MENU
         engine_over = 0;     //WE ALLOW DISPENSE PILLS TO OPERATE ONCE WITH THIS FLAG
         Serial.println("Start of operation!");
@@ -202,7 +263,9 @@ void refill_module()   //when refill take into the account the previous amount o
     Serial.println("You are in add pills mode! \n Please insert the module number that will receive the pill!");
     while (Serial.available() == 0) {}  module_number[schedule_enumerator] = Serial.parseInt();
     //UNLOCKING A LOCK WOULD BE NICE HERE!
+    selector_function();  //We activate the correct module to be operated!
   }
+
   Serial.println("Please insert the number of pills that will be added to the storage :");
   while (Serial.available() == 0) {}  number_of_pills[schedule_enumerator] = Serial.parseInt();
 
@@ -214,7 +277,7 @@ void refill_module()   //when refill take into the account the previous amount o
 
 void edit_schedule_menu()        //////////////////////////////////////////////////////
 {
-    Y = 1 + schedule_enumerator; Serial.print("size of schedule_enumerator + 1   i.e. number of routines = "); Serial.println(Y);
+    Y = 1 + schedule_enumerator; Serial.print("schedule_enumerator = "); Serial.println(schedule_enumerator);
     
     int schedule_menu_mode = 0;
 
@@ -226,21 +289,7 @@ void edit_schedule_menu()        ///////////////////////////////////////////////
         Serial.print("You are in the EDIT SCHEDULE MENU. ");
         Serial.println("\n------------------------------------------------------------");
 
-/*         --------------------     PRINT THE WHOLE ROUTINE    -----------------------------    */
-        Serial.println("This is your full routine schedule:");
-
-        for (int k = 0; k < schedule_enumerator; k++) 
-        {
-            Serial.print(k+1); Serial.print(" - "); Serial.print(medicine[module_number[k]]); Serial.print("\t   Time : "); 
-            for (int l =0; l < X; l++) 
-            {
-                Serial.print(Schedule_time[k][l]);Serial.print("  ");
-            }
-
-            Serial.println("");
-        }
-        Serial.println("\n------------------------------------------------------------");
-/*                  ---------------------------------------------------------                  */
+      print_schedule();
 
         Serial.println("To enter the desired mode, press:\n \t ----------------");
         Serial.println("1 - for inserting a routine."); 
@@ -253,7 +302,7 @@ void edit_schedule_menu()        ///////////////////////////////////////////////
         {
             while (Serial.available() == 0) {} 
             schedule_menu_mode = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
-            Serial.println("The mode inserted mode does not exist! \n Try again: ");
+            Serial.println("The inserted mode does not exist! \n Try again: ");
         }
         switch (schedule_menu_mode) {
             case 1:
@@ -292,6 +341,7 @@ void insert_schedule_routine()   //TO BE ALTERED! DATA OF SCHEDULE HAS TO RETURN
   
   Serial.println("insert module number to be operated at the specified time:"); while (Serial.available() == 0) {} module_number[schedule_enumerator] = Serial.parseInt();
 
+  selector_function();  //We activate the correct module to be operated!
   Serial.print("Schedule Saved!! Time: "); Serial.print(Schedule_time[schedule_enumerator][0]);  Serial.print(":"); Serial.println(Schedule_time[schedule_enumerator][1]);
   
   Serial.print("Module : "); Serial.println(module_number[schedule_enumerator]);  //PRINT THE NUMBER OF MODULES OCCUPIED, SHOW WHICH MODULES ARE EMPTY\\OCCUPIED AND WITH WHAT!
@@ -364,7 +414,24 @@ void delete_schedule_routine()  //enumerator fix
 
 }
 
+void print_schedule()
+{
+  /*         --------------------     PRINT THE WHOLE ROUTINE    -----------------------------    */
+        Serial.println("This is your full routine schedule:");
 
+        for (int k = 0; k < schedule_enumerator; k++) 
+        {
+            Serial.print(k+1); Serial.print(" - "); Serial.print(medicine[module_number[k]]); Serial.print("\t   Time : "); 
+            for (int l =0; l < X; l++) 
+            {
+                Serial.print(Schedule_time[k][l]);Serial.print("  ");
+            }
+
+            Serial.println("");
+        }
+        Serial.println("\n------------------------------------------------------------");
+/*                  ---------------------------------------------------------                  */
+}
 
 int photointerrupter()
 {
@@ -419,14 +486,6 @@ int photointerrupter()
 
 }
 
-int alarm()
-{
-  
-  /* INSERT CODE FOR ALARM SYSTEM HERE (sound buzz) */
-
-  //WHEN schedule_time[][0] == 'value'  &&  schedule_time[1]  == 'value'
-
-}
 
 void dispense_pills()
 {
@@ -470,6 +529,34 @@ void dispense_pills()
       }
   }
 }
+
+
+
+void selector_function()
+{
+  switch (module_number[schedule_enumerator]) {
+      case 1:
+        digitalWrite(SEL0, LOW);   //00
+        digitalWrite(SEL1, LOW);
+        break;
+      case 2:
+        digitalWrite(SEL0, HIGH);   //01
+        digitalWrite(SEL1, LOW);
+        break;
+      case 3:
+        digitalWrite(SEL0, LOW);   //10
+        digitalWrite(SEL1, HIGH);
+        break;
+      case 4:
+        digitalWrite(SEL0, HIGH);   //11
+        digitalWrite(SEL1, HIGH);
+        break;        
+      default:
+        Serial.println("please insert a valid input!!");
+  }
+}
+
+
 
 
 void lock_pill()   // Stepper motor operation
@@ -530,7 +617,6 @@ void unlock_pill()   //Stepper_motor operation
 }
 
 
-
 void open_gate()
 {   
     int motor_Speed = 1000;
@@ -546,7 +632,6 @@ void close_gate()
 
 
 
-
 void send_email()
 {
     digitalWrite(SIGNAL_TO_ESP, HIGH);
@@ -554,4 +639,31 @@ void send_email()
     delay(31);
     digitalWrite(SIGNAL_TO_ESP, LOW);
     delay(2000);
+}
+
+void print2digits(int number) 
+{
+  if (number < 10) {
+    Serial.print("0"); // print a 0 before if the number is < than 10
+  }
+  Serial.print(number);
+}
+
+
+void print_date_time()
+{
+
+  // Print date...
+
+  print2digits(rtc.getDay());  Serial.print("/");
+  print2digits(rtc.getMonth());  Serial.print("/");
+  print2digits(rtc.getYear());  Serial.print(" ");
+
+  // ...and time
+
+  print2digits(rtc.getHours());  Serial.print(":");
+  print2digits(rtc.getMinutes());  Serial.print(":");
+  print2digits(rtc.getSeconds());  Serial.println();
+
+  //delay(1000);
 }
