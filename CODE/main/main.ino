@@ -1,5 +1,8 @@
 #include <Servo.h> 
 
+#define MAX_num_of_routines 30
+
+
 /* PINOUT SELECTION   --------------------------------------*/
 #define LDR A1
 #define SIGNAL_TO_ESP 2
@@ -36,9 +39,14 @@ int engine_over = 0;
 
 /*    GLOBAL VARIABLES FOR SCHEDULE    */
 
-int Schedule_time[30][2];
-int schedule_enumerator;  //variable to keep track of how many pill-taking events in a complex schedule
-int module_number;
+int X = 2;
+int r, Y;
+
+int Schedule_time[MAX_num_of_routines][2];
+int schedule_enumerator = 0;  //variable to keep track of how many pill-taking events in a complex schedule
+int module_number[MAX_num_of_routines];
+int insert;
+int edit = 0;
 
 
 unsigned long t_current, t_0;
@@ -48,8 +56,8 @@ int success = 0;
 
 
 /*         ADD PILLS global variables              */
-String medicine;
-int number_of_pills;
+String medicine[16];
+int number_of_pills[MAX_num_of_routines];
 
 
 
@@ -105,7 +113,7 @@ void loop()
         dispense_pills();   
         success = photointerrupter();
 
-        verify_success();
+        if (engine_over == 1) {verify_success();}
     }
     
 
@@ -146,35 +154,39 @@ void menu()
 {
     /*DEFINE MODES OF OPERATION:
   0 - insert schedule
-  1 - add pills to compartment
-  2 (default) - dispense pills
+  1 - edit schedule
+  2 - add pills to compartment
+  3 - dispense pills
   +
 
   */
   Serial.println("\n------------------------------------------------------------");
-  Serial.println("Welcome to the MENU! \n To enter the desired mode, press: ");
-  Serial.println("0 - for inserting a schedule"); Serial.println("1 - for editing schedule"); 
-  Serial.println("2 - for adding pills to a module storage"); Serial.println("3 - for dispensing pills");
+  Serial.println("Welcome to the MAIN MENU! \n To enter the desired mode, press: ");
+  Serial.println("1 - for editing routine schedule"); 
+  Serial.println("2 - for refilling pills to a module storage"); Serial.println("3 - for dispensing pills");
+  Serial.println("\n------------------------------------------------------------");
 
-  while (Serial.available() == 0) {} mode = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
+    while (Serial.available() == 0) {}  mode = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
+    while (mode > 3  ||  mode<=0)  //------------INPUT ERROR CHECKING  ------------------- 
+    {
+        while (Serial.available() == 0) {} 
+        mode = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
+        Serial.println("The mode inserted mode does not exist! \n Try again: ");
+    }
 
-  switch (mode) {
-      case 0:
-        Serial.println("0 Inserted!");
-          insert_schedule();  
-          break;
-
+  switch (mode) 
+  {
       case 1:
         Serial.println("1 Inserted!");
-          edit_schedule();
-          break;
+        edit_schedule_menu();
+        break;
 
       case 2:
         Serial.println("2 Inserted!");
-          add_pills();
-          break;
+        refill_module();
+        break;
 
-      default:
+      default:  //dispensing pills!  mode 3
         operation_over = 0;  //WE START AN OPERATION, BYPASS MENU
         engine_over = 0;     //WE ALLOW DISPENSE PILLS TO OPERATE ONCE WITH THIS FLAG
         Serial.println("Start of operation!");
@@ -182,77 +194,177 @@ void menu()
 }
 
 
-void add_pills()
+void refill_module()   //when refill take into the account the previous amount of pills in a module!!!
 {
-
-  Serial.println("You are in add pills mode! \n Please insert the module number that will receive the pill!");
-  while (Serial.available() == 0) {}  module_number = Serial.parseInt();
-  //UNLOCKING A LOCK WOULD BE NICE HERE!
-
+  Serial.print("insert variable :"); Serial.println(insert);
+  if(insert = 0)
+  { 
+    Serial.println("You are in add pills mode! \n Please insert the module number that will receive the pill!");
+    while (Serial.available() == 0) {}  module_number[schedule_enumerator] = Serial.parseInt();
+    //UNLOCKING A LOCK WOULD BE NICE HERE!
+  }
   Serial.println("Please insert the number of pills that will be added to the storage :");
-  while (Serial.available() == 0) {}  number_of_pills = Serial.parseInt();
+  while (Serial.available() == 0) {}  number_of_pills[schedule_enumerator] = Serial.parseInt();
 
-  Serial.print("Please type the medicine name that will be added to the storage number" ); Serial.print(module_number); Serial.println(":");
+  Serial.print("Please type the medicine name that will be added to the storage number:  " ); Serial.print(module_number[schedule_enumerator]); Serial.println("");
   while (Serial.available() == 0) {}    Serial.setTimeout(5000);   //This sets the maximum time to wait for serial data from user.
-  while (Serial.available() == 0) {}    medicine = Serial.readString();
-
-
-  return;
+  while (Serial.available() == 0) {}    medicine[module_number[schedule_enumerator]] = Serial.readString();
   
 }
 
-void edit_schedule()
+void edit_schedule_menu()        //////////////////////////////////////////////////////
 {
-    Y = sizeof(schedule_enumerator); Serial.print("size of schedule_enumerator = "); Serial.println(Y);
-    X = 2
+    Y = 1 + schedule_enumerator; Serial.print("size of schedule_enumerator + 1   i.e. number of routines = "); Serial.println(Y);
+    
+    int schedule_menu_mode = 0;
 
-    Serial.println("You are in edit schedule mode");
-    Serial.println(Schedule);
-    for (int k =0; k < Y; k++) 
+
+    if (schedule_enumerator == 0){insert_schedule_routine(); return;}
+    else
     {
-        Serial.print("This is your full schedule! \n Pill routine number: "); Serial.print(schedule_enumerator); Serial.println("Time"); 
-        for (int l =0; l < X; l++) 
+        Serial.println("\n------------------------------------------------------------");
+        Serial.print("You are in the EDIT SCHEDULE MENU. ");
+        Serial.println("\n------------------------------------------------------------");
+
+/*         --------------------     PRINT THE WHOLE ROUTINE    -----------------------------    */
+        Serial.println("This is your full routine schedule:");
+
+        for (int k = 0; k < schedule_enumerator; k++) 
         {
-            Serial.print(Schedule_time[k][l]);Serial.print(" ");
+            Serial.print(k+1); Serial.print(" - "); Serial.print(medicine[module_number[k]]); Serial.print("\t   Time : "); 
+            for (int l =0; l < X; l++) 
+            {
+                Serial.print(Schedule_time[k][l]);Serial.print("  ");
+            }
+
+            Serial.println("");
         }
-        Serial.println("");
+        Serial.println("\n------------------------------------------------------------");
+/*                  ---------------------------------------------------------                  */
+
+        Serial.println("To enter the desired mode, press:\n \t ----------------");
+        Serial.println("1 - for inserting a routine."); 
+        Serial.println("2 - for editing a routine in the schedule."); 
+        Serial.println("3 - for deleting a routine from the schedule.");
+        Serial.println("4 - to exit!");
+      
+        while (Serial.available() == 0) {} schedule_menu_mode = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
+        while (schedule_menu_mode > 4  ||  schedule_menu_mode <= 0)  //------------INPUT ERROR CHECKING  ------------------- 
+        {
+            while (Serial.available() == 0) {} 
+            schedule_menu_mode = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
+            Serial.println("The mode inserted mode does not exist! \n Try again: ");
+        }
+        switch (schedule_menu_mode) {
+            case 1:
+              Serial.println("1 Inserted, inserting schedule!\n");
+              insert_schedule_routine();
+              break;
+      
+            case 2:
+              Serial.println("2 Inserted, editing schedule!\n");
+              edit_schedule();
+              break;
+      
+            case 3:
+              Serial.println("3 Inserted, delete routine!\n");
+              delete_schedule_routine();
+              break;
+      
+            default:  //exit the menu
+              Serial.println("4 Inserted, exiting the menu!\n");
+              return;
+        }  
+                
     }
 
-    Serial.println("Insert routine number to edit : "); while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][0] =Serial.parseInt();
 
 }
 
-void insert_schedule()   //TO BE ALTERED! DATA OF SCHEDULE HAS TO RETURN TO THE MAIN!!!
+void insert_schedule_routine()   //TO BE ALTERED! DATA OF SCHEDULE HAS TO RETURN TO THE MAIN!!!           
 {
+  if (edit == 0){ Serial.println("You are in insert schedule routine mode! "); }
 
-  Serial.println("You are in insert schedule mode! \n Please insert the hours '00' followed by an enter and then minutes '00' "); 
+  insert = 1;
+  Serial.println("Please insert the hours '00' followed by an enter and then minutes '00' "); 
   Serial.println("insert hours, range from 0 until 23:");  while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][0] =Serial.parseInt();
   Serial.println("insert minutes, range from 0 until 59"); while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][1] =Serial.parseInt();
   
-  Serial.println("insert module number to be operated at the specified time:"); while (Serial.available() == 0) {} module_number = Serial.parseInt();
+  Serial.println("insert module number to be operated at the specified time:"); while (Serial.available() == 0) {} module_number[schedule_enumerator] = Serial.parseInt();
 
-  Serial.print("Schedule Saved!! Time:"); Serial.print(Schedule_time[schedule_enumerator][0]);  Serial.print(":"); Serial.println(Schedule_time[schedule_enumerator][1]);
+  Serial.print("Schedule Saved!! Time: "); Serial.print(Schedule_time[schedule_enumerator][0]);  Serial.print(":"); Serial.println(Schedule_time[schedule_enumerator][1]);
   
-  Serial.print("Module : "); Serial.println(module_number);
+  Serial.print("Module : "); Serial.println(module_number[schedule_enumerator]);  //PRINT THE NUMBER OF MODULES OCCUPIED, SHOW WHICH MODULES ARE EMPTY\\OCCUPIED AND WITH WHAT!
 
-  schedule_enumerator++;
+
+  //----------------------------------
 
   Serial.println("Would you like to insert the pills into the storage now? \n Y for yes, N for no.");
   while (Serial.available() == 0) {
     }
-    Serial.setTimeout(1000);   //This sets the maximum time to wait for serial data from user.
-    String menuChoice = Serial.readString();
+  Serial.setTimeout(7000);   //This sets the maximum time to wait for serial data from user.
+  String menuChoice = Serial.readString();
   
-  if (menuChoice == "Y")//(!strcmp(menuChoice, ("Y"))
+  if ((menuChoice == "Y") || (menuChoice == "y"))                                                       //ERROR CHECK!!!!
   {
-    add_pills();  //add module number to be passed to add_pills       ------------                        TO DO
-  } 
-  else
-  {
-    return;
+    refill_module();  //add module number to be passed to refill_module       ------------                        TO DO
   }
 
+  schedule_enumerator++;
+  insert = 0;
+  return;
+
 }
+
+void edit_schedule()
+{
+    Y = 1 + schedule_enumerator;
+    int temp = schedule_enumerator;
+
+    edit = 1;
+
+    Serial.println("Insert routine number to be edited : "); 
+    r = input_routine_number(); schedule_enumerator = r-1;
+
+    delete_schedule_routine();
+    insert_schedule_routine();
+
+    edit = 0; schedule_enumerator = temp;
+}
+
+int input_routine_number()
+{
+    while (Serial.available() == 0) {}  r = Serial.parseInt();   //CHECKING FOR CORRECT INPUT FROM USER
+    while (r >= Y  ||  r<=0)
+    {
+        Serial.println("That routine number does not exist! \n Try again: ");
+        while (Serial.available() == 0) {}  r = Serial.parseInt();
+    }
+    return r;
+}
+
+void delete_schedule_routine()  //enumerator fix
+{ 
+    Y = 1 + schedule_enumerator; 
+    
+    //add bypass if editing
+    Serial.println("Insert routine number to delete : "); 
+    r = input_routine_number();
+
+    for (int k=r-1; k < Y; k++)
+    {
+        for(int l =0; l < X; l++)
+        {
+            Schedule_time[k][l] = Schedule_time[k+1][l];   //move all values higher than the value to edit 
+        }
+    }
+    
+    Schedule_time[r-1][0] = 0; Schedule_time[r-1][1] = 0;  //delete that routine number
+    schedule_enumerator--;
+
+}
+
+
 
 int photointerrupter()
 {
@@ -439,7 +551,7 @@ void send_email()
 {
     digitalWrite(SIGNAL_TO_ESP, HIGH);
     Serial.println("Sending_Email_to_Caregiver!!");
-    delay(30);
+    delay(31);
     digitalWrite(SIGNAL_TO_ESP, LOW);
     delay(2000);
 }
