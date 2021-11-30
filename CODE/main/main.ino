@@ -1,6 +1,15 @@
 #include <WiFiNINA.h>
 #include <RTCZero.h>
-#include <Servo.h> 
+#include <Servo.h>
+#include <SPI.h> 
+
+
+#include "arduino_secrets.h"
+///////please enter your sensitive data in the Secret tab/arduino_secrets.h
+char ssid[] = SECRET_SSID;        // your network SSID (name)
+char pass[] = SECRET_PASS;    // your network password (use for WPA, or use as key for WEP)
+int status = WL_IDLE_STATUS;     // the Wifi radio's status
+
 
 #define MAX_num_of_routines 30
 #define MAX_num_of_modules 4
@@ -37,15 +46,15 @@ RTCZero rtc;
 
 /* Change these values to set the current initial time */
 
-const byte seconds = 0;
-const byte minutes = 0;
-const byte hours = 16;
+byte seconds = 0;
+byte minutes = 0;
+byte hours = 16;
 
 /* Change these values to set the current initial date */
 
-const byte day = 25;
-const byte month = 9;
-const byte year = 15;
+byte day = 25;
+byte month = 9;
+byte year = 15;
 
 
 
@@ -69,7 +78,7 @@ int r, Y;
 int Schedule_time[MAX_num_of_routines][2];
 int schedule_enumerator = 0;  //variable to keep track of how many pill-taking events in a complex schedule
 int module_number[MAX_num_of_routines];
-int insert;
+int insert = 0;
 int edit = 0;
 
 
@@ -81,7 +90,7 @@ int success = 0;
 
 /*         ADD PILLS global variables              */
 String medicine[MAX_num_of_modules + 1];
-int number_of_pills[MAX_num_of_routines];
+int number_of_pills[MAX_num_of_modules + 1];
 
 
 
@@ -112,17 +121,12 @@ void setup()
     pinMode(SIGNAL_TO_ESP, OUTPUT); digitalWrite(SIGNAL_TO_ESP, LOW);
 
 
-    Serial.begin(9600); while (!Serial); Serial.println("serial Begin!");
+    Serial.begin(9600); /*while (!Serial);*/ delay(2000); Serial.println("serial Begin!");
 
-    rtc.begin(); // initialize RTC 24H format
-    rtc.setTime(hours, minutes, seconds);
-    rtc.setDate(day, month, year);
-
-    //rtc.setAlarmTime(16, 0, 10);
-    //rtc.enableAlarm(rtc.MATCH_HHMMSS);
+    Wifi_setup();
+    real_time_clock_setup();
 
     rtc.attachInterrupt(alarmMatch);
-
     print_date_time();
 
     /* SETUP ENGINES TIMING */
@@ -140,7 +144,7 @@ void loop()
     t_current = millis();
     check_schedule();
 
-    if (operation_over == 1){ menu(); }  //only check menu again if no operation is taking place
+    if (operation_over == 1){ menu();}  //only check menu again if no operation is taking place
     else
     {
 
@@ -153,6 +157,49 @@ void loop()
 
 }
 
+void Wifi_setup()
+{
+    // check for the WiFi module:
+
+    if (WiFi.status() == WL_NO_MODULE) 
+    {
+        Serial.println("Communication with WiFi module failed!");
+        
+        // don't continue
+        while (true);
+    }
+
+    String fv = WiFi.firmwareVersion();
+    if (fv < WIFI_FIRMWARE_LATEST_VERSION) {Serial.println("Please upgrade the firmware");}
+    
+
+    // attempt to connect to Wifi network:
+    while (status != WL_CONNECTED) 
+    {
+      Serial.print("Attempting to connect to WPA SSID: ");Serial.println(ssid);
+    
+      // Connect to WPA/WPA2 network:
+      status = WiFi.begin(ssid, pass);    
+      
+      delay(2000);// wait 10 seconds for connection:
+
+    }
+    // you're connected now, so print out the data:
+    Serial.print("You're connected to the network");
+    printCurrentNet();   printWifiData();
+    
+}
+
+void real_time_clock_setup()
+{
+    rtc.begin(); // initialize RTC 24H format
+    rtc.setTime(hours, minutes, seconds);
+    rtc.setDate(day, month, year);
+
+    //rtc.setAlarmTime(16, 0, 10);
+    //rtc.enableAlarm(rtc.MATCH_HHMMSS);
+
+}
 
 void verify_success()
 {
@@ -215,13 +262,15 @@ void menu()
   */
   Serial.println("\n------------------------------------------------------------");
   Serial.println("Welcome to the MAIN MENU! \n To enter the desired mode, press: ");
-  Serial.println("1 - for displaying your full schedule");
-  Serial.println("2 - for editing routine schedule"); 
-  Serial.println("3 - for refilling pills to a module storage"); Serial.println("4 - for dispensing pills");
+  Serial.println("1 - for displaying your full schedule.");
+  Serial.println("2 - for editing routine schedule."); 
+  Serial.println("3 - for refilling pills to a module storage."); 
+  Serial.println("4 - for dispensing pills.");
+  Serial.println("5 - for displaying Wifi connection settings.");  
   Serial.println("------------------------------------------------------------");
 
     while (Serial.available() == 0) {}  mode = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
-    while (mode > 3  ||  mode<=0)  //------------INPUT ERROR CHECKING  ------------------- 
+    while (mode > 5  ||  mode<=0)  //------------INPUT ERROR CHECKING  ------------------- 
     {
         while (Serial.available() == 0) {} 
         mode = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
@@ -232,47 +281,59 @@ void menu()
   switch (mode) 
   {
       case 1:
-        Serial.println("1 Inserted!");
-        edit_schedule_menu();
-        break;
-
-      case 2:
-        Serial.println("2 Inserted!");
-        refill_module();
-        break;
-
-      case 3:
-        Serial.println("3 Inserted!");
+        Serial.println("\n1 Inserted!");
         print_schedule();
         break;
 
-      default:  //dispensing pills!  mode 3
+      case 2:
+        Serial.println("\n2 Inserted!");
+        edit_schedule_menu();
+        break;
+
+      case 3:
+        Serial.println("\n3 Inserted!");
+        refill_module();
+        break;
+
+      case 4:  //dispensing pills!  mode 4
+        Serial.println("\n4 Inserted!");
         selector_function();  //We activate the correct module to be operated!
         operation_over = 0;  //WE START AN OPERATION, BYPASS MENU
         engine_over = 0;     //WE ALLOW DISPENSE PILLS TO OPERATE ONCE WITH THIS FLAG
         Serial.println("Start of operation!");
+        break;
+
+      default:  
+        printCurrentNet();
   }
 }
 
 
 void refill_module()   //when refill take into the account the previous amount of pills in a module!!!
 {
-  Serial.print("insert variable :"); Serial.println(insert);
-  if(insert = 0)
-  { 
-    Serial.println("You are in add pills mode! \n Please insert the module number that will receive the pill!");
-    while (Serial.available() == 0) {}  module_number[schedule_enumerator] = Serial.parseInt();
-    //UNLOCKING A LOCK WOULD BE NICE HERE!
-    selector_function();  //We activate the correct module to be operated!
-  }
-
-  Serial.println("Please insert the number of pills that will be added to the storage :");
-  while (Serial.available() == 0) {}  number_of_pills[schedule_enumerator] = Serial.parseInt();
-
-  Serial.print("Please type the medicine name that will be added to the storage number:  " ); Serial.print(module_number[schedule_enumerator]); Serial.println("");
-  while (Serial.available() == 0) {}    Serial.setTimeout(5000);   //This sets the maximum time to wait for serial data from user.
-  while (Serial.available() == 0) {}    medicine[module_number[schedule_enumerator]] = Serial.readString();
-  
+    if (schedule_enumerator == 0 && insert == 0)
+    {
+      Serial.println("You have no pill routines! Modules cannot be refilled.");
+      return;
+    }
+    else if(insert == 0)
+    { 
+      print_schedule();
+      Serial.println("You are in add pills mode! \nPlease insert the module number that will be refilled!");
+      while (Serial.available() == 0) {}  module_number[schedule_enumerator] = Serial.parseInt();
+      //UNLOCKING A LOCK WOULD BE NICE HERE!
+      selector_function();  //We activate the correct module to be operated!
+    }
+    
+    Serial.print("Please insert the number of pills that will be added to module number "); Serial.print(module_number[schedule_enumerator]); Serial.println(": ");
+    while (Serial.available() == 0) {}  number_of_pills[module_number[schedule_enumerator]] = Serial.parseInt();
+    Serial.println(number_of_pills[module_number[schedule_enumerator]]);
+    
+    Serial.print("Please type the medicine name that will be added to the module number " ); Serial.print(module_number[schedule_enumerator]); Serial.println(": ");
+    //while (Serial.available() == 0) {}    Serial.setTimeout(500);   //This sets the maximum time to wait for serial data from user.
+    while (Serial.available() == 0) {}    medicine[module_number[schedule_enumerator]] = Serial.readString();
+    Serial.println(medicine[module_number[schedule_enumerator]]);
+    
 }
 
 void edit_schedule_menu()        //////////////////////////////////////////////////////
@@ -300,28 +361,28 @@ void edit_schedule_menu()        ///////////////////////////////////////////////
         while (Serial.available() == 0) {} schedule_menu_mode = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
         while (schedule_menu_mode > 4  ||  schedule_menu_mode <= 0)  //------------INPUT ERROR CHECKING  ------------------- 
         {
+            Serial.println("The inserted mode does not exist! \n Try again: ");
             while (Serial.available() == 0) {} 
             schedule_menu_mode = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
-            Serial.println("The inserted mode does not exist! \n Try again: ");
         }
         switch (schedule_menu_mode) {
             case 1:
-              Serial.println("1 Inserted, inserting schedule!\n");
+              Serial.println("\n1 Inserted, inserting schedule!\n");
               insert_schedule_routine();
               break;
       
             case 2:
-              Serial.println("2 Inserted, editing schedule!\n");
+              Serial.println("\n2 Inserted, editing schedule!\n");
               edit_schedule();
               break;
       
             case 3:
-              Serial.println("3 Inserted, delete routine!\n");
+              Serial.println("\n3 Inserted, delete routine!\n");
               delete_schedule_routine();
               break;
       
             default:  //exit the menu
-              Serial.println("4 Inserted, exiting the menu!\n");
+              Serial.println("\n4 Inserted, exiting the menu!\n");
               return;
         }  
                 
@@ -332,19 +393,38 @@ void edit_schedule_menu()        ///////////////////////////////////////////////
 
 void insert_schedule_routine()   //TO BE ALTERED! DATA OF SCHEDULE HAS TO RETURN TO THE MAIN!!!           
 {
-  if (edit == 0){ Serial.println("You are in insert schedule routine mode! "); }
+  if (edit == 0){ Serial.println("\nYou are in insert schedule routine mode! "); }
 
   insert = 1;
-  Serial.println("Please insert the hours '00' followed by an enter and then minutes '00' "); 
-  Serial.println("insert hours, range from 0 until 23:");  while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][0] =Serial.parseInt();
-  Serial.println("insert minutes, range from 0 until 59"); while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][1] =Serial.parseInt();
+  Serial.println("Lets set the time of your routine..."); 
+  Serial.println("Please insert the hours, range from 0 until 23:");  while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][0] =Serial.parseInt(); 
+  while (Schedule_time[schedule_enumerator][0] < 0  ||  Schedule_time[schedule_enumerator][0] > 23)
+    {   
+        Serial.println(Schedule_time[schedule_enumerator][0]);
+        Serial.println("The hour inserted does not exist! \n Try again: ");
+        while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][0] =Serial.parseInt(); 
+    }
+  Serial.println(Schedule_time[schedule_enumerator][0]);
   
-  Serial.println("insert module number to be operated at the specified time:"); while (Serial.available() == 0) {} module_number[schedule_enumerator] = Serial.parseInt();
+  Serial.println("Please insert the minutes, range from 0 until 59"); while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][1] =Serial.parseInt(); 
+  while (Schedule_time[schedule_enumerator][1] < 0  ||  Schedule_time[schedule_enumerator][1] > 59)
+    {   
+        Serial.println(Schedule_time[schedule_enumerator][1]);
+        Serial.println("The minutes inserted do not exist! \n Try again: ");
+        while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][1] =Serial.parseInt(); 
+    }
+  Serial.println(Schedule_time[schedule_enumerator][1]);
+  
+  Serial.println("Insert module number to be operated at the specified time:"); while (Serial.available() == 0) {} module_number[schedule_enumerator] = Serial.parseInt(); 
+  
+  module_number_error_check();
 
+  Serial.println(module_number[schedule_enumerator]);
+  
   selector_function();  //We activate the correct module to be operated!
   Serial.print("Schedule Saved!! Time: "); Serial.print(Schedule_time[schedule_enumerator][0]);  Serial.print(":"); Serial.println(Schedule_time[schedule_enumerator][1]);
   
-  Serial.print("Module : "); Serial.println(module_number[schedule_enumerator]);  //PRINT THE NUMBER OF MODULES OCCUPIED, SHOW WHICH MODULES ARE EMPTY\\OCCUPIED AND WITH WHAT!
+  Serial.print("Module : "); Serial.println(module_number[schedule_enumerator]);  
 
 
   //----------------------------------
@@ -352,7 +432,7 @@ void insert_schedule_routine()   //TO BE ALTERED! DATA OF SCHEDULE HAS TO RETURN
   Serial.println("Would you like to insert the pills into the storage now? \n Y for yes, N for no.");
   while (Serial.available() == 0) {
     }
-  Serial.setTimeout(7000);   //This sets the maximum time to wait for serial data from user.
+  Serial.setTimeout(500);   //This sets the maximum time to wait for serial data from user.
   String menuChoice = Serial.readString();
   
   if ((menuChoice == "Y") || (menuChoice == "y"))                                                       //ERROR CHECK!!!!
@@ -363,6 +443,34 @@ void insert_schedule_routine()   //TO BE ALTERED! DATA OF SCHEDULE HAS TO RETURN
   schedule_enumerator++;
   insert = 0;
   return;
+
+}
+
+void module_number_error_check()
+{
+  int flag;
+  do{
+    flag = 0;
+    if(module_number[schedule_enumerator] == 0 || (module_number[schedule_enumerator] > MAX_num_of_modules) ) { flag++; }
+    else
+    {
+        for(int m=0; m<=schedule_enumerator; m++)
+        {    
+          if (module_number[schedule_enumerator] == module_number[m])
+          {   
+              flag++;
+          }
+        }
+    }
+    
+    if (flag != 0) 
+    {
+        Serial.println(Schedule_time[schedule_enumerator][1]);
+        Serial.println("The module number inserted is occupied or invalid! \n Try again: ");
+        while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][1] =Serial.parseInt(); 
+    }
+
+  }while (flag != 0);
 
 }
 
@@ -396,20 +504,27 @@ int input_routine_number()
 void delete_schedule_routine()  //enumerator fix
 { 
     Y = 1 + schedule_enumerator; 
-    
-    //add bypass if editing
-    Serial.println("Insert routine number to delete : "); 
-    r = input_routine_number();
+    Serial.print("schedule_enumerator"); Serial.println(schedule_enumerator);
+    if (edit == 0)
+    {
+        Serial.println("Insert routine number to delete : "); r = input_routine_number(); Serial.println(r);
+    }
 
-    for (int k=r-1; k < Y; k++)
+    for (int k=r-1; k < Y-1; k++)
     {
         for(int l =0; l < X; l++)
         {
-            Schedule_time[k][l] = Schedule_time[k+1][l];   //move all values higher than the value to edit 
+            Schedule_time[k][l] = Schedule_time[k+1][l];   //move all values higher than the value to edit
         }
+
+        medicine[module_number[k]] = medicine[module_number[k+1]];
+        number_of_pills[module_number[k]] = number_of_pills[module_number[k+1]];
+        module_number[k] = module_number [k+1];
+        print_schedule();
+
     }
     
-    Schedule_time[r-1][0] = 0; Schedule_time[r-1][1] = 0;  //delete that routine number
+    Schedule_time[Y-1][0] = 0; Schedule_time[Y-1][1] = 0;  //delete that routine number
     schedule_enumerator--;
 
 }
@@ -421,13 +536,15 @@ void print_schedule()
 
         for (int k = 0; k < schedule_enumerator; k++) 
         {
-            Serial.print(k+1); Serial.print(" - "); Serial.print(medicine[module_number[k]]); Serial.print("\t   Time : "); 
+            Serial.print(k+1); Serial.print(" - "); Serial.print(medicine[module_number[k]]); Serial.print("\t   Time: "); 
             for (int l =0; l < X; l++) 
             {
-                Serial.print(Schedule_time[k][l]);Serial.print("  ");
+                Serial.print(Schedule_time[k][l]);
+                if (l) Serial.print(" ");
+                else Serial.print(":");
             }
 
-            Serial.println("");
+            Serial.print("\t   Module number :"); Serial.print(module_number[k]); Serial.print("\t   Number of Pills: "); Serial.println(number_of_pills[module_number[k]]);
         }
         Serial.println("\n------------------------------------------------------------");
 /*                  ---------------------------------------------------------                  */
@@ -666,4 +783,70 @@ void print_date_time()
   print2digits(rtc.getSeconds());  Serial.println();
 
   //delay(1000);
+}
+
+
+
+void printWifiData() 
+{
+    
+    // print your board's IP address:
+    
+    IPAddress ip = WiFi.localIP();
+    
+    Serial.print("IP Address: ");
+    Serial.println(ip);
+    Serial.println(ip);
+    
+    // print your MAC address:
+    
+    byte mac[6];
+    
+    WiFi.macAddress(mac);
+    Serial.print("MAC address: ");  printMacAddress(mac);
+}   
+    
+void printCurrentNet() 
+{
+    
+    // print the SSID of the network you're attached to:
+    
+    Serial.print("\nSSID: ");  Serial.println(WiFi.SSID());
+    
+    // print the MAC address of the router you're attached to:
+    
+    byte bssid[6];
+    WiFi.BSSID(bssid);
+    
+    Serial.print("BSSID: ");  printMacAddress(bssid);
+    
+    // print the received signal strength:
+    
+    long rssi = WiFi.RSSI();
+    Serial.print("signal strength (RSSI):");Serial.println(rssi);
+    
+    // print the encryption type:
+    
+    byte encryption = WiFi.encryptionType();
+    
+    Serial.print("Encryption Type:");
+    Serial.print(encryption, HEX); Serial.println("");
+}
+
+void printMacAddress(byte mac[]) 
+{
+  for (int i = 5; i >= 0; i--) 
+  {
+    if (mac[i] < 16) 
+    {
+      Serial.print("0");
+    }
+    Serial.print(mac[i], HEX);
+    if (i > 0) 
+    {
+      Serial.print(":");
+
+    }
+  }
+  Serial.println();
 }
