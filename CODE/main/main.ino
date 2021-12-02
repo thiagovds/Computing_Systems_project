@@ -507,7 +507,7 @@ void module_number_error_check()
   int flag;
   do{
     flag = 0;
-    if(module_number[schedule_enumerator] == 0 || (module_number[schedule_enumerator] >= MAX_num_of_modules) ) { flag++; }
+    if(module_number[schedule_enumerator] == 0 || (module_number[schedule_enumerator] > MAX_num_of_modules+1) ) { flag++; }
     else
     {
         for(int m=0; m<=schedule_enumerator; m++)
