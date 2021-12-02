@@ -18,21 +18,22 @@ int status = WL_IDLE_STATUS;     // the Wifi radio's status
 /* PINOUT SELECTION   --------------------------------------*/
 #define LDR A1
 #define SIGNAL_TO_ESP 2
+#define BUZZER 3        //PWM WE CAN TUNE THE FREQUENCY!!
 #define Servo_pin 9
+
+#define stepMotorPin1 10
+#define stepMotorPin2 11
+#define stepMotorPin3 12
+#define stepMotorPin4 13
 
 #define SEL0 21 //BLUE CABLE
 #define SEL1 20 //PURPLE CABLE -----------
-
 
 /* CALIBRATION CONSTANTS FOR STEPPER   -----------------------*/
 #define Time_interval_stepper 1000
 #define Time_interval_servo 500
 #define stepper_steps 50
 
-#define stepMotorPin1 10
-#define stepMotorPin2 11
-#define stepMotorPin3 12
-#define stepMotorPin4 13
 
 /* CALIBRATION CONSTANTS FOR PHOTOINTERRUPTER -----------------*/
 #define Delay_time_photoint 20
@@ -46,15 +47,15 @@ RTCZero rtc;
 
 /* Change these values to set the current initial time */
 
-byte seconds = 0;
-byte minutes = 0;
-byte hours = 16;
+ byte seconds = 0;
+ byte minutes = 25;
+ byte hours = 17;
 
 /* Change these values to set the current initial date */
 
-byte day = 25;
-byte month = 9;
-byte year = 15;
+ byte day = 30;
+ byte month = 11;
+ byte year = 21;
 
 
 
@@ -80,6 +81,7 @@ int schedule_enumerator = 0;  //variable to keep track of how many pill-taking e
 int module_number[MAX_num_of_routines];
 int insert = 0;
 int edit = 0;
+boolean buzz = 0;
 
 
 unsigned long t_current, t_0;
@@ -107,9 +109,52 @@ int error_count = 0;
 
 void setup()
 {
+    setup_pins();
+
+    Serial.begin(9600); delay(2000); Serial.println("serial Begin!\n");
+
+    rtc.begin();
+    Wifi_setup();
+    real_time_clock_setup();
+
+    rtc.attachInterrupt(alarmMatch);
+    print_date_time();
+
+}
+
+void loop()
+{
+
+    /* TAKE TIMESTAMP EVERY CYCLE i.e. UPDATE TIMESTAMP TO CURRENT TIMESTAMP  */
+    t_current = millis();
+    check_schedule();
+
+    if (operation_over == 1)
+    {
+        //buzz = 0; digitalWrite(BUZZER, LOW); digitalWrite(LED_BUILTIN, LOW);
+        menu();
+    }           //only check menu again if no operation is taking place
+    else
+    {
+        if (buzz == 1)
+        {
+            //later ADD BUTTON PRESS TO STOP BUZZ AND ACTIVATE PILL!
+            dispense_pills();   
+            success = photointerrupter();
+        }
+
+        if (engine_over == 1) {verify_success();}
+    }
+    
+
+}
+
+void setup_pins()
+{
     pinMode(LDR, INPUT);
+    pinMode(BUZZER, OUTPUT);
     pinMode(SEL0, OUTPUT);
-    pinMode(SEL1, OUTPUT);
+    pinMode(SEL1, OUTPUT);    
 
     Servo1.attach (Servo_pin); //Il Servo1 è collegato al pin digitale 
     pinMode(stepMotorPin1, OUTPUT);
@@ -121,40 +166,12 @@ void setup()
     pinMode(SIGNAL_TO_ESP, OUTPUT); digitalWrite(SIGNAL_TO_ESP, LOW);
 
 
-    Serial.begin(9600); /*while (!Serial);*/ delay(2000); Serial.println("serial Begin!");
-
-    Wifi_setup();
-    real_time_clock_setup();
-
-    rtc.attachInterrupt(alarmMatch);
-    print_date_time();
-
-    /* SETUP ENGINES TIMING */
+        /* SETUP ENGINES TIMING */
     t_0 = millis(); cycle_stage = 1;
 
     /*SETUP PHOTOINTERRUPTER*/
     mytime[0] = t_0;   //Serial.print("mytime[0]: "); Serial.println(mytime[i]);
     i++;
-}
-
-void loop()
-{
-
-    /* TAKE TIMESTAMP EVERY CYCLE i.e. UPDATE TIMESTAMP TO CURRENT TIMESTAMP  */
-    t_current = millis();
-    check_schedule();
-
-    if (operation_over == 1){ menu();}  //only check menu again if no operation is taking place
-    else
-    {
-
-        dispense_pills();   
-        success = photointerrupter();
-
-        if (engine_over == 1) {verify_success();}
-    }
-    
-
 }
 
 void Wifi_setup()
@@ -190,8 +207,31 @@ void Wifi_setup()
     
 }
 
-void real_time_clock_setup()
+void real_time_clock_setup()   //FURTHER IMPLEMENTATION ACQUIRE DATA FROM WEB RTC
 {
+    Serial.println("Lets configure the date and time in your RAPID! ");
+    Serial.println("Please insert the day number of today: ");
+    while (Serial.available() == 0) {} day = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
+    date_error_check(day, 31 ,0 );
+
+    Serial.println("Please insert the current month number: ");
+    while (Serial.available() == 0) {} month = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
+    date_error_check(month, 12, 0);
+
+    Serial.println("Now, please insert the current year: ");
+    while (Serial.available() == 0) {} year = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
+    date_error_check(year, 99, 20);
+
+    Serial.println("Please insert the hours: ");
+    while (Serial.available() == 0) {} hours = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
+    date_error_check(hours, 24, -1);
+
+    Serial.println("And finally please insert the minutes: ");
+    while (Serial.available() == 0) {} minutes = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
+    date_error_check(minutes, 60, -1);
+    
+    seconds = 0;
+    
     rtc.begin(); // initialize RTC 24H format
     rtc.setTime(hours, minutes, seconds);
     rtc.setDate(day, month, year);
@@ -199,6 +239,16 @@ void real_time_clock_setup()
     //rtc.setAlarmTime(16, 0, 10);
     //rtc.enableAlarm(rtc.MATCH_HHMMSS);
 
+}
+
+void date_error_check(int d, int max_n, int min_n)
+{
+    while (d > max_n  ||  d <= min_n)  //------------INPUT ERROR CHECKING  ------------------- 
+        {
+            Serial.println("invalid input! \n Try again: ");
+            while (Serial.available() == 0) {} 
+            d = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
+        }
 }
 
 void verify_success()
@@ -229,20 +279,24 @@ void verify_success()
 
 void alarmMatch()
 {
-    Serial.println("Alarm Match!");
+    Serial.println("Alarm Match!\t Time to take the pill!\t BUZZING!");
+    digitalWrite(BUZZER, HIGH); digitalWrite(LED_BUILTIN, HIGH);
+    buzz = 1;
 }
 
-int alarm()
-{
-  
-  /* INSERT CODE FOR ALARM SYSTEM HERE (sound buzz) */
 
+int set_alarm()
+{
   //WHEN schedule_time[][0] == 'value'  &&  schedule_time[1]  == 'value'
+  Serial.println("Alarm set to:");
   for(int a=0; a<Y; a++)
   {
-    rtc.setAlarmTime(Schedule_time[a][0], Schedule_time[a][0], 00);
-    rtc.enableAlarm(rtc.MATCH_HHMMSS);
+    rtc.setAlarmTime(Schedule_time[a][0], Schedule_time[a][1], 00);
+    rtc.enableAlarm(rtc.MATCH_HHMMSS); //rtc.enableAlarm(rtc.MATCH_DHHMMSS);
+    print2digits(Schedule_time[a][0]);  Serial.print(":");
+    print2digits(Schedule_time[a][1]);  Serial.println("");
   }
+  Serial.println("Alarm updated!!!");
 }
 
 void check_schedule()
@@ -252,14 +306,9 @@ void check_schedule()
 
 void menu()
 {
-    /*DEFINE MODES OF OPERATION:
-  0 - insert schedule
-  1 - edit schedule
-  2 - add pills to compartment
-  3 - dispense pills
-  +
 
-  */
+  print_date_time();
+
   Serial.println("\n------------------------------------------------------------");
   Serial.println("Welcome to the MAIN MENU! \n To enter the desired mode, press: ");
   Serial.println("1 - for displaying your full schedule.");
@@ -297,6 +346,13 @@ void menu()
 
       case 4:  //dispensing pills!  mode 4
         Serial.println("\n4 Inserted!");
+
+        if (schedule_enumerator == 0)
+        {
+            Serial.println("You have no pill routines! Nothing to dispense!.");
+            return;
+        }
+
         selector_function();  //We activate the correct module to be operated!
         operation_over = 0;  //WE START AN OPERATION, BYPASS MENU
         engine_over = 0;     //WE ALLOW DISPENSE PILLS TO OPERATE ONCE WITH THIS FLAG
@@ -426,7 +482,6 @@ void insert_schedule_routine()   //TO BE ALTERED! DATA OF SCHEDULE HAS TO RETURN
   
   Serial.print("Module : "); Serial.println(module_number[schedule_enumerator]);  
 
-
   //----------------------------------
 
   Serial.println("Would you like to insert the pills into the storage now? \n Y for yes, N for no.");
@@ -439,6 +494,7 @@ void insert_schedule_routine()   //TO BE ALTERED! DATA OF SCHEDULE HAS TO RETURN
   {
     refill_module();  //add module number to be passed to refill_module       ------------                        TO DO
   }
+  set_alarm();
 
   schedule_enumerator++;
   insert = 0;
@@ -451,12 +507,12 @@ void module_number_error_check()
   int flag;
   do{
     flag = 0;
-    if(module_number[schedule_enumerator] == 0 || (module_number[schedule_enumerator] > MAX_num_of_modules) ) { flag++; }
+    if(module_number[schedule_enumerator] == 0 || (module_number[schedule_enumerator] >= MAX_num_of_modules) ) { flag++; }
     else
     {
         for(int m=0; m<=schedule_enumerator; m++)
         {    
-          if (module_number[schedule_enumerator] == module_number[m])
+          if ((module_number[schedule_enumerator] == module_number[m]) && (m !=schedule_enumerator))
           {   
               flag++;
           }
@@ -467,7 +523,7 @@ void module_number_error_check()
     {
         Serial.println(Schedule_time[schedule_enumerator][1]);
         Serial.println("The module number inserted is occupied or invalid! \n Try again: ");
-        while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][1] =Serial.parseInt(); 
+        while (Serial.available() == 0) {}  module_number[schedule_enumerator] =Serial.parseInt(); 
     }
 
   }while (flag != 0);
@@ -796,7 +852,7 @@ void printWifiData()
     
     Serial.print("IP Address: ");
     Serial.println(ip);
-    Serial.println(ip);
+    //Serial.println(ip);
     
     // print your MAC address:
     
@@ -804,6 +860,7 @@ void printWifiData()
     
     WiFi.macAddress(mac);
     Serial.print("MAC address: ");  printMacAddress(mac);
+    Serial.println("------------------------------------------------------------\n");
 }   
     
 void printCurrentNet() 
