@@ -1,7 +1,7 @@
 #define LDR A1
 
 
-int calib_val = 900;   //calibration value, decrease if false counts
+int calib_val = 800;   //calibration value, decrease if false counts
 int light = 0;
 int counter = 0;
 int error_count = 0;
