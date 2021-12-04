@@ -2,7 +2,7 @@
 #include <RTCZero.h>
 #include <Servo.h>
 #include <SPI.h> 
-
+#include <WiFiUdp.h>
 
 #include "arduino_secrets.h"
 ///////please enter your sensitive data in the Secret tab/arduino_secrets.h
@@ -41,7 +41,7 @@ int status = WL_IDLE_STATUS;     // the Wifi radio's status
 #define Time_between_detections 1000          //to set around 100ms ?
 
 
-/* Create an RTC (Real Time Clock) object  ------------------------------------ RTC */
+/* Create an RTC (Real Time Clock) object  ------------------------------------ RTC --------------------------------*/
 
 RTCZero rtc;
 
@@ -58,11 +58,40 @@ RTCZero rtc;
  byte year = 21;
 
 
+unsigned int localPort = 2390;      // local port to listen for UDP packets
+
+IPAddress timeServer(129, 6, 15, 28); // time.nist.gov NTP server
+
+const int NTP_PACKET_SIZE = 48; // NTP timestamp is in the first 48 bytes of the message
+
+byte packetBuffer[ NTP_PACKET_SIZE]; //buffer to hold incoming and outgoing packets
+
+// A UDP instance to let us send and receive packets over UDP
+WiFiUDP Udp;
+
+
+//------------------------------------------------------------------------------------------------------------
+static unsigned char month_days[12]={31,28,31,30,31,30,31,31,30,31,30,31};
+static unsigned char week_days[7] = {4,5,6,0,1,2,3};
+//Thu=4, Fri=5, Sat=6, Sun=0, Mon=1, Tue=2, Wed=3
+
+unsigned char
+ntp_hour, ntp_minute, ntp_second, ntp_week_day, ntp_day, ntp_month, leap_days, leap_year_ind ;
+
+unsigned short temp_days;
+
+unsigned 
+ntp_year, days_since_epoch, day_of_year; //epoch, 
+unsigned long epoch;
+//char key;
+
+
+//------------------------------------------------------------------------------------------------------
 
 /*  INITIALIZATION OF GLOBAL VARIABLES FOR MAIN  ----------------------  */
 int mode, operation_over = 1;
-//int start = 1;
 
+int weekdayselected[MAX_num_of_routines];
 
 /*    GLOBAL VARIABLES FOR ENGINES    */
 Servo Servo1;   // create Servo object
@@ -76,11 +105,14 @@ int engine_over = 0;
 int X = 2;
 int r, Y;
 
-int Schedule_time[MAX_num_of_routines][2];
+int Schedule_time[MAX_num_of_routines][2]; // for hours and seconds
+int Schedule_date[MAX_num_of_routines][3]; // for day, month and year
+
 int schedule_enumerator = 0;  //variable to keep track of how many pill-taking events in a complex schedule
 int module_number[MAX_num_of_routines];
-int insert = 0;
-int edit = 0;
+boolean insert = 0;
+boolean edit = 0;
+boolean everyday_routine =0;
 boolean buzz = 0;
 
 
@@ -115,10 +147,12 @@ void setup()
 
     rtc.begin();
     Wifi_setup();
+    
+    Serial.println("\nStarting connection to server...");
+    Udp.begin(localPort);
     real_time_clock_setup();
 
     rtc.attachInterrupt(alarmMatch);
-    print_date_time();
 
 }
 
@@ -127,11 +161,12 @@ void loop()
 
     /* TAKE TIMESTAMP EVERY CYCLE i.e. UPDATE TIMESTAMP TO CURRENT TIMESTAMP  */
     t_current = millis();
-    check_schedule();
+
+    update_rtc();
 
     if (operation_over == 1)
     {
-        //buzz = 0; digitalWrite(BUZZER, LOW); digitalWrite(LED_BUILTIN, LOW);
+        buzz = 0; digitalWrite(BUZZER, LOW); digitalWrite(LED_BUILTIN, LOW);
         menu();
     }           //only check menu again if no operation is taking place
     else
@@ -207,49 +242,43 @@ void Wifi_setup()
     
 }
 
-void real_time_clock_setup()   //FURTHER IMPLEMENTATION ACQUIRE DATA FROM WEB RTC
+void real_time_clock_setup()
 {
-    Serial.println("Lets configure the date and time in your RAPID! ");
-    Serial.println("Please insert the day number of today: ");
-    while (Serial.available() == 0) {} day = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
-    date_error_check(day, 31 ,0 );
-
-    Serial.println("Please insert the current month number: ");
-    while (Serial.available() == 0) {} month = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
-    date_error_check(month, 12, 0);
-
-    Serial.println("Now, please insert the current year: ");
-    while (Serial.available() == 0) {} year = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
-    date_error_check(year, 99, 20);
-
-    Serial.println("Please insert the hours: ");
-    while (Serial.available() == 0) {} hours = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
-    date_error_check(hours, 24, -1);
-
-    Serial.println("And finally please insert the minutes: ");
-    while (Serial.available() == 0) {} minutes = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
-    date_error_check(minutes, 60, -1);
+    sendNTPpacket(timeServer); // send an NTP packet to a time server
+    // wait to see if a reply is available
+    delay(1000);
+    if (Udp.parsePacket()) 
+    {
+        Serial.println("packet received");
+        // We've received a packet, read the data from it
+        Udp.read(packetBuffer, NTP_PACKET_SIZE); // read the packet into the buffer
     
-    seconds = 0;
+        //the timestamp starts at byte 40 of the received packet and is four bytes,
+        // or two words, long. First, extract the two words:
     
-    rtc.begin(); // initialize RTC 24H format
-    rtc.setTime(hours, minutes, seconds);
-    rtc.setDate(day, month, year);
-
-    //rtc.setAlarmTime(16, 0, 10);
-    //rtc.enableAlarm(rtc.MATCH_HHMMSS);
-
+        unsigned long highWord = word(packetBuffer[40], packetBuffer[41]);
+        unsigned long lowWord = word(packetBuffer[42], packetBuffer[43]);
+        // combine the four bytes (two words) into a long integer
+        // this is NTP time (seconds since Jan 1 1900):
+        unsigned long secsSince1900 = highWord << 16 | lowWord;
+        //Serial.print("Seconds since Jan 1 1900 = ");
+        //Serial.println(secsSince1900);
+    
+        // now convert NTP time into everyday time:
+        Serial.print("Unix time = ");
+        // Unix time starts on Jan 1 1970. In seconds, that's 2208988800:
+        const unsigned long seventyYears = 2208988800UL;
+        // subtract seventy years:
+        /*unsigned long*/ epoch = secsSince1900 - seventyYears; 
+        // print Unix time UTC 0
+        Serial.println(epoch);
+    
+        conversion_epoch_to_Time_Date();
+    }
+        //delay(1000);    
+    
 }
 
-void date_error_check(int d, int max_n, int min_n)
-{
-    while (d > max_n  ||  d <= min_n)  //------------INPUT ERROR CHECKING  ------------------- 
-        {
-            Serial.println("invalid input! \n Try again: ");
-            while (Serial.available() == 0) {} 
-            d = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
-        }
-}
 
 void verify_success()
 {
@@ -288,20 +317,47 @@ void alarmMatch()
 int set_alarm()
 {
   //WHEN schedule_time[][0] == 'value'  &&  schedule_time[1]  == 'value'
-  Serial.println("Alarm set to:");
-  for(int a=0; a<Y; a++)
+  Serial.print("Alarm set to:  ");
+  for(int a=0; a<schedule_enumerator+1; a++)
   {
     rtc.setAlarmTime(Schedule_time[a][0], Schedule_time[a][1], 00);
-    rtc.enableAlarm(rtc.MATCH_HHMMSS); //rtc.enableAlarm(rtc.MATCH_DHHMMSS);
+
+    if(!everyday_routine)
+    {
+        rtc.setAlarmDate(Schedule_date[a][0], Schedule_date[a][1], Schedule_date[a][2]);
+        rtc.enableAlarm(rtc.MATCH_YYMMDDHHMMSS); 
+    }
+    else
+    {
+        rtc.enableAlarm(rtc.MATCH_HHMMSS);
+    }
     print2digits(Schedule_time[a][0]);  Serial.print(":");
     print2digits(Schedule_time[a][1]);  Serial.println("");
+
+    //rtc.attachInterrupt(alarmMatch);
   }
-  Serial.println("Alarm updated!!!");
+  Serial.println("Alarm updated!!!\n");
 }
 
-void check_schedule()
+void update_rtc()   //check_schedule()
 {
-    
+    if (rtc.getMinutes() == 12 ) { real_time_clock_setup(); }  //updates rtc every hour at minutes 12
+    //int p = 0;
+
+    //set_alarm();
+
+/*    for (int z=0; z<schedule_enumerator; z++)
+        if (ntp_week_day == weekdayselected[z])
+        {
+
+            p =+  Schedule_date[z][0] == rtc.getDay();
+            p =+  Schedule_date[z][1] == rtc.getMonth(); 
+            p =+  Schedule_date[z][2] == rtc.getYear();
+            p =+  Schedule_time[z][0] == rtc.getHours();
+            p =+  Schedule_time[z][1] == rtc.getMinutes();
+
+            if (p == 5) {buzz = 1}
+*/     
 }
 
 void menu()
@@ -331,7 +387,22 @@ void menu()
   {
       case 1:
         Serial.println("\n1 Inserted!");
-        print_schedule();
+        if (schedule_enumerator == 0)
+        {
+            Serial.println("You have no pill routines! Nothing to display!.");
+            return;
+        }
+        if(everyday_routine)
+        {
+            Serial.print("Schedule Saved!! Time: "); //Serial.print(Schedule_time[schedule_enumerator][0]);  Serial.print(":"); Serial.println(Schedule_time[schedule_enumerator][1]);
+            print_schedule_time(1);
+        }
+        else 
+        {
+            Serial.println("Schedule Saved!! Date and Time: ");
+            print_schedule_date_time(1);
+        }
+
         break;
 
       case 2:
@@ -374,9 +445,10 @@ void refill_module()   //when refill take into the account the previous amount o
     }
     else if(insert == 0)
     { 
-      print_schedule();
+      print_schedule_time(0);
       Serial.println("You are in add pills mode! \nPlease insert the module number that will be refilled!");
       while (Serial.available() == 0) {}  module_number[schedule_enumerator] = Serial.parseInt();
+      module_number_error_check();
       //UNLOCKING A LOCK WOULD BE NICE HERE!
       selector_function();  //We activate the correct module to be operated!
     }
@@ -406,7 +478,7 @@ void edit_schedule_menu()        ///////////////////////////////////////////////
         Serial.print("You are in the EDIT SCHEDULE MENU. ");
         Serial.println("\n------------------------------------------------------------");
 
-      print_schedule();
+      print_schedule_time(0);
 
         Serial.println("To enter the desired mode, press:\n \t ----------------");
         Serial.println("1 - for inserting a routine."); 
@@ -447,53 +519,104 @@ void edit_schedule_menu()        ///////////////////////////////////////////////
 
 }
 
-void insert_schedule_routine()   //TO BE ALTERED! DATA OF SCHEDULE HAS TO RETURN TO THE MAIN!!!           
+
+void input_number_error_check(int d, int max_n, int min_n)
+{
+    while (d > max_n  ||  d <= min_n)  //------------INPUT ERROR CHECKING  ------------------- 
+        {
+            Serial.println("invalid input! \n Try again: ");
+            while (Serial.available() == 0) {} 
+            d = Serial.parseInt();  //get input from user in serial for mode, to be upgraded to a web service with ESP
+        }
+        //return d;
+}
+
+void print_weekday_options()
+{   
+    Serial.println("Please insert the weekday you must take your pill: ");
+
+     Serial.print("1 - for every Sunday\n");
+     Serial.print("2 - for every Monday\n");
+     Serial.print("3 - for every Tuesday\n");
+     Serial.print("4 - for every Wednesday\n");
+     Serial.print("5 - for every Thursday\n");
+     Serial.print("6 - for every Friday\n");
+     Serial.print("7 - for every Saturday\n");
+     Serial.println("8 - for everyday\n");
+
+
+}
+
+
+
+void insert_schedule_routine()             
 {
   if (edit == 0){ Serial.println("\nYou are in insert schedule routine mode! "); }
-
   insert = 1;
-  Serial.println("Lets set the time of your routine..."); 
-  Serial.println("Please insert the hours, range from 0 until 23:");  while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][0] =Serial.parseInt(); 
-  while (Schedule_time[schedule_enumerator][0] < 0  ||  Schedule_time[schedule_enumerator][0] > 23)
-    {   
-        Serial.println(Schedule_time[schedule_enumerator][0]);
-        Serial.println("The hour inserted does not exist! \n Try again: ");
-        while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][0] =Serial.parseInt(); 
-    }
-  Serial.println(Schedule_time[schedule_enumerator][0]);
+
+  Serial.println("Lets set the days and time of your pill intake routine...");  
+  define_Schedule_time();
   
-  Serial.println("Please insert the minutes, range from 0 until 59"); while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][1] =Serial.parseInt(); 
-  while (Schedule_time[schedule_enumerator][1] < 0  ||  Schedule_time[schedule_enumerator][1] > 59)
-    {   
-        Serial.println(Schedule_time[schedule_enumerator][1]);
-        Serial.println("The minutes inserted do not exist! \n Try again: ");
-        while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][1] =Serial.parseInt(); 
-    }
-  Serial.println(Schedule_time[schedule_enumerator][1]);
-  
-  Serial.println("Insert module number to be operated at the specified time:"); while (Serial.available() == 0) {} module_number[schedule_enumerator] = Serial.parseInt(); 
+  Serial.println("Insert module number to be operated at the specified time:"); 
+  while (Serial.available() == 0) {} module_number[schedule_enumerator] = Serial.parseInt();   
   
   module_number_error_check();
-
+  
   Serial.println(module_number[schedule_enumerator]);
-  
+
+  //------------------------------------------
+
+  print_weekday_options();
+
+  while (Serial.available() == 0) {} int routine_options = Serial.parseInt();  //get input from user in serial for mode
+  input_number_error_check(routine_options, 8, 0);  
+  Serial.print(routine_options);Serial.println(" Inserted!");
+
+  weekdayselected[schedule_enumerator] = routine_options -1;
+
+  if(weekdayselected[schedule_enumerator] > 7)
+  { 
+    Serial.println(" everyday routine selected!\n");
+    everyday_routine = 1;
+  }  
+  else // everyday_routine == 0 TRUE
+  { 
+    everyday_routine = 0;
+    Serial.println(everyday_routine);
+    define_Schedule_date();   
+  }
+
+  //-------------------------------------------------  
+
+
   selector_function();  //We activate the correct module to be operated!
-  Serial.print("Schedule Saved!! Time: "); Serial.print(Schedule_time[schedule_enumerator][0]);  Serial.print(":"); Serial.println(Schedule_time[schedule_enumerator][1]);
-  
+
   Serial.print("Module : "); Serial.println(module_number[schedule_enumerator]);  
 
   //----------------------------------
 
-  Serial.println("Would you like to insert the pills into the storage now? \n Y for yes, N for no.");
-  while (Serial.available() == 0) {
-    }
-  Serial.setTimeout(500);   //This sets the maximum time to wait for serial data from user.
+  Serial.println("Would you like to insert the pills into the storage now? \n Y for yes, N for no:  ");
+  while (Serial.available() == 0) {}  Serial.setTimeout(500);   //This sets the maximum time to wait for serial data from user.
   String menuChoice = Serial.readString();
-  
+  Serial.print(menuChoice);    Serial.println("\n------------------------------------------------------------");
   if ((menuChoice == "Y") || (menuChoice == "y"))                                                       //ERROR CHECK!!!!
   {
     refill_module();  //add module number to be passed to refill_module       ------------                        TO DO
   }
+
+
+  if(everyday_routine)
+  {
+    Serial.print("Schedule Saved!! Time: "); //Serial.print(Schedule_time[schedule_enumerator][0]);  Serial.print(":"); Serial.println(Schedule_time[schedule_enumerator][1]);
+    print_schedule_time(1);
+  } else 
+  {
+    Serial.println("Schedule Saved!! Date and Time: ");
+    print_schedule_date_time(1);
+  }
+  
+
+
   set_alarm();
 
   schedule_enumerator++;
@@ -530,6 +653,93 @@ void module_number_error_check()
 
 }
 
+void define_Schedule_time()
+{
+  Serial.println("Please insert the hours, range from 0 until 23:");  while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][0] =Serial.parseInt(); 
+  while (Schedule_time[schedule_enumerator][0] < 0  ||  Schedule_time[schedule_enumerator][0] > 23)
+    {   
+        Serial.println(Schedule_time[schedule_enumerator][0]);
+        Serial.println("The hour inserted does not exist! \n Try again: ");
+        while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][0] =Serial.parseInt(); 
+    }
+  Serial.println(Schedule_time[schedule_enumerator][0]);
+  
+  Serial.println("Please insert the minutes, range from 0 until 59"); while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][1] =Serial.parseInt(); 
+  while (Schedule_time[schedule_enumerator][1] < 0  ||  Schedule_time[schedule_enumerator][1] > 59)
+    {   
+        Serial.println(Schedule_time[schedule_enumerator][1]);
+        Serial.println("The minutes inserted do not exist! \n Try again: ");
+        while (Serial.available() == 0) {}  Schedule_time[schedule_enumerator][1] =Serial.parseInt(); 
+    }
+  Serial.println(Schedule_time[schedule_enumerator][1]);
+}
+
+
+void define_Schedule_date()
+{
+      
+   if (ntp_week_day < weekdayselected[schedule_enumerator])
+   {
+       int SUM = rtc.getDay() + (weekdayselected[schedule_enumerator] - ntp_week_day);
+       if (SUM > month_days[rtc.getMonth()])  //OVERFLOW DAYS // ADD A MONTH
+       {
+           Schedule_date[schedule_enumerator][0] = SUM - month_days[rtc.getMonth()];
+           int month_selected = rtc.getMonth() + 1;
+           if(month_selected > 12) // OVERFLOW MONTHS // ADD A YEAR
+           {
+               Schedule_date[schedule_enumerator][1] = 1;  //start from January
+               Schedule_date[schedule_enumerator][2] = rtc.getYear() + 1;
+           }
+           else
+           {
+               Schedule_date[schedule_enumerator][1] = rtc.getMonth();
+               Schedule_date[schedule_enumerator][2] = rtc.getYear();
+           }
+       }
+       else
+       {
+           Schedule_date[schedule_enumerator][0] = SUM;
+           Schedule_date[schedule_enumerator][1] = rtc.getMonth();
+           Schedule_date[schedule_enumerator][2] = rtc.getYear();
+       }
+   }
+   else if (ntp_week_day > weekdayselected[schedule_enumerator])
+   {
+       int SUM = rtc.getDay() + 7 - (ntp_week_day - weekdayselected[schedule_enumerator]);
+       if (SUM > month_days[rtc.getMonth()])  //OVERFLOW DAYS // ADD A MONTH
+       {
+           Schedule_date[schedule_enumerator][0] = SUM - month_days[rtc.getMonth()];
+           int month_selected = rtc.getMonth() + 1;
+           if(month_selected > 12) // OVERFLOW MONTHS // ADD A YEAR
+           {
+               Schedule_date[schedule_enumerator][1] = 1;  //start from January
+               Schedule_date[schedule_enumerator][2] = rtc.getYear() + 1;
+           }
+           else
+           {
+               Schedule_date[schedule_enumerator][1] = rtc.getMonth();
+               Schedule_date[schedule_enumerator][2] = rtc.getYear();
+           }
+       }
+       else
+       {
+           Schedule_date[schedule_enumerator][0] = SUM;
+           Schedule_date[schedule_enumerator][1] = rtc.getMonth();
+           Schedule_date[schedule_enumerator][2] = rtc.getYear();
+       }
+   }
+   else //ntp_week_day = weekdayselected[schedule_enumerator]
+   {
+       Schedule_date[schedule_enumerator][0] = rtc.getDay();
+       Schedule_date[schedule_enumerator][1] = rtc.getMonth(); 
+       Schedule_date[schedule_enumerator][2] = rtc.getYear();
+   }
+   
+}
+
+
+
+
 void edit_schedule()
 {
     Y = 1 + schedule_enumerator;
@@ -538,9 +748,11 @@ void edit_schedule()
     edit = 1;
 
     Serial.println("Insert routine number to be edited : "); 
-    r = input_routine_number(); schedule_enumerator = r-1;
+    r = input_routine_number(); //schedule_enumerator = r-1;
 
     delete_schedule_routine();
+    
+    schedule_enumerator = r-1;
     insert_schedule_routine();
 
     edit = 0; schedule_enumerator = temp;
@@ -554,13 +766,15 @@ int input_routine_number()
         Serial.println("That routine number does not exist! \n Try again: ");
         while (Serial.available() == 0) {}  r = Serial.parseInt();
     }
+    Serial.println(r);
+
     return r;
 }
 
 void delete_schedule_routine()  //enumerator fix
 { 
     Y = 1 + schedule_enumerator; 
-    Serial.print("schedule_enumerator"); Serial.println(schedule_enumerator);
+    Serial.print("schedule_enumerator = "); Serial.println(schedule_enumerator);
     if (edit == 0)
     {
         Serial.println("Insert routine number to delete : "); r = input_routine_number(); Serial.println(r);
@@ -571,26 +785,62 @@ void delete_schedule_routine()  //enumerator fix
         for(int l =0; l < X; l++)
         {
             Schedule_time[k][l] = Schedule_time[k+1][l];   //move all values higher than the value to edit
+            Schedule_date[k][l] = Schedule_date[k+1][l];
         }
 
         medicine[module_number[k]] = medicine[module_number[k+1]];
         number_of_pills[module_number[k]] = number_of_pills[module_number[k+1]];
         module_number[k] = module_number [k+1];
-        print_schedule();
 
     }
     
     Schedule_time[Y-1][0] = 0; Schedule_time[Y-1][1] = 0;  //delete that routine number
     schedule_enumerator--;
+    print_schedule_time(0);
 
 }
 
-void print_schedule()
+void print_schedule_date_time(int add)
 {
-  /*         --------------------     PRINT THE WHOLE ROUTINE    -----------------------------    */
+    for (int k = 0; k < schedule_enumerator + add; k++) 
+    {
+        Serial.print(k+1); Serial.print(" - "); Serial.print(medicine[module_number[k]]);// Serial.print("\t   Next alarm set to: "); 
+
+
+        int temp_schedule = ntp_week_day;
+        ntp_week_day = weekdayselected[k];
+        print_weekday(); 
+        ntp_week_day = temp_schedule; 
+    
+        temp_schedule = ntp_month;
+        ntp_month = Schedule_date[k][1];
+        print_name_month();
+        ntp_month = temp_schedule;
+    
+        // Print date...
+    
+        print2digits(Schedule_date[k][0]);  Serial.print("/");
+        print2digits(Schedule_date[k][1]);  Serial.print("/");
+        print2digits(Schedule_date[k][2]);  Serial.print(" ");
+    
+        // ...and time
+    
+        print2digits(Schedule_time[k][0]);  Serial.print(":");
+        print2digits(Schedule_time[k][1]);  Serial.print(":");
+        print2digits(0);  Serial.print(" ");
+
+        Serial.print("   Module number :"); Serial.print(module_number[k]); Serial.print("\t   Number of Pills: "); Serial.println(number_of_pills[module_number[k]]);
+    }
+    Serial.println("\n------------------------------------------------------------");
+}
+
+
+void print_schedule_time(int add)
+{
+  //         --------------------     PRINT THE WHOLE ROUTINE    -----------------------------    
         Serial.println("This is your full routine schedule:");
 
-        for (int k = 0; k < schedule_enumerator; k++) 
+        for (int k = 0; k < (schedule_enumerator + add) ; k++) 
         {
             Serial.print(k+1); Serial.print(" - "); Serial.print(medicine[module_number[k]]); Serial.print("\t   Time: "); 
             for (int l =0; l < X; l++) 
@@ -603,8 +853,9 @@ void print_schedule()
             Serial.print("\t   Module number :"); Serial.print(module_number[k]); Serial.print("\t   Number of Pills: "); Serial.println(number_of_pills[module_number[k]]);
         }
         Serial.println("\n------------------------------------------------------------");
-/*                  ---------------------------------------------------------                  */
+    //              ---------------------------------------------------------                  */
 }
+
 
 int photointerrupter()
 {
@@ -796,7 +1047,6 @@ void open_gate()
     Servo1.write (40);
 
 }
-
 void close_gate()
 {
     int motor_Speed = 1000;
@@ -809,9 +1059,9 @@ void send_email()
 {
     digitalWrite(SIGNAL_TO_ESP, HIGH);
     Serial.println("Sending_Email_to_Caregiver!!");
-    delay(31);
+    delay(500);
     digitalWrite(SIGNAL_TO_ESP, LOW);
-    delay(2000);
+    delay(400);
 }
 
 void print2digits(int number) 
@@ -823,26 +1073,92 @@ void print2digits(int number)
 }
 
 
-void print_date_time()
+void print_date_time()             //----------------------  PRINTING    --------------
 {
+  print_date();
+  // ...and time
+  print_time();
+}
+
+void print_date()
+{
+  print_weekday();
+  print_name_month();
 
   // Print date...
 
   print2digits(rtc.getDay());  Serial.print("/");
   print2digits(rtc.getMonth());  Serial.print("/");
   print2digits(rtc.getYear());  Serial.print(" ");
+}
 
-  // ...and time
+void print_time()
+{
 
   print2digits(rtc.getHours());  Serial.print(":");
   print2digits(rtc.getMinutes());  Serial.print(":");
   print2digits(rtc.getSeconds());  Serial.println();
+}
 
-  //delay(1000);
+void print_weekday()
+{
+    switch(ntp_week_day) {
+                         
+                         case 0: Serial.print("  Sunday");
+                                 break;
+                         case 1: Serial.print("  Monday");
+                                 break;
+                         case 2: Serial.print("  Tuesday");
+                                 break;
+                         case 3: Serial.print("  Wednesday");
+                                 break;
+                         case 4: Serial.print("  Thursday");
+                                 break;
+                         case 5: Serial.print("  Friday");
+                                 break;
+                         case 6: Serial.print("  Saturday");
+                                 break; 
+                         default: 
+                                Serial.print("Error_weekday! ntp_week_day = ");
+                                Serial.print(ntp_week_day);Serial.print(" ");
+                         }
+    Serial.print(", "); 
+}
+
+void print_name_month()
+{
+    switch(ntp_month)   {
+                         
+                         case 1: Serial.print("January ");
+                                 break;
+                         case 2: Serial.print("February ");
+                                 break;
+                         case 3: Serial.print("March ");
+                                 break;
+                         case 4: Serial.print("April ");
+                                 break;
+                         case 5: Serial.print("May ");
+                                 break;
+                         case 6: Serial.print("June ");
+                                 break;
+                         case 7: Serial.print("July ");
+                                 break;
+                         case 8: Serial.print("August ");
+                                 break;
+                         case 9: Serial.print("September ");
+                                 break;
+                         case 10: Serial.print("October ");
+                                 break;
+                         case 11: Serial.print("November ");
+                                 break;
+                         case 12: Serial.print("December ");       
+                         default: break;        
+                         }
 }
 
 
 
+ //                         ----------------------------------------------
 void printWifiData() 
 {
     
@@ -906,4 +1222,99 @@ void printMacAddress(byte mac[])
     }
   }
   Serial.println();
+}
+
+
+
+void conversion_epoch_to_Time_Date()   //-------------------------------------------
+{
+    int leap_days=0; 
+    int leap_year_ind=0;
+
+    // Add or substract time zone here. 
+    epoch+=3600 ; //GMT +1: = +3600 seconds 
+    unsigned int epoch_tmp = epoch;
+    
+    ntp_second = epoch_tmp%60;
+    epoch_tmp /= 60;
+    ntp_minute = epoch_tmp%60;
+    epoch_tmp /= 60;
+    ntp_hour  = epoch_tmp%24;
+    epoch_tmp /= 24;
+        
+    days_since_epoch = epoch_tmp;      //number of days since epoch
+    ntp_week_day = week_days[days_since_epoch%7];  //Calculating WeekDay
+      //
+    ntp_year = 1970+(days_since_epoch/365); // ball parking year, may not be accurate!
+ //
+    int i;
+    for (i=1972; i<ntp_year; i+=4)      // Calculating number of leap days since epoch/1970
+       if(((i%4==0) && (i%100!=0)) || (i%400==0)) leap_days++;
+          
+    ntp_year = 1970+((days_since_epoch - leap_days)/365); // Calculating accurate current year by (days_since_epoch - extra leap days)
+    day_of_year = ((days_since_epoch - leap_days)%365)+1;
+
+    if(((ntp_year%4==0) && (ntp_year%100!=0)) || (ntp_year%400==0))  
+     {
+       month_days[1]=29;     //February = 29 days for leap years
+       leap_year_ind = 1;    //if current year is leap, set indicator to 1 
+      }
+          else month_days[1]=28; //February = 28 days for non-leap years 
+
+          temp_days=0;
+   
+    for (ntp_month=0 ; ntp_month <= 11 ; ntp_month++) //calculating current Month
+       {
+           if (day_of_year <= temp_days) break; 
+           temp_days = temp_days + month_days[ntp_month];
+        }
+    
+    temp_days = temp_days - month_days[ntp_month-1]; //calculating current Date
+    ntp_day = day_of_year - temp_days;
+  
+    
+    rtc.setTime(ntp_hour, ntp_minute, ntp_second);
+    rtc.setDate(ntp_day, ntp_month, ntp_year - 2000);
+
+    //print_date_time();
+    Serial.print("YEAR: ");
+    Serial.println(ntp_year);
+
+    //Serial.print("Days since Epoch: "); Serial.println(days_since_epoch);
+    Serial.print("Number of Leap days since EPOCH: "); Serial.println(leap_days);
+    Serial.print("Day of year = "); Serial.println(day_of_year);
+    Serial.print("Is Year Leap? "); Serial.println(leap_year_ind);
+    Serial.print("===============================================\n");
+}
+
+
+
+// send an NTP request to the time server at the given address
+unsigned long sendNTPpacket(IPAddress& address) {
+  //Serial.println("1");
+  // set all bytes in the buffer to 0
+  memset(packetBuffer, 0, NTP_PACKET_SIZE);
+  // Initialize values needed to form NTP request
+  // (see URL above for details on the packets)
+  //Serial.println("2");
+  packetBuffer[0] = 0b11100011;   // LI, Version, Mode
+  packetBuffer[1] = 0;     // Stratum, or type of clock
+  packetBuffer[2] = 6;     // Polling Interval
+  packetBuffer[3] = 0xEC;  // Peer Clock Precision
+  // 8 bytes of zero for Root Delay & Root Dispersion
+  packetBuffer[12]  = 49;
+  packetBuffer[13]  = 0x4E;
+  packetBuffer[14]  = 49;
+  packetBuffer[15]  = 52;
+
+  //Serial.println("3");
+
+  // all NTP fields have been given values, now
+  // you can send a packet requesting a timestamp:
+  Udp.beginPacket(address, 123); //NTP requests are to port 123
+  //Serial.println("4");
+  Udp.write(packetBuffer, NTP_PACKET_SIZE);
+  //Serial.println("5");
+  Udp.endPacket();
+  //Serial.println("6");
 }
