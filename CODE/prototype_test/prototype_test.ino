@@ -2,28 +2,30 @@
 #define LDR A0
 
 Servo Servo1;          //Servo is named Servo1
+
 int button_1 = 8;      //trigger button on pin 8
+int val1 = 0;          //value of the button
+
 int motorPin1 = 2;     //IN1 on pin 2   
 int motorPin2 = 3;     //IN2 on pin 3
 int motorPin3 = 4;     //IN3 on pin 4
 int motorPin4 = 5;     //IN4 on pin 5
-
-int motor_Speed = 5;   //stepper timing for stability
-int val1 = 0;          //value of the button
+int motor_Speed = 3;   //stepper timing for stability
 int steps = 20;        //number of steps
-int cal_value = 980;  //threshold value of the laser which is still not picking the pills passing
+
+int cal_value = 980;   //threshold value of the laser which is still not picking the pills passing
 int light = 0;         //sensor value
 int counter = 0;       //counter
 
 void setup() {
-  pinMode(button_1, INPUT);  
+  pinMode(button_1, INPUT);
+  pinMode(LDR, INPUT);  
   pinMode(motorPin1, OUTPUT);
   pinMode(motorPin2, OUTPUT);
   pinMode(motorPin3, OUTPUT);
   pinMode(motorPin4, OUTPUT);
-  Servo1.write(65);  // IMPORTANT: starting position of the servo
-  Servo1.attach (6); // servo connected to pin 6
-  pinMode(LDR, INPUT);
+  Servo1.attach (6);          //servo connected to pin 6
+  Servo1.write(65);           // IMPORTANT: starting position of the servo
   Serial.begin(9600);
 }
 
@@ -33,7 +35,7 @@ void loop() {
 
   if(val1 == HIGH){
     stepper_right();
-    delay(1000);
+    delay(500);
     servo_right();
 
     light = analogRead(LDR);
@@ -46,9 +48,9 @@ void loop() {
       Serial.println(counter);
     }
     
-    delay(1000);
+    delay(800);
     servo_left();
-    delay(1000);
+    delay(500);
     stepper_left();
   }
 
@@ -105,7 +107,7 @@ void stepper_right(){
 }
 
 void servo_right(){
-  Servo1.write (90);
+  Servo1.write (85);
 }
 
 void servo_left(){
