@@ -1,4 +1,5 @@
 #include <Servo.h> //Inserire la libreria Servo
+#define LDR A0
 
 Servo Servo1;          //Servo is named Servo1
 int button_1 = 8;      //trigger button on pin 8
@@ -10,6 +11,9 @@ int motorPin4 = 5;     //IN4 on pin 5
 int motor_Speed = 5;   //stepper timing for stability
 int val1 = 0;          //value of the button
 int steps = 20;        //number of steps
+int cal_value = 980;  //threshold value of the laser which is still not picking the pills passing
+int light = 0;         //sensor value
+int counter = 0;       //counter
 
 void setup() {
   pinMode(button_1, INPUT);  
@@ -18,7 +22,9 @@ void setup() {
   pinMode(motorPin3, OUTPUT);
   pinMode(motorPin4, OUTPUT);
   Servo1.write(65);  // IMPORTANT: starting position of the servo
-  Servo1.attach (6); // servo connected to pin 6 
+  Servo1.attach (6); // servo connected to pin 6
+  pinMode(LDR, INPUT);
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -29,11 +35,21 @@ void loop() {
     stepper_right();
     delay(1000);
     servo_right();
+
+    light = analogRead(LDR);
+  
+    if(light < cal_value){
+      counter = counter + 1;
+      Serial.print("Sensor value is: ");
+      Serial.println(light);
+      Serial.print("Pill dispensed: ");
+      Serial.println(counter);
+    }
+    
     delay(1000);
     servo_left();
     delay(1000);
     stepper_left();
-    delay(1000);
   }
 
 }
