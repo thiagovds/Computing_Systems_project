@@ -3,12 +3,12 @@
     #define LDR A1
     #define SIGNAL_TO_ESP 2
     #define BUZZER 3        //PWM WE CAN TUNE THE FREQUENCY!!
-    #define Servo_pin 9
+    #define Servo_pin 6
     
-    #define stepMotorPin1 10
-    #define stepMotorPin2 11
-    #define stepMotorPin3 12
-    #define stepMotorPin4 13
+    #define stepMotorPin1 2
+    #define stepMotorPin2 3
+    #define stepMotorPin3 4
+    #define stepMotorPin4 5
 
     #define SEL0 4 //
     #define SEL1 5 // ----------- FOR UNO  
@@ -16,12 +16,12 @@
     /* CALIBRATION CONSTANTS FOR STEPPER   -----------------------*/
     #define Time_interval_stepper 1000
     #define Time_interval_servo 500
-    #define stepper_steps 50
+    #define stepper_steps 20
     
     
     /* CALIBRATION CONSTANTS FOR PHOTOINTERRUPTER -----------------*/
     #define PHOTOVOLTAGE_threshold 900
-    #define Delay_time_photoint 15
+    #define Delay_time_photoint 50
     #define TIMEOUT_COUNTER 10000
     #define Time_between_detections 100          //to set around 100ms ?
     
@@ -37,7 +37,7 @@
 
 /*         GLOBAL VARIABLES FOR verify_success FUNCTION       */
     int attempts = 0;
-    int success = 0;
+    int success = 3;
 
 /*        PHOTOINTERRUPTER GLOBAL VARIABLES        */
     unsigned long t_current, t_0;
@@ -102,9 +102,9 @@ void loop()
 
 void choose_to_dispense()
 {
-    Serial.println("Do you want to start the dispensing test?\n  'Y' for YES or 'N' for NO ");
-    while (Serial.available() == 0) {}  Serial.setTimeout(500);   //This sets the maximum time to wait for serial data from user.
-    String menuChoice = Serial.readString();
+   // Serial.println("Do you want to start the dispensing test?\n  'Y' for YES or 'N' for NO ");
+   // while (Serial.available() == 0) {}  Serial.setTimeout(500);   //This sets the maximum time to wait for serial data from user.
+    String menuChoice = "Y" ;//Serial.readString();
     Serial.print(menuChoice);    Serial.println("\n------------------------------------------------------------");
     if ((menuChoice == "Y") || (menuChoice == "y"))                                                    
     {
@@ -167,6 +167,7 @@ int photointerrupter()
             //send_email();              // SEND EMAIL!!!!!!           -------------------------------------------------------------------------------
             
             Serial.print("counter : ");           Serial.println(counter);    
+            Serial.print("light: ");              Serial.println(light);
             Serial.print("time difference : ") ;  Serial.println(mytime[i]-mytime[i-1]);
             Serial.print("mytime[i] : ") ;        Serial.println(mytime[i]);
             Serial.print("mytime[0] : ") ;        Serial.println(mytime[i-1]);  
@@ -283,11 +284,11 @@ void dispense_pills()
 
 
 
-void lock_pill()   // Stepper motor operation
+void unlock_pill()   // Stepper motor operation
 {
     for(int j=0; j<stepper_steps; j++){
         
-        int motor_Speed = 4;   /*  TO BE INSERTED THE RIGHT motor speed value   */ 
+        int motor_Speed = 3;   /*  TO BE INSERTED THE RIGHT motor speed value   */ 
         digitalWrite(stepMotorPin4, HIGH);
         digitalWrite(stepMotorPin3, LOW);
         digitalWrite(stepMotorPin2, LOW);
@@ -312,11 +313,11 @@ void lock_pill()   // Stepper motor operation
 
 }
 
-void unlock_pill()   //Stepper_motor operation
+void lock_pill()   //Stepper_motor operation
 {
     for(int j=0; j<stepper_steps; j++){
         
-        int motor_Speed = 4;   /*  TO BE INSERTED THE RIGHT motor speed value   */ 
+        int motor_Speed = 3;   /*  TO BE INSERTED THE RIGHT motor speed value   */ 
         digitalWrite(stepMotorPin4, LOW);
         digitalWrite(stepMotorPin3, LOW);
         digitalWrite(stepMotorPin2, LOW);
@@ -344,13 +345,13 @@ void unlock_pill()   //Stepper_motor operation
 void open_gate()
 {   
     int motor_Speed = 1000;
-    Servo1.write (40);
+    Servo1.write (85);
 
 }
 void close_gate()
 {
     int motor_Speed = 1000;
-    Servo1.write (140);
+    Servo1.write (65);
 }
 
 
@@ -364,6 +365,7 @@ void setup_pins()
     pinMode(SEL1, OUTPUT);    
 
     Servo1.attach (Servo_pin); //Il Servo1 è collegato al pin digitale 
+    Servo1.write(65);
     pinMode(stepMotorPin1, OUTPUT);
     pinMode(stepMotorPin2, OUTPUT);
     pinMode(stepMotorPin3, OUTPUT);
