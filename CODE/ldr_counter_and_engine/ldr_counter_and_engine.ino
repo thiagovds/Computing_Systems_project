@@ -227,8 +227,8 @@ void verify_success()
         Serial.println("Pill dispensed successfully!!"); delay(1000);
         break;
       case 2:                                 //TRY AGAIN!   NO PILL WAS DISPENSED
-        Serial.println("Reattempting pill dispensing!"); delay(1000);
-        
+        Serial.println("Pill stuck on chamber!"); delay(1000);
+        operation_over = 1;
         //attempts++; Serial.print("\t attempt number:"); Serial.println(attempts);
         //if(attempts >= 2){ operation_over = 1; attempts = 0; }
         break;  
