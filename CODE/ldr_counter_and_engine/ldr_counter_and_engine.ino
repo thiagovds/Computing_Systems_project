@@ -85,14 +85,13 @@ void loop()
         //dispense_pills activates the engines
 
         dispense_pills();
-        if ((cycle_stage == 2 || cycle_stage == 3) && success!=0 && success !=1)
-        {   
-            success = photointerrupter();              //success takes either 0 , 1, 2  for failure, success, no pill dispensed 
-        }
-
         if (engine_over == 1) {verify_success();}  //menu_var = 0;}
 
 
+        if ((cycle_stage == 2 || cycle_stage == 3) && success !=1)
+        {   
+            success = photointerrupter();              //success takes either 0 , 1, 2  for failure, success, no pill dispensed 
+        }
     }
 }
 
