@@ -152,7 +152,7 @@ void selector_function()
 
 int photointerrupter()
 {
-    int start == 1;
+    int start = 1;
 
     if (start) {delay(Delay_time_photoint); start=0; }
 
