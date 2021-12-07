@@ -69,8 +69,8 @@ void loop()
   /* TAKE TIMESTAMP EVERY CYCLE i.e. UPDATE TIMESTAMP TO CURRENT TIMESTAMP  */
   t_current = millis();
 
-  int random_v;
-  Serial.print("Value from serial: "); random_v = Serial.read(); Serial.print(random_v);
+//  int random_v;
+//  Serial.print("Value from serial: "); random_v = Serial.read(); Serial.println(random_v);
 /*          WHENEVER FLAG operation_over is not set to 1 ->                                */
   
   if (operation_over == 1)
@@ -154,7 +154,7 @@ void selector_function()
 
 int photointerrupter()
 {
-    if(start_1)
+    if(1)//start_1)
     {
       delay(Delay_time_photoint); 
       start_1 = 0;   
