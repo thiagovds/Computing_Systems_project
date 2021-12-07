@@ -13,7 +13,7 @@ int motorPin4 = 5;     //IN4 on pin 5
 int motor_Speed = 3;   //stepper timing for stability
 int steps = 20;        //number of steps
 
-int cal_value = 980;   //threshold value of the laser which is still not picking the pills passing
+int cal_value = 900;   //threshold value of the laser which is still not picking the pills passing
 int light = 0;         //sensor value
 int counter = 0;       //counter
 
