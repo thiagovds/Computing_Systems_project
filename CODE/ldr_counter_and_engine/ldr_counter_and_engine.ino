@@ -5,8 +5,8 @@
     #define BUZZER 3        //PWM WE CAN TUNE THE FREQUENCY!!
     #define Servo_pin 9
     
-    #define stepMotorPin1 10
-    #define stepMotorPin2 11
+    #define stepMotorPin1 10 //2
+    #define stepMotorPin2 11 //
     #define stepMotorPin3 12
     #define stepMotorPin4 13
 
