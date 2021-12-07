@@ -21,8 +21,8 @@
     
     /* CALIBRATION CONSTANTS FOR PHOTOINTERRUPTER -----------------*/
     #define PHOTOVOLTAGE_threshold 900
-    #define Delay_time_photoint 15
-    #define TIMEOUT_COUNTER 
+    #define Delay_time_photoint 50
+    #define TIMEOUT_COUNTER 10000
     #define Time_between_detections 100          //to set around 100ms ?
     
     int mode, operation_over = 1;
@@ -47,6 +47,7 @@
     int calib_val = 900;
     int error_count = 0;
     int check_time_elapsed_success =0;
+    boolean start_1 = 1;
 
 
 void setup()
@@ -84,7 +85,7 @@ void loop()
         //dispense_pills activates the engines
 
         dispense_pills();
-        if ((cycle_stage == 2 || cycle_stage == 3) || cycle_stage == 1)
+        if (cycle_stage == 2 || cycle_stage == 3)
         {   
             success = photointerrupter();              //success takes either 0 , 1, 2  for failure, success, no pill dispensed 
         }
@@ -152,10 +153,11 @@ void selector_function()
 
 int photointerrupter()
 {
-    int start == 1;
-
-    if (start) {delay(Delay_time_photoint); start=0; }
-
+    if(start_1)
+    {
+      delay(Delay_time_photoint); 
+      start_1 = 0;   
+    }  
     int light = analogRead(LDR);
 
     if (light < calib_val)                      //detection of light beam obstruction
@@ -217,22 +219,20 @@ void verify_success()
   switch (success) {
       case 0:                                //ERROR!
         operation_over = 1;
-        Serial.println("ERROR when dispensing pill!!");
+        Serial.println("ERROR when dispensing pill!!"); delay(1000);
         //send_email();
 
         break;
       case 1:                                //SUCCESS!
         operation_over = 1;
-        Serial.println("Pill dispensed successfully!!");
+        Serial.println("Pill dispensed successfully!!"); delay(1000);
         break;
       case 2:                                 //TRY AGAIN!   NO PILL WAS DISPENSED
-        Serial.println("Pill is stuck on chamber!");
-          break;
-//        Serial.println("Reattempting pill dispensing!");
-//        delay(2000);
-//        attempts++; Serial.print("\t attempt number:"); Serial.println(attempts);
+        Serial.println("Reattempting pill dispensing!"); delay(1000);
+        
+        //attempts++; Serial.print("\t attempt number:"); Serial.println(attempts);
         //if(attempts >= 2){ operation_over = 1; attempts = 0; }
-
+        break;  
       default:
         Serial.println("Default!");     //-------------------------------------
   }
