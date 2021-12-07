@@ -3,12 +3,12 @@
     #define LDR A1
     #define SIGNAL_TO_ESP 2
     #define BUZZER 3        //PWM WE CAN TUNE THE FREQUENCY!!
-    #define Servo_pin 9
+    #define Servo_pin 6//9
     
-    #define stepMotorPin1 10 //2
-    #define stepMotorPin2 11 //
-    #define stepMotorPin3 12
-    #define stepMotorPin4 13
+    #define stepMotorPin1 2 //10
+    #define stepMotorPin2 3 //11
+    #define stepMotorPin3 4 //12
+    #define stepMotorPin4 5 //13
 
     #define SEL0 4 //
     #define SEL1 5 // ----------- FOR UNO  
@@ -287,7 +287,7 @@ void dispense_pills()
 
 
 
-void lock_pill()   // Stepper motor operation
+void unlock_pill()   // Stepper motor operation
 {
     for(int j=0; j<stepper_steps; j++){
         
@@ -316,7 +316,7 @@ void lock_pill()   // Stepper motor operation
 
 }
 
-void unlock_pill()   //Stepper_motor operation
+void lock_pill()   //Stepper_motor operation
 {
     for(int j=0; j<stepper_steps; j++){
         
