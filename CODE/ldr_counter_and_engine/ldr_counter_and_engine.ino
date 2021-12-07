@@ -16,12 +16,12 @@
     /* CALIBRATION CONSTANTS FOR STEPPER   -----------------------*/
     #define Time_interval_stepper 1000
     #define Time_interval_servo 500
-    #define stepper_steps 50
+    #define stepper_steps 20
     
     
     /* CALIBRATION CONSTANTS FOR PHOTOINTERRUPTER -----------------*/
     #define PHOTOVOLTAGE_threshold 900
-    #define Delay_time_photoint 50
+    #define Delay_time_photoint 30
     #define TIMEOUT_COUNTER 10000
     #define Time_between_detections 100          //to set around 100ms ?
     
