@@ -37,7 +37,7 @@
 
 /*         GLOBAL VARIABLES FOR verify_success FUNCTION       */
     int attempts = 0;
-    int success = 0;
+    int success = 3;
 
 /*        PHOTOINTERRUPTER GLOBAL VARIABLES        */
     unsigned long t_current, t_0;
@@ -85,7 +85,7 @@ void loop()
         //dispense_pills activates the engines
 
         dispense_pills();
-        if (cycle_stage == 2 || cycle_stage == 3)
+        if ((cycle_stage == 2 || cycle_stage == 3) && success!=0)
         {   
             success = photointerrupter();              //success takes either 0 , 1, 2  for failure, success, no pill dispensed 
         }
@@ -104,8 +104,8 @@ void loop()
 void choose_to_dispense()
 {
     Serial.println("Do you want to start the dispensing test?\n  'Y' for YES or 'N' for NO ");
-    while (Serial.available() == 0) {}  Serial.setTimeout(500);   //This sets the maximum time to wait for serial data from user.
-    String menuChoice = Serial.readString();
+    //while (Serial.available() == 0) {}  Serial.setTimeout(500);   //This sets the maximum time to wait for serial data from user.
+    String menuChoice = "Y";//Serial.readString();
     Serial.print(menuChoice);    Serial.println("\n------------------------------------------------------------");
     if ((menuChoice == "Y") || (menuChoice == "y"))                                                    
     {
