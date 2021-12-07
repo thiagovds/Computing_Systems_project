@@ -21,7 +21,7 @@
     
     /* CALIBRATION CONSTANTS FOR PHOTOINTERRUPTER -----------------*/
     #define PHOTOVOLTAGE_threshold 900
-    #define Delay_time_photoint 30
+    #define Delay_time_photoint 50
     #define TIMEOUT_COUNTER 10000
     #define Time_between_detections 100          //to set around 100ms ?
     
