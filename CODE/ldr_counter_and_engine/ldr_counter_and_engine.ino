@@ -85,7 +85,7 @@ void loop()
         //dispense_pills activates the engines
 
         dispense_pills();
-        if ((cycle_stage == 2 || cycle_stage == 3) && success!=0)
+        if ((cycle_stage == 2 || cycle_stage == 3) && success!=0 && success !=1)
         {   
             success = photointerrupter();              //success takes either 0 , 1, 2  for failure, success, no pill dispensed 
         }
@@ -291,7 +291,7 @@ void unlock_pill()   // Stepper motor operation
 {
     for(int j=0; j<stepper_steps; j++){
         
-        int motor_Speed = 4;   /*  TO BE INSERTED THE RIGHT motor speed value   */ 
+        int motor_Speed = 3;   /*  TO BE INSERTED THE RIGHT motor speed value   */ 
         digitalWrite(stepMotorPin4, HIGH);
         digitalWrite(stepMotorPin3, LOW);
         digitalWrite(stepMotorPin2, LOW);
@@ -320,7 +320,7 @@ void lock_pill()   //Stepper_motor operation
 {
     for(int j=0; j<stepper_steps; j++){
         
-        int motor_Speed = 4;   /*  TO BE INSERTED THE RIGHT motor speed value   */ 
+        int motor_Speed = 3;   /*  TO BE INSERTED THE RIGHT motor speed value   */ 
         digitalWrite(stepMotorPin4, LOW);
         digitalWrite(stepMotorPin3, LOW);
         digitalWrite(stepMotorPin2, LOW);
@@ -348,13 +348,13 @@ void lock_pill()   //Stepper_motor operation
 void open_gate()
 {   
     int motor_Speed = 1000;
-    Servo1.write (40);
+    Servo1.write (85);
 
 }
 void close_gate()
 {
     int motor_Speed = 1000;
-    Servo1.write (140);
+    Servo1.write (65);
 }
 
 
@@ -367,7 +367,8 @@ void setup_pins()
     pinMode(SEL0, OUTPUT);
     pinMode(SEL1, OUTPUT);    
 
-    Servo1.attach (Servo_pin); //Il Servo1 è collegato al pin digitale 
+    Servo1.attach (Servo_pin); //Il Servo1 è collegato al pin digitale
+    Servo1.write(65); 
     pinMode(stepMotorPin1, OUTPUT);
     pinMode(stepMotorPin2, OUTPUT);
     pinMode(stepMotorPin3, OUTPUT);
