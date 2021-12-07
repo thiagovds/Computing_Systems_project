@@ -70,7 +70,7 @@ void loop()
   t_current = millis();
 
   int random_v;
-  Serial.print("Value from serial: "); Serial.read(random_v); Serial.print(random_v);
+  Serial.print("Value from serial: "); random_v = Serial.read(); Serial.print(random_v);
 /*          WHENEVER FLAG operation_over is not set to 1 ->                                */
   
   if (operation_over == 1)
