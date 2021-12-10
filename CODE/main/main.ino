@@ -3,6 +3,8 @@
 #include <Servo.h>
 #include <SPI.h> 
 #include <WiFiUdp.h>
+// Include EEPROM-like API for FlashStorage
+#include <FlashAsEEPROM.h>
 
 #include "arduino_secrets.h"
 ///////please enter your sensitive data in the Secret tab/arduino_secrets.h
@@ -39,7 +41,7 @@ int status = WL_IDLE_STATUS;     // the Wifi radio's status
     
     /* CALIBRATION CONSTANTS FOR PHOTOINTERRUPTER -----------------*/
     #define PHOTOVOLTAGE_threshold 900
-    #define Delay_time_photoint_Microseconds 15000
+    #define Delay_time_photoint_Microseconds 18000
     #define TIMEOUT_COUNTER 1500
     #define Time_between_detections 100          //to set around 100ms ?
 
@@ -343,7 +345,7 @@ void verify_success()
 }
 
 
-void sorting_date_time()
+void sorting_date_time(int addend)
 {
     int count_days_of_year[MAX_num_of_routines];
     int sch = 0;
@@ -352,22 +354,28 @@ void sorting_date_time()
     // month_days[12]={31,28,31,30,31,30,31,31,30,31,30,31};
 
 
-// CONVERTS DATE AND TIME INTO MINUTES AND SAVES THE INDEX OF EACH INSIDE THE COLUMN 1
+// CONVERTS DATE AND TIME INTO MINUTES from 1st second of 1st day of 2000 AND SAVES THE INDEX OF EACH INSIDE THE COLUMN 1
   
-  for (sch = 0; sch <= schedule_enumerator; sch++)
+  for (sch = 0; sch < schedule_enumerator + addend; sch++)
   {
 
     count_days_of_year[sch] = 0;
 
-    for(int f=0; f < Schedule_date[sch][1]; f++)
-    {   
-        count_days_of_year[sch]=+ month_days[f];
-    }
-
     schedules_in_minutes[sch][0] = 60*Schedule_time[sch][0] + Schedule_time[sch][1];
+    
     if (!everyday_routine[sch])
     {
-        schedules_in_minutes[sch][0] += ( Schedule_date[sch][0]*24*60 + count_days_of_year[schedule_enumerator]*24*60 + (525600)*(Schedule_date[sch][2]) );  
+        for(int f=0; f < Schedule_date[sch][1] - 1; f++)
+        {   
+            count_days_of_year[sch]+= month_days[f];
+        }
+        schedules_in_minutes[sch][0] += ( Schedule_date[sch][0]*24*60 + count_days_of_year[schedule_enumerator]*24*60 + (525600)*(Schedule_date[sch][2]) );
+        Serial.print("count_days_of_year = ");Serial.println(count_days_of_year[schedule_enumerator]);  
+    }
+    else
+    {
+        schedules_in_minutes[sch][0] += (day_of_year*24*60 + (525600)*rtc.getYear());
+        Serial.print("day_of_year = ");Serial.println(day_of_year);
     }
     
 
@@ -379,24 +387,13 @@ void sorting_date_time()
   }
 
 
-    InsertionSort(schedules_in_minutes , schedule_enumerator);
+    InsertionSort(schedules_in_minutes , schedule_enumerator +addend);
     
 
     for(int f=0; f <= schedule_enumerator; f++)
-    {
-        ordered_index[f] = f;           
-        Serial.print("Schedule in minutes ordered!["); Serial.print(f);  Serial.print("][0] = "); (schedules_in_minutes[sch][0]);
-        Serial.print("Ordered_index : "); Serial.println(ordered_index[f]);
-        
-
-        /*Serial.println("full matrix");
-        for(int x=0; x<2; x++)
-        { 
-            Serial.print(schedules_in_minutes[f][x]);
-            Serial.print(" , ");
-        }
-        Serial.println(" ");
-        */ 
+    {          
+        Serial.print("Schedule in minutes ordered!["); Serial.print(f);  Serial.print("][0] = "); Serial.println(schedules_in_minutes[f][0]);
+        Serial.print("Ordered_index : "); Serial.println(ordered_index[f]);      
     }
 
 
@@ -421,6 +418,11 @@ void InsertionSort (int A[][2], int n)
         }
         A[j1+1][0] = x0;
         A[j1+1][1] = x01;
+    }
+
+    for(int k1=0; k1<n; k1++)
+    {
+        ordered_index[k1] = A[k1][1];
     }
     return;
 }
@@ -611,7 +613,7 @@ void refill_module()   //when refill take into the account the previous amount o
 
 void edit_schedule_menu()        //////////////////////////////////////////////////////
 {
-    Y = 1 + schedule_enumerator; Serial.print("schedule_enumerator = "); Serial.println(schedule_enumerator);
+    Y = 1 + schedule_enumerator; //Serial.print("schedule_enumerator = "); Serial.println(schedule_enumerator);
     
     int schedule_menu_mode = 0;
 
@@ -766,7 +768,7 @@ void insert_schedule_routine()
   }
   
 
-  sorting_date_time();
+  sorting_date_time(1);
   
   alarm_played=0;
   set_alarm(alarm_played);
@@ -787,7 +789,7 @@ void module_number_error_check()
     {
         for(int m=0; m<=schedule_enumerator; m++)
         {    
-          if (((module_number[schedule_enumerator] == module_number[m]) && (m !=schedule_enumerator)) && number_of_pills[module_number[schedule_enumerator]] != 0)
+          if (medicine[module_number[schedule_enumerator]] != "empty" &&(((module_number[schedule_enumerator] == module_number[m]) && (m !=schedule_enumerator)) && number_of_pills[module_number[schedule_enumerator]] != 0))
           {   
               Serial.print("This Module number: "); Serial.print(module_number[schedule_enumerator]); 
               Serial.print(" is occupied with: ");  Serial.println(medicine[module_number[schedule_enumerator]]);
@@ -1524,4 +1526,83 @@ void debug_print_all_routine_variables()
     }
     
 
+}
+
+
+void EEPROM_SIM_write(int add)
+{
+    int k;
+     // If the EEPROM is empty then isValid() is false
+  if (!EEPROM.isValid()) 
+  {
+
+    Serial.println("EEPROM is empty, writing schedule data:");
+    Serial.print("->");
+    
+    for (k = 0; k < schedule_enumerator + add; k++) 
+    {
+        for(int s=0; s<2; s++)
+        {
+            EEPROM.write(k, Schedule_time[k][s]);
+            Serial.print(" ");
+            Serial.print(Schedule_time[k][s]);
+        }
+        if (!everyday_routine[k])
+        {
+            for(int s=0; s<3; s++)
+            {
+                EEPROM.write(k+schedule_enumerator, Schedule_date[k][s]);
+                Serial.print(" ");
+                Serial.print(Schedule_date[k][s]);
+            }
+        }
+        EEPROM.write(k+ 2*schedule_enumerator, module_number[k]);
+    }
+
+
+    Serial.println();
+
+    // commit() saves all the changes to EEPROM, it must be called
+    // every time the content of virtual EEPROM is changed to make
+    // the change permanent.
+    // This operation burns Flash write cycles and should not be
+    // done too often. See readme for details:
+    // https://github.com/cmaglie/FlashStorage#limited-number-of-writes
+    EEPROM.commit();
+    Serial.println("Done!");
+
+    Serial.print("After commit, calling isValid() returns ");
+    Serial.println(EEPROM.isValid());
+
+  } 
+  else 
+  {
+
+    Serial.println("EEPROM has been written.");
+    Serial.println("Here is the content of the first 20 bytes:");
+
+    Serial.print("->");
+    for (int k = 0; k < 3*schedule_enumerator + add; k++) 
+    {
+      Serial.print(" ");
+      Serial.print(EEPROM.read(k));
+    }
+    Serial.println();
+
+  }
+}
+
+void EEPROM_SIM_read(int add)
+{
+
+    Serial.println("EEPROM has been written.");
+    Serial.println("Here is the content of the first 3*schedule_enumerator bytes:");
+
+    Serial.print("->");
+    for (int k = 0; k < 3*schedule_enumerator + add; k++) 
+    {
+      Serial.print(" ");
+      Serial.print(EEPROM.read(k));
+    }
+    Serial.println();
 }

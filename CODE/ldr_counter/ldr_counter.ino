@@ -37,7 +37,7 @@ void loop() {
   if(light < cal_value){
     counter = counter + 1;
     Serial.println(counter);
-    delay(Delay_time_photoint);    //IF DELAY IS ABOVE 50ms Pill likely to not be detected :(
+    delay(Delay_time_photoint);    //IF DELAY IS ABOVE 50ms Pill likely to not be detected :(     *************************************************************
 
 
   }

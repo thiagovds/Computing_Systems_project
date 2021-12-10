@@ -18,5 +18,5 @@ void loop() {
   else{
     Serial.println("HIGH");
     }
-  delay(200);
+  delay(200);      //IF DELAY IS ABOVE 50ms Pill likely to not be detected :(
 }

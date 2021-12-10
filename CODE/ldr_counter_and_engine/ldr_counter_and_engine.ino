@@ -94,6 +94,7 @@ void loop()
         {   
             success = photointerrupter();              //success takes either 0 , 1, 2  for failure, success, no pill dispensed 
         }
+
     }
 }
 
@@ -235,6 +236,8 @@ void verify_success()
         break;  
       default:
         Serial.println("Default!");     //-------------------------------------
+        operation_over = 1;
+        break;
   }
 
 }
