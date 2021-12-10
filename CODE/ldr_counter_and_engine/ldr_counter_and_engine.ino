@@ -3,12 +3,12 @@
     #define LDR A1
     #define SIGNAL_TO_ESP 2
     #define BUZZER 3        //PWM WE CAN TUNE THE FREQUENCY!!
-    #define Servo_pin 6//9
+    #define Servo_pin 8//6//9
     
-    #define stepMotorPin1 2 //10
-    #define stepMotorPin2 3 //11
-    #define stepMotorPin3 4 //12
-    #define stepMotorPin4 5 //13
+    #define stepMotorPin1 19//9
+    #define stepMotorPin2 18//10
+    #define stepMotorPin3 17//11
+    #define stepMotorPin4 16//12
 
     #define SEL0 4 //
     #define SEL1 5 // ----------- FOR UNO  
@@ -154,11 +154,10 @@ void selector_function()
 
 int photointerrupter()
 {
-    if(1)//start_1)
-    {
-      delay(Delay_time_photoint); 
-      start_1 = 0;   
-    }  
+    if(start_1){ start_1 = 0;}
+    else {delay(Delay_time_photoint); }
+
+
     int light = analogRead(LDR);
 
     if (light < calib_val)                      //detection of light beam obstruction

@@ -19,12 +19,14 @@ int status = WL_IDLE_STATUS;     // the Wifi radio's status
     #define LDR A1
     #define SIGNAL_TO_ESP 2
     #define BUZZER 3        //PWM WE CAN TUNE THE FREQUENCY!!
-    #define Servo_pin 9
+    #define BUTTON 4
+
+    #define Servo_pin 8
     
-    #define stepMotorPin1 10
-    #define stepMotorPin2 11
-    #define stepMotorPin3 12
-    #define stepMotorPin4 13
+    #define stepMotorPin1 19//9
+    #define stepMotorPin2 18//10
+    #define stepMotorPin3 17//11
+    #define stepMotorPin4 16//12
     
     #define SEL0 21 //BLUE CABLE
     #define SEL1 20 //PURPLE CABLE -----------
@@ -32,13 +34,13 @@ int status = WL_IDLE_STATUS;     // the Wifi radio's status
     /* CALIBRATION CONSTANTS FOR STEPPER   -----------------------*/
     #define Time_interval_stepper 1000
     #define Time_interval_servo 500
-    #define stepper_steps 50
+    #define stepper_steps 20
     
     
     /* CALIBRATION CONSTANTS FOR PHOTOINTERRUPTER -----------------*/
     #define PHOTOVOLTAGE_threshold 900
-    #define Delay_time_photoint 15
-    #define TIMEOUT_COUNTER 10000
+    #define Delay_time_photoint_Microseconds 15000
+    #define TIMEOUT_COUNTER 1500
     #define Time_between_detections 100          //to set around 100ms ?
 
 
@@ -123,11 +125,10 @@ RTCZero rtc;
     int Alarm_year, Alarm_hour, Alarm_minutes;
     
     
-    unsigned long t_current, t_0;
+    unsigned long t_current, t_0, t_photo_start;
 
 /*         GLOBAL VARIABLES FOR verify_success FUNCTION       */
-    int attempts = 0;
-    int success = 0;
+    int success ;
 
 
 /*         ADD PILLS global variables              */
@@ -138,11 +139,13 @@ RTCZero rtc;
 
 /*        PHOTOINTERRUPTER GLOBAL VARIABLES        */
     int counter;
-    int mytime[20];   //size can be changed
+    int mytime[5];   //size can be changed
     int i=1;
     int calib_val = 900;
     int error_count = 0;
     int check_time_elapsed_success =0;
+    int result = 33;
+    boolean photo_over = 0;
 
 
 
@@ -182,6 +185,7 @@ void loop()
         selector_function();  //We activate the correct module to be operated!
         operation_over = 0;  //WE START AN OPERATION, BYPASS MENU
         engine_over = 0;     //WE ALLOW DISPENSE PILLS TO OPERATE ONCE WITH THIS FLAG
+        t_photo_start = millis();
         Serial.println("Start of operation!");
 
         alarm_played++;
@@ -198,12 +202,13 @@ void loop()
     {
         //later ADD BUTTON PRESS TO STOP BUZZ AND ACTIVATE PILL!
         dispense_pills();
-        if (cycle_stage == 2 || cycle_stage == 3)
+        if (photo_over == 0 && (cycle_stage == 2 || cycle_stage == 3))
         {   
             success = photointerrupter();
+            Serial.println(success);
         }
 
-        if (engine_over == 1) {verify_success();  menu_var = 0;}
+        if (engine_over == 1) {verify_success(); menu_var = 0; photo_over = 0;}
     }
     
 
@@ -213,10 +218,12 @@ void setup_pins()
 {
     pinMode(LDR, INPUT);
     pinMode(BUZZER, OUTPUT);
+    pinMode(BUTTON, INPUT);
     pinMode(SEL0, OUTPUT);
     pinMode(SEL1, OUTPUT);    
 
     Servo1.attach (Servo_pin); //Il Servo1 è collegato al pin digitale 
+    Servo1.write(65);
     pinMode(stepMotorPin1, OUTPUT);
     pinMode(stepMotorPin2, OUTPUT);
     pinMode(stepMotorPin3, OUTPUT);
@@ -231,7 +238,7 @@ void setup_pins()
 
     /*SETUP PHOTOINTERRUPTER*/
     mytime[0] = t_0;   //Serial.print("mytime[0]: "); Serial.println(mytime[i]);
-    i++;
+    //i++;
 }
 
 void Wifi_setup()
@@ -307,27 +314,30 @@ void real_time_clock_setup()
 
 void verify_success()
 {
+    error_count = 0; check_time_elapsed_success = 0;
 
   switch (success) {
       case 0:                                //ERROR!
         operation_over = 1;
-        Serial.println("ERROR when dispensing pill!!");
+        Serial.println("ERROR when dispensing pill!!"); delay(1000);
         send_email();
 
         break;
       case 1:                                //SUCCESS!
         operation_over = 1;
-        Serial.println("Pill dispensed successfully!!");
+        Serial.println("Pill dispensed successfully!!"); delay(1000);
         break;
       case 2:                                 //TRY AGAIN!   NO PILL WAS DISPENSED
-        Serial.println("Reattempting pill dispensing!");
-        delay(2000);
-        attempts++; Serial.print("\t attempt number:"); Serial.println(attempts);
-        if(attempts >= 2){ operation_over = 1; attempts = 0; }
+        Serial.println("Pill stuck on chamber!");
+        delay(1000);
+        operation_over = 1; 
+        break;
 
-        break;  
       default:
         Serial.println("Default!");     //-------------------------------------
+        operation_over = 1;
+        Serial.print("success = "); Serial.println(success); 
+        break;
   }
 
 }
@@ -420,7 +430,7 @@ void alarmMatch()
     
     Alarm_Matched = 1;
     Serial.println("Alarm Match!\t Time to take the pill!\t BUZZING!");
-    Serial.write(10);
+    //Serial.write(10);
 
 }
 
@@ -506,6 +516,7 @@ void menu()
       {
           case 1:
             Serial.println("\n1 Inserted!");
+            menu_var = 0;
             if (schedule_enumerator == 0)
             {
                 Serial.println("You have no pill routines! Nothing to display!.\n\n");
@@ -521,7 +532,6 @@ void menu()
                 Serial.println("Schedule Saved!! Date and Time:\n ");
                 print_schedule_date_time(0);
             }
-            menu_var = 0;
     
             break;
     
@@ -549,6 +559,7 @@ void menu()
             selector_function();  //We activate the correct module to be operated!
             operation_over = 0;  //WE START AN OPERATION, BYPASS MENU
             engine_over = 0;     //WE ALLOW DISPENSE PILLS TO OPERATE ONCE WITH THIS FLAG
+            t_photo_start = millis();
             Serial.println("Start of operation!");
             break;
     
@@ -1022,8 +1033,11 @@ void print_schedule_time(int add)
 
 int photointerrupter()
 {
-    delay(Delay_time_photoint);  
+    
+    delayMicroseconds(Delay_time_photoint_Microseconds);  
+    
     int light = analogRead(LDR);
+    Serial.print("light : ");           Serial.println(light); 
 
     if (light < calib_val)                      //detection of light beam obstruction
     {
@@ -1043,9 +1057,10 @@ int photointerrupter()
             Serial.print("i = ");                 Serial.println(i);
 
             i=0; mytime[i] = millis();  //reset mytime  
-            i++;  error_count++; check_time_elapsed_success =0;
+            i++;  error_count++; check_time_elapsed_success =0; photo_over = 1;
 
-            return 0;    //return to success variable on main
+            result =0;    //return to success variable on main
+            return result;
         }
         else
         {
@@ -1060,19 +1075,21 @@ int photointerrupter()
 
     }
 
-    else if (t_current - mytime[i] > TIMEOUT_COUNTER  &&  (i != 0  && counter==0))   //     CASE THAT NO PILL IS DISPENSED.    ----------------------------------
+    else if (t_current - t_photo_start > TIMEOUT_COUNTER  &&   check_time_elapsed_success==0)   //     CASE THAT NO PILL IS DISPENSED.    ----------------------------------
     {
         Serial.println("TIMEOUT FOR PILL DETECTION! \t NO PILL DISPENSED");  //TO ADD! TRY AGAIN TO DISPENSE PILL!
         Serial.print("current time - last event time > TIMEOUT = "); Serial.println(t_current - mytime[i]);
         Serial.print("t_current: ") ;          Serial.println(t_current);
         Serial.print("mytime["); Serial.print(i); Serial.print("] : ");  Serial.println(mytime[i]);
 
-        return 2;     //return to success variable for verify_success
+        result =2;     //return to success variable for verify_success
     }
-    else if (t_current - mytime[i] > TIMEOUT_COUNTER && (error_count==0 && check_time_elapsed_success==1)) //     CASE THAT ONLY 1 PILL IS DISPENSED.    ----------------------------------
+    else if (t_current - t_photo_start > TIMEOUT_COUNTER && check_time_elapsed_success==1) //     CASE THAT ONLY 1 PILL IS DISPENSED.    ----------------------------------
     {
-        return 1;
+        result =1; photo_over = 1;
     }
+
+    return result;
 
 
 }
@@ -1102,7 +1119,7 @@ void dispense_pills()
       }
   
 
-      if((t_current - t_0 >2000) && cycle_stage == 3)   //wait 2000ms                             //   STAGE 3
+      if((t_current - t_0 >1000) && cycle_stage == 3)   //wait 2000ms                             //   STAGE 3
       {   
           close_gate();
           t_0 = t_current;
@@ -1150,11 +1167,11 @@ void selector_function()
 
 
 
-void lock_pill()   // Stepper motor operation
+void unlock_pill()   // Stepper motor operation
 {
     for(int j=0; j<stepper_steps; j++){
         
-        int motor_Speed = 4;   /*  TO BE INSERTED THE RIGHT motor speed value   */ 
+        int motor_Speed = 3;   /*  TO BE INSERTED THE RIGHT motor speed value   */ 
         digitalWrite(stepMotorPin4, HIGH);
         digitalWrite(stepMotorPin3, LOW);
         digitalWrite(stepMotorPin2, LOW);
@@ -1179,11 +1196,11 @@ void lock_pill()   // Stepper motor operation
 
 }
 
-void unlock_pill()   //Stepper_motor operation
+void lock_pill()   //Stepper_motor operation
 {
     for(int j=0; j<stepper_steps; j++){
         
-        int motor_Speed = 4;   /*  TO BE INSERTED THE RIGHT motor speed value   */ 
+        int motor_Speed = 3;   /*  TO BE INSERTED THE RIGHT motor speed value   */ 
         digitalWrite(stepMotorPin4, LOW);
         digitalWrite(stepMotorPin3, LOW);
         digitalWrite(stepMotorPin2, LOW);
@@ -1210,14 +1227,12 @@ void unlock_pill()   //Stepper_motor operation
 
 void open_gate()
 {   
-    int motor_Speed = 1000;
-    Servo1.write (40);
+    Servo1.write (85);
 
 }
 void close_gate()
 {
-    int motor_Speed = 1000;
-    Servo1.write (140);
+    Servo1.write (65);
 }
 
 
