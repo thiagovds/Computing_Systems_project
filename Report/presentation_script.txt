@@ -1,0 +1,35 @@
+Problem: Sorting pills is a repetitive and delicate task, requiring what's called prospective memory, 
+         a form of memory that involves remembering to perform a planned action or recall a planned 
+         intention at some future point in time. This kind of memory gets worse with aging, so, for elderly,
+         pills sorting needs to be performed by relatives or caregiver; in this way it's still 
+         susceptible to the human error, which could lead to wrong dosages or medicine intake.
+
+Solution: with RAPiD, this risk can be highly mitigated, bringing tranquility for your family and for the 
+         ones you care about. It's a fully autonomous and reliable pill dispenser, and after a first time 
+         setup, you won't have to worry about it anymore. Through the accompanying app, the device
+         connects to the internet, from which it receives important data such as "precise time stamps"
+         and once the connection is established, every new operation on the device will be done remotely.
+         But apart from uploading new schedules and refilling the pills magazine (once requested by the dispenser
+         itself), the RAPiD will work autonomously, helping its user to maintain a regular intake schedule.
+         The device will alert the user with sounds and lights when it's time for intake, and after checking
+         the presence of the user, it despense the set dosage of medicine. As more than 1 medicine is probably
+         required, the system is fully modular, and allows the relative/caregiver to add more magazines, each 
+         containing a different pill. This solution might seem expensive, but that's incorrect: the magazines
+         are cheap, as  the most expensive part of the system (the one that controls every module)
+         is a one-time purchase and still it's much cheaper than similar solutions. Given the simple working
+         mechanism of the device, maintenance is cheap, but must be performed by trained technicians to 
+         guarantee the functionality (and safety) of the device. But why would you need the RAPiD? As IT 
+         professors always say "computers are dumb, but once instructed, they are very good at repeting operations 
+         over and over again" which is exactly what the device is meant to do.
+         Once the setup is completed through the app, the caregiver or relative will receive information from 
+         the device in the form of push notifiaction or email; those information include reminders when
+         a magazine is running out of pills, warning messages in case the user missed the intake time, very rarely 
+         messages about fails inside the device (kidding, we never had fails during testing).
+
+Conclusions: this device is meant to help you by helping the elderly you care about, being them relatives or 
+            people under your care. It's reliable, it won't let you down even in the event of a power outage, 
+            it's childproof and, of course, elderly-proof. Seems like magic, seems very expensive but don't worry, 
+            it won't break the bank, you'll buy just what you need and nothing more. Thanks.
+         
+
+         
